@@ -16,7 +16,6 @@ class CreateChatlieu extends Migration
         Schema::create('tbl_ChatLieu', function (Blueprint $table) {
             $table->bigIncrements('MaChatLieu');
             $table->string('TenChatLieu',100);
-            $table->bigInteger('MaSP');
             $table->timestamps();
         });
     }

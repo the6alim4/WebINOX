@@ -18,7 +18,9 @@ class CreateKichThuoc extends Migration
             $table->double('ChieuDai');
             $table->double('ChieuRong');
             $table->double('ChieuCao');
+            $table->double('DuongKinh');
             $table->bigInteger('MaSP');
+            $table->integer('SoLuong');
             $table->timestamps();
         });
     }

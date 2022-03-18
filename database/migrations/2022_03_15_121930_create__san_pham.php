@@ -16,7 +16,6 @@ class CreateSanPham extends Migration
         Schema::create('tbl_SanPham', function (Blueprint $table) {
             $table->bigIncrements('MaSP');
             $table->string('TenSP',100);
-            $table->integer('SoLuong');
             $table->double('DonGiaNhap');
             $table->double('DonGiaBan');
             $table->string('Anh');
@@ -24,6 +23,7 @@ class CreateSanPham extends Migration
             $table->bigInteger('MaNSX');
             $table->bigInteger('MaLoai');
             $table->double('KhuyenMai');
+            $table->bigInteger('MaChatLieu');
             $table->timestamps();
         });
     }
