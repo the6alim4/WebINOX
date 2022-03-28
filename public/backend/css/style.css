@@ -55,6 +55,10 @@ label {
 body a:hover {
     text-decoration: none;
 }
+.kichco{
+    display: inline-flex;
+    width: 100%;
+}
 /*sidebar navigation*/
 #sidebar {
     width: 240px;

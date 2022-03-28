@@ -17,4 +17,9 @@ Route::get('/trang-chu','HomeController@index');
 //Backend
 Route::get('/admin','AdminController@index');
 Route::get('/dashboard','AdminController@show_dashboard');
+Route::get('/logout','AdminController@logout');
 Route::post('/admin-dashboard','AdminController@dashboard');
+
+//Category Product
+Route::get('/add-category-product','CategoryProduct@add_category_product');
+Route::get('/all-category-product','CategoryProduct@all_category_product');
