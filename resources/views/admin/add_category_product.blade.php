@@ -70,25 +70,36 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Nhà sản xuất</label>
                     <select class="form-control input-sm m-bot15" name="nsx">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
+                        <?php
+					$tennsx=Session::get('tennsx');
+                    foreach($tennsx as $i){
+                        echo '<option>'.$i.'</option>';
+                    }
+					?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Loại sản phẩm</label>
                     <select class="form-control input-sm m-bot15" name="loaisanpham">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
+                        <?php
+					$tenloaisp=Session::get('tenloaisp');
+                    foreach($tenloaisp as $j){
+                        echo '<option>'.$j.'</option>';
+                    }
+					
+					?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Chất liệu</label>
                     <select class="form-control input-sm m-bot15" name="chatlieu">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
+                        <?php
+					$tenchatlieu=Session::get('tenchatlieu');
+                    foreach($tenchatlieu as $k){
+                        echo '<option>'.$k.'</option>';
+                    }
+
+					?>
                     </select>
                 </div>
                 <div class="form-group">
