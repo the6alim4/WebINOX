@@ -53,7 +53,6 @@ class CategoryProduct extends Controller
         $addanhbotro=[];
         $datakichthuoc=[];
         $addkt=[];
-
         $makt=0;
         $datasp['TenSP']=$request->category_product_name;
         $datasp['DonGiaNhap']=$request->dongianhap;
