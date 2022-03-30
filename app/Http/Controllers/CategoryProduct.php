@@ -48,24 +48,103 @@ class CategoryProduct extends Controller
         
     }
     public function save_category_product(Request $request){
-        $data['TenSP']=$request->category_product_name;
-        $data['DonGiaNhap']=$request->dongianhap;
-        $data['DonGiaBan']=$request->dongiaban;
-        $data['Anh']='storage/app/img/'.($request->file('anhchinhsanpham')->getClientOriginalName());
-        $data['MoTa']=$request->motasanpham;
-        $data['MaNSX']=$request->nsx;
-        $data['MaLoai']=$request->loaisanpham;
-        $data['MaChatLieu']=$request->chatlieu;
-        $anhbotro='';
+        $datasp=[];
+        $dataanhbotro=[];
+        $addanhbotro=[];
+        $datakichthuoc=[];
+        $addkt=[];
+
+        $makt=0;
+        $datasp['TenSP']=$request->category_product_name;
+        $datasp['DonGiaNhap']=$request->dongianhap;
+        $datasp['DonGiaBan']=$request->dongiaban;
+        $datasp['Anh']='storage/app/img/'.($request->file('anhchinhsanpham')->getClientOriginalName());
+        $datasp['MoTa']=$request->motasanpham;
+        $datasp['MaNSX']=$request->nsx;
+        $datasp['MaLoai']=$request->loaisanpham;
+        $datasp['MaChatLieu']=$request->chatlieu;
+        $datasp['KhuyenMai']=$request->giamgia;
+        $anhbotro=[];
+        $soluong=[10];
         $request->file('anhchinhsanpham')->storeAs('img',$request->file('anhchinhsanpham')->getClientOriginalName());
         foreach($request->file('anhphusanpham') as $i){         
             $i->storeAs('img',$i->getClientOriginalName());
         }
-        foreach($request->file('anhphusanpham') as $j){
-        $anhbotro=$anhbotro.'__'.'storage/app/img/'.($j->getClientOriginalName());
-        
+        for($j=0;$j<count($request->file('anhphusanpham'));$j++){
+        $anhbotro[$j]='storage/app/img/'.($request->file('anhphusanpham'))[$j]->getClientOriginalName();        
         }
-        $data['Anhbotro']=$anhbotro;
+        DB::table('tbl_sanpham')->insert($datasp);
+        $masp=DB::table('tbl_sanpham')->where('TenSP',$request->category_product_name)->first();
+        $maspmoi=$masp->MaSP;
+        $soluong[0]=$request->c16;
+        $soluong[1]=$request->c18;
+        $soluong[2]=$request->c20;
+        $soluong[3]=$request->c22;
+        $soluong[4]=$request->c24;
+        $soluong[5]=$request->c26;
+        $soluong[6]=$request->c28;
+        $soluong[7]=$request->c30;
+        $soluong[8]=$request->c32;
+        $soluong[9]=$request->khac;
+        $datakichthuoc['SoLuong']=$soluong;
+        $dataanhbotro['Anhbotro']=$anhbotro;
+        if($anhbotro!=null){
+            for ($k = 0; $k < count($anhbotro); $k++) {
+                $addanhbotro[] = [
+                    'Anhbotro' => $anhbotro[$k],
+                    'MaSP' => $maspmoi
+                ];
+            }
+            DB::table('tbl_anhbotro')->insert($addanhbotro);
+        }
+        
+        for ($l = 0; $l < count($soluong); $l++) {
+            if($soluong[$l]==0||$soluong[$l]==null){
+                continue;
+            }else{
+                switch($l){
+                    case '0':
+                        $makt=16;
+                        break;
+                    case '1':
+                        $makt=18;
+                        break;
+                    case '2':
+                        $makt=20;
+                        break;
+                    case '3':
+                        $makt=22;
+                        break;
+                    case '4':
+                        $makt=24;
+                        break;
+                    case '5':
+                        $makt=26;
+                        break;
+                    case '6':
+                        $makt=28;
+                        break;
+                    case '7':
+                        $makt=30;
+                        break;
+                    case '8':
+                        $makt=32;
+                        break;
+                    case '9':
+                        $makt=null;
+                        break;
+                }
+                $addkt[] = [
+                    'Duongkinh' => $makt,
+                    'MaSP' => $maspmoi,
+                    'SoLuong'=>$soluong[$l]
+                ]; 
+            }
+            
+        }
+        DB::table('tbl_kichthuoc')->insert($addkt);
+        Session::put('message','Thêm danh mục sản phẩm thành công!');
+        return Redirect::to('add-category-product');
 
     }
 }

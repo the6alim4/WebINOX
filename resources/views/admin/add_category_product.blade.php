@@ -7,6 +7,13 @@
             Thêm danh mục sản phẩm
         </header>
         <div class="panel-body">
+            <?php
+            $message=Session::get('message');
+            if($message){
+                echo '<span style="display:fex;justify-self:center";color:green>'.$message.'</span>';
+                Session::put('message',null);
+            }
+            ?>
             <div class="position-center">
                 <form role="form" action="{{URL::to('/save-category-product')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -38,34 +45,34 @@
                     <label for="exampleInputEmail1">Số lượng</label>
                     <div>
                         <div class="kichco"><span>16cm</span>&nbsp;
-                            <input type="number" name="16" value="16" >
+                            <input type="number" name="c16">
                         </div>
                         <div class="kichco"><span>18cm</span>&nbsp;
-                            <input type="number" name="18" value="18" >
+                            <input type="number" name="c18"  >
                         </div>
                         <div class="kichco"><span>20cm</span>&nbsp;
-                            <input type="number" name="20" value="20">
+                            <input type="number" name="c20" >
                         </div>
                         <div class="kichco"><span>22cm</span>&nbsp;
-                            <input type="number" name="22" value="22">
+                            <input type="number" name="c22" >
                         </div>
                         <div class="kichco"><span>24cm</span>&nbsp;
-                            <input type="number" name="24" value="24">
+                            <input type="number" name="c24" >
                         </div>
                         <div class="kichco"><span>26cm</span>&nbsp;
-                            <input type="number" name="26" value="26">
+                            <input type="number" name="c26" >
                         </div>
                         <div class="kichco"><span>28cm</span>&nbsp;
-                            <input type="number" name="28" value="28">
+                            <input type="number" name="c28" >
                         </div>
                         <div class="kichco"><span>30cm</span>&nbsp;
-                            <input type="number" name="30" value="30">
+                            <input type="number" name="c30" >
                         </div>
                         <div class="kichco"><span>32cm</span>&nbsp;
-                            <input type="number" name="32" value="32">
+                            <input type="number" name="c32" >
                         </div>
                         <div class="kichco"><span>Khác</span>&nbsp;&nbsp;
-                            <input type="number" name="khac" value="0">
+                            <input type="number" name="khac">
                         </div>
                     </div>
                     
