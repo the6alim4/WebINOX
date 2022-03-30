@@ -44,6 +44,39 @@ class CategoryProduct extends Controller
 
     }
     public function all_category_product(){
+        $data=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
+        ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
+        ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
+        ->select('TenSP','DonGiaNhap','DonGiaBan','Anh','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')->get();        
+        $tensp=[];
+        $dongianhap=[];
+        $dongiaban=[];
+        $anh=[];
+        $mota=[];        
+        $khuyenmai=[];
+        $tennsx=[];
+        $tenloai=[];
+        $tenchatlieu=[];
+        for($i=0;$i<count($data);$i++){
+            $tensp[$i]=$data[$i]->TenSP;
+            $dongianhap[$i]=$data[$i]->DonGiaNhap;
+            $dongiaban[$i]=$data[$i]->DonGiaBan;
+            $anh[$i]=$data[$i]->Anh;
+            $mota[$i]=$data[$i]->MoTa;
+            $tennsx[$i]=$data[$i]->TenNSX;
+            $tenloai[$i]=$data[$i]->TenLoai;
+            $tenchatlieu[$i]=$data[$i]->TenChatLieu;
+            $khuyenmai[$i]=$data[$i]->KhuyenMai;
+            }       
+        Session::put('tensp',$tensp); 
+        Session::put('dongianhap',$dongianhap); 
+        Session::put('dongiaban',$dongiaban); 
+        Session::put('anh',$anh); 
+        Session::put('mota',$mota); 
+        Session::put('khuyenmai',$khuyenmai); 
+        Session::put('tennsx',$tennsx); 
+        Session::put('tenloai',$tenloai); 
+        Session::put('tenchatlieu',$tenchatlieu); 
         return view('admin.all_category_product');
         
     }

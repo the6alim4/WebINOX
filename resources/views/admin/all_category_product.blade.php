@@ -27,32 +27,54 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table class="table table-striped b-t b-light">
-          <thead>
+        <table class="table table-striped b-t b-light" >
+          <thead >
             <tr>
               <th style="width:20px;">
                 <label class="i-checks m-b-none">
                   <input type="checkbox"><i></i>
                 </label>
               </th>
-              <th>Tên danh mục</th>
-              <th>Task</th>
-              <th>Date</th>
+              <th style="text-align: center;">Tên danh mục</th>
+              <th style="text-align: center;">Đơn giá nhập</th>
+              <th style="text-align: center;">Đơn giá bán</th>
+              <th style="text-align: center;min-width: 1000px">Mô tả</th>
+              <th style="text-align: center;">Ảnh</th>
+              <th style="text-align: center;">Tên NSX</th>
+              <th style="text-align: center;">Tên loại</th>
+              <th style="text-align: center;">Chất liệu</th>
               <th style="width:30px;"></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <?php
+              $tensp=Session::get('tensp'); 
+              $dongianhap=Session::get('dongianhap'); 
+              $dongiaban=Session::get('dongiaban'); 
+              $anh=Session::get('anh'); 
+              $mota=Session::get('mota'); 
+              $khuyenmai=Session::get('khuyenmai'); 
+              $tennsx=Session::get('tennsx'); 
+              $tenloai=Session::get('tenloai'); 
+              $tenchatlieu=Session::get('tenchatlieu'); 
+              for($i=0;$i<count($tensp);$i++){
+                echo 
+              '<tr>
               <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-              <td>Idrawfast prototype design prototype design prototype design prototype design prototype design</td>
-              <td><span class="text-ellipsis">{item.PrHelpText1}</span></td>
-              <td><span class="text-ellipsis">{item.PrHelpText1}</span></td>
+              <td>'.$tensp[$i].'</td>
+              <td>'.$dongianhap[$i].'</td>
+              <td>'.$dongiaban[$i].'</td>
+              <td>'.$mota[$i].'</td>
+              <td >'.$anh[$i].'</td>
+              <td>'.$tennsx[$i].'</td>
+              <td>'.$tenloai[$i].'</td>
+              <td>'.$tenchatlieu[$i].'</td>
               <td>
                 <a href="" class="active" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i>
                     <i class="fa fa-times text-danger text"></i></a>
-              </td>
-            </tr>
-            
+              </td>';
+              }
+            ?>
           </tbody>
         </table>
       </div>
