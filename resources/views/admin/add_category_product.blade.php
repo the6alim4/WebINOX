@@ -10,7 +10,7 @@
             <?php
             $message=Session::get('message');
             if($message){
-                echo '<span style="display:fex;justify-self:center";color:green>'.$message.'</span>';
+                echo '<div style="display: flex;justify-content: center; width: 100%; color: green;">'.$message.'</div>';
                 Session::put('message',null);
             }
             ?>

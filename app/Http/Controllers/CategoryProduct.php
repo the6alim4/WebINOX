@@ -67,12 +67,17 @@ class CategoryProduct extends Controller
         $anhbotro=[];
         $soluong=[10];
         $request->file('anhchinhsanpham')->storeAs('img',$request->file('anhchinhsanpham')->getClientOriginalName());
-        foreach($request->file('anhphusanpham') as $i){         
-            $i->storeAs('img',$i->getClientOriginalName());
+        if($request->file('anhphusanpham')!=null)
+        {
+            foreach($request->file('anhphusanpham') as $i){         
+                $i->storeAs('img',$i->getClientOriginalName());
+            }
+            for($j=0;$j<count($request->file('anhphusanpham'));$j++){
+                $anhbotro[$j]='storage/app/img/'.($request->file('anhphusanpham'))[$j]->getClientOriginalName();        
+                }
         }
-        for($j=0;$j<count($request->file('anhphusanpham'));$j++){
-        $anhbotro[$j]='storage/app/img/'.($request->file('anhphusanpham'))[$j]->getClientOriginalName();        
-        }
+        
+        
         DB::table('tbl_sanpham')->insert($datasp);
         $masp=DB::table('tbl_sanpham')->where('TenSP',$request->category_product_name)->first();
         $maspmoi=$masp->MaSP;
