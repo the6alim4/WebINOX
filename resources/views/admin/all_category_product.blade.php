@@ -40,6 +40,7 @@
               <th style="text-align: center;">Đơn giá bán</th>
               <th style="text-align: center;min-width: 1000px">Mô tả</th>
               <th style="text-align: center;">Ảnh</th>
+              <th style="text-align: center;">Khuyến mãi</th>
               <th style="text-align: center;">Tên NSX</th>
               <th style="text-align: center;">Tên loại</th>
               <th style="text-align: center;">Chất liệu</th>
@@ -47,53 +48,35 @@
             </tr>
           </thead>
           <tbody>
-            <?php
-              $tensp=Session::get('tensp'); 
-              $dongianhap=Session::get('dongianhap'); 
-              $dongiaban=Session::get('dongiaban'); 
-              $anh=Session::get('anh'); 
-              $mota=Session::get('mota'); 
-              $khuyenmai=Session::get('khuyenmai'); 
-              $tennsx=Session::get('tennsx'); 
-              $tenloai=Session::get('tenloai'); 
-              $tenchatlieu=Session::get('tenchatlieu'); 
-              for($i=0;$i<count($tensp);$i++){
-                echo 
-              '<tr>
+            @foreach ($data as $key ) 
+              <tr>
               <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-              <td>'.$tensp[$i].'</td>
-              <td>'.$dongianhap[$i].'</td>
-              <td>'.$dongiaban[$i].'</td>
-              <td>'.$mota[$i].'</td>
-              <td >'.$anh[$i].'</td>
-              <td>'.$tennsx[$i].'</td>
-              <td>'.$tenloai[$i].'</td>
-              <td>'.$tenchatlieu[$i].'</td>
+              <td>{{$key->TenSP}}</td>
+              <td>{{$key->DonGiaNhap}}</td>
+              <td>{{$key->DonGiaBan}}</td>
+              <td>{{$key->MoTa}}</td>
+              <td>{{$key->Anh}}</td>
+              <td>{{$key->KhuyenMai}}</td>
+              <td>{{$key->TenNSX}}</td>
+              <td>{{$key->TenLoai}}</td>
+              <td>{{$key->TenChatLieu}}</td>
               <td>
-                <a href="" class="active" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i>
-                    <i class="fa fa-times text-danger text"></i></a>
-              </td>';
-              }
-            ?>
+                <a href="{{URL::to('/edit-category-product/'.$key->MaSP)}}" class="active styling-edit" ui-toggle-class="">
+                  <i class="fa fa-pencil-square-o text-success text-active"></i>
+                </a>
+                <a href="{{URL::to('/delete-category-product/'.$key->MaSP)}}" class="active styling-edit" ui-toggle-class="">  
+                  <i class="fa fa-times text-danger text"></i>
+                </a>
+              </td>
+            
+             @endforeach
+             {{$data->links()}}
           </tbody>
         </table>
       </div>
       <footer class="panel-footer">
         <div class="row">
-          
-          <div class="col-sm-5 text-center">
-            <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-          </div>
-          <div class="col-sm-7 text-right text-center-xs">                
-            <ul class="pagination pagination-sm m-t-none m-b-none">
-              <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-              <li><a href="">1</a></li>
-              <li><a href="">2</a></li>
-              <li><a href="">3</a></li>
-              <li><a href="">4</a></li>
-              <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-          </div>
+          {{$data->links()}}          
         </div>
       </footer>
     </div>
