@@ -26,6 +26,13 @@
           </div>
         </div>
       </div>
+      <?php
+            $message=Session::get('message');
+            if($message){
+                echo '<div style="display: flex;justify-content: center; width: 100%; color: green;">'.$message.'</div>';
+                Session::put('message',null);
+            }
+            ?>
       <div class="table-responsive">
         <table class="table table-striped b-t b-light" >
           <thead >
@@ -64,7 +71,7 @@
                 <a href="{{URL::to('/edit-category-product/'.$key->MaSP)}}" class="active styling-edit" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i>
                 </a>
-                <a href="{{URL::to('/delete-category-product/'.$key->MaSP)}}" class="active styling-edit" ui-toggle-class="">  
+                <a onclick="return confirm('Bạn có chắc xóa danh mục này?')" href="{{URL::to('/delete-category-product/'.$key->MaSP)}}" class="active styling-edit" ui-toggle-class="">  
                   <i class="fa fa-times text-danger text"></i>
                 </a>
               </td>

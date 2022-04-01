@@ -6,16 +6,9 @@
         <header class="panel-heading">
             Cập nhật danh mục sản phẩm
         </header>
-        <div class="panel-body">
-            <?php
-            $message=Session::get('message');
-            if($message){
-                echo '<div style="display: flex;justify-content: center; width: 100%; color: green;">'.$message.'</div>';
-                Session::put('message',null);
-            }
-            ?>
+        <div class="panel-body">            
             <div class="position-center">
-                <form role="form" action="{{URL::to('/update-category-product')}}" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{URL::to('/update-category-product/'.$sp->MaSP)}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tên danh mục sản phẩm</label>
@@ -31,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh chính sản phẩm</label>
-                    <input type="file" id="exampleInputFile" name="anhchinhsanpham" accept="image/*" value="{{$sp->Anh}}" required>
+                    <input type="file" id="exampleInputFile" name="anhchinhsanpham" accept="image/*">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh phụ sản phẩm</label>
@@ -121,14 +114,12 @@
                     <label for="exampleInputPassword1">Nhà sản xuất</label>
                     <select class="form-control input-sm m-bot15" name="nsx">
                         <?php                        
-					$tennsx=Session::get('tennsx');
-					$mansx=Session::get('mansx');
-                    for($i=0;$i<count($tennsx);$i++){
-                        if($sp->MaNSX==$mansx[$i]){
-                            echo '<option value="'.$mansx[$i].'" selected>'.$tennsx[$i].'</option>';
+                    for($i=0;$i<count($nsx);$i++){
+                        if($sp->MaNSX==$nsx[$i]->MaNSX){
+                            echo '<option value="'.$nsx[$i]->MaNSX.'" selected>'.$nsx[$i]->TenNSX.'</option>';
                         }
                         else{
-                            echo '<option value="'.$mansx[$i].'">'.$tennsx[$i].'</option>';
+                            echo '<option value="'.$nsx[$i]->MaNSX.'">'.$nsx[$i]->TenNSX.'</option>';
                         }
                     }
 					?>
@@ -138,13 +129,11 @@
                     <label for="exampleInputPassword1">Loại sản phẩm</label>
                     <select class="form-control input-sm m-bot15" name="loaisanpham">
                         <?php
-					$tenloaisp=Session::get('tenloaisp');
-					$maloaisp=Session::get('maloaisp');
-                    for($j=0;$j<count($tenloaisp);$j++){
-                        if($sp->MaLoai==$maloaisp[$j]){
-                        echo '<option value="'.$maloaisp[$j].'" selected>'.$tenloaisp[$j].'</option>';                            
+                    for($j=0;$j<count($loai);$j++){
+                        if($sp->MaLoai==$loai[$j]->MaLoai){
+                        echo '<option value="'.$loai[$j]->MaLoai.'" selected>'.$loai[$j]->TenLoai.'</option>';                            
                         }else{
-                            echo '<option value="'.$maloaisp[$j].'">'.$tenloaisp[$j].'</option>';
+                            echo '<option value="'.$loai[$j]->MaLoai.'">'.$loai[$j]->TenLoai.'</option>';
                         }
                     }
 					
@@ -153,15 +142,13 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Chất liệu</label>
-                    <select class="form-control input-sm m-bot15" name="chatlieu" value="{{$sp->MaChatLieu}}">
+                    <select class="form-control input-sm m-bot15" name="chatlieu" >
                         <?php
-					$tenchatlieu=Session::get('tenchatlieu');
-					$machatlieu=Session::get('machatlieu');
-                    for($k=0;$k<count($tenchatlieu);$k++){
-                        if($sp->MaChatLieu==$machatlieu[$k]){
-                        echo '<option value="'.$machatlieu[$k].'" selected>'.$tenchatlieu[$k].'</option>';
+                    for($k=0;$k<count($chatlieu);$k++){
+                        if($sp->MaChatLieu==$chatlieu[$k]->MaChatLieu){
+                        echo '<option value="'.$chatlieu[$k]->MaChatLieu.'" selected>'.$chatlieu[$k]->TenChatLieu.'</option>';
                         }else{
-                            echo '<option value="'.$machatlieu[$k].'">'.$tenchatlieu[$k].'</option>';
+                        echo '<option value="'.$chatlieu[$k]->MaChatLieu.'">'.$chatlieu[$k]->TenChatLieu.'</option>';
                         }
                     }
 
