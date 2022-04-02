@@ -39,6 +39,7 @@
 								<img src="{{('public/frontend/img/logo.jpg')}}" alt="bootstrap sexy shop">
 							</a>
 							&nbsp;
+							&nbsp;
 							<img src="{{('public/frontend/img/logo2.jpg')}}" alt="bootstrap sexy shop">
 							
 							
@@ -136,34 +137,11 @@ Navigation Bar Section
 					<div class="well np">
 						<div id="myCarousel" class="carousel slide homCar">
 							<div class="carousel-inner">
-								<div class="item">
-									<img style="width:100%" src="{{('public/frontend/img/bootstrap_free-ecommerce.png')}}" alt="bootstrap ecommerce templates">
-									<div class="carousel-caption">
-										<h4>Bootstrap shopping cart</h4>
-										<p><span>Very clean simple to use</span></p>
+								@foreach($slider as $key)
+									<div class="item">
+										<img style="width:100%" src="{{$key->Anh}}">
 									</div>
-								</div>
-								<div class="item">
-									<img style="width:100%" src="{{('public/frontend/img/carousel1.png')}}" alt="bootstrap ecommerce templates">
-									<div class="carousel-caption">
-										<h4>Bootstrap Ecommerce template</h4>
-										<p><span>Highly Google seo friendly</span></p>
-									</div>
-								</div>
-								<div class="item active">
-									<img style="width:100%" src="{{('public/frontend/img/carousel3.png')}}" alt="bootstrap ecommerce templates">
-									<div class="carousel-caption">
-										<h4>Twitter Bootstrap cart</h4>
-										<p><span>Very easy to integrate and expand.</span></p>
-									</div>
-								</div>
-								<div class="item">
-									<img style="width:100%" src="{{('public/frontend/img/bootstrap-templates.png')}}" alt="bootstrap templates">
-									<div class="carousel-caption">
-										<h4>Bootstrap templates integration</h4>
-										<p><span>Compitable to many more opensource cart</span></p>
-									</div>
-								</div>
+								@endforeach								
 							</div>
 							<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 							<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
@@ -179,30 +157,22 @@ Navigation Bar Section
 			
 			<!-- /container -->
 			<!--Footer-->
-			<footer class="footer">
-				<section class="our_client">
+			<footer class="footer" style="height: fit-content;">
+				<section class="our_client" style="height: fit-content;">
 					<hr class="soften" />
-					<h4 class="title cntr"><span class="text">Nhà cung cấp</span></h4>
+					<h4 class="title cntr"><span class="text">Thương hiệu</span></h4>
 					<hr class="soften" />
-					<div class="row">
-						<div class="span2">
-							<a href="#"><img alt="" src="{{('public/frontend/img/TH1.png')}}"></a>
+					<div class="row" style="display: inline-flex;height: fit-content;">
+						@foreach($nsx as $key)
+						@if ($key->Anh==null)
+						@else
+						<div class="span2" style="width: auto;">
+							<a href="#"><img alt="" src="{{$key->Anh}}" style="height: 100px;width:auto;" ></a>
 						</div>
-						<div class="span2">
-							<a href="#"><img alt="" src="{{('public/frontend/img/TH2.jpg')}}"></a>
-						</div>
-						<div class="span2">
-							<a href="#"><img alt="" src="{{('public/frontend/img/3.png')}}"></a>
-						</div>
-						<div class="span2">
-							<a href="#"><img alt="" src="{{('public/frontend/img/4.png')}}"></a>
-						</div>
-						<div class="span2">
-							<a href="#"><img alt="" src="{{('public/frontend/img/5.png')}}"></a>
-						</div>
-						<div class="span2">
-							<a href="#"><img alt="" src="{{('public/frontend/img/6.png')}}"></a>
-						</div>
+						&nbsp;
+						@endif
+						
+						@endforeach
 					</div>
 				</section>
 			</footer>

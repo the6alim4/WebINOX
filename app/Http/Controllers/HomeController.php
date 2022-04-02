@@ -16,6 +16,7 @@ class HomeController extends Controller
     {
         $loaisp=DB::table('tbl_loaisp')->get();
         $nsx=DB::table('tbl_nsx')->get();
-        return view('pages.home',compact('loaisp','nsx'));
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.home',compact('loaisp','nsx','slider'));
     }
 }
