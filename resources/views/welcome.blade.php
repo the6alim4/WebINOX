@@ -76,7 +76,7 @@ Navigation Bar Section
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa-brands fa-font-awesome"></i>&nbsp; Thương hiệu <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										@foreach($nsx as $key)
-										<div style="text-align: center;width:100%;">
+										<div style="text-align: center;width:100%;" class="divnsx">
 											<a>{{$key->TenNSX}}</a>
 										</div>
 										<br>
@@ -87,7 +87,7 @@ Navigation Bar Section
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp; Loại sản phẩm <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										@foreach($loaisp as $key)
-										<div style="text-align: center;width:100%;">
+										<div style="text-align: center;width:100%;" class="divhv">
 											<a style="width: 100%;">{{$key->TenLoai}}</a>
 										</div>
 										<br>
@@ -100,12 +100,12 @@ Navigation Bar Section
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Tài khoản <b class="caret"></b></a>
 									<div class="dropdown-menu">
-										<div style="text-align: center;width:100%;padding: 0">
+										<div style="text-align: center;width:100%;padding: 0" class="divus">
 											<i class="fa fa-sign-in" aria-hidden="true"></i>
 											<a>Đăng nhập</a>
 										</div>
 										<br>
-										<div style="text-align: center;width:100%;">
+										<div style="text-align: center;width:100%;"class="divus">
 											<i class="fa fa-sign-out" aria-hidden="true"></i>
 											<a>Đăng xuất</a>
 										</div>
