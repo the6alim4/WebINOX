@@ -34,19 +34,26 @@
 			<header id="header">
 				<div class="row">
 					<h1>
-						<a class="logo" href="index.html">
-							<img src="{{('public/frontend/img/logo.jpg')}}" alt="bootstrap sexy shop">&nbsp;
+						<div class="logo"  style="display: inline-flex;">
+							<a href="{{url('/trang-chu')}}">
+								<img src="{{('public/frontend/img/logo.jpg')}}" alt="bootstrap sexy shop">
+							</a>
+							&nbsp;
 							<img src="{{('public/frontend/img/logo2.jpg')}}" alt="bootstrap sexy shop">
-						</a>
+							
+							
+						</div>
 					</h1>
 
 				</div>
 			</header>
 			<div id="sear">
-				<form action="#" class="navbar-search pull-left">
+				<form action="#" class="navbar-search pull-left" style="display: inline-flex;">
+					<i class="fa fa-search" aria-hidden="true"></i>&nbsp;
 					<input type="text" placeholder="Bạn đang tìm sản phẩm nào" class="search-query span2">
 				</form>
 			</div>
+			<br>
 			<!--
 Navigation Bar Section 
 -->
@@ -62,27 +69,47 @@ Navigation Bar Section
 						<div class="nav-collapse">
 							<ul class="nav">
 
-								<li class=""><a href="{{url('/trang-chu')}}">Trang chủ </a></li>
-								<li class=""><a href="list-view.html">Giới thiệu</a></li>
+								<li class=""><a href="{{url('/trang-chu')}}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Trang chủ </a></li>
+								<li class=""><a href="list-view.html"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
 								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span> Thương hiệu <b class="caret"></b></a>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa-brands fa-font-awesome"></i>&nbsp; Thương hiệu <b class="caret"></b></a>
 									<div class="dropdown-menu">
-										<a>Sunhouse</a>
+										@foreach($nsx as $key)
+										<div style="text-align: center;width:100%;">
+											<a>{{$key->TenNSX}}</a>
+										</div>
+										<br>
+										@endforeach
 									</div>
 								</li>
 								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span> Loại sản phẩm <b class="caret"></b></a>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp; Loại sản phẩm <b class="caret"></b></a>
 									<div class="dropdown-menu">
-										<a>Sunhouse</a>
+										@foreach($loaisp as $key)
+										<div style="text-align: center;width:100%;">
+											<a style="width: 100%;">{{$key->TenLoai}}</a>
+										</div>
+										<br>
+										@endforeach
+									</div>
+								</li>								
+								<li class=""><a href="list-view.html"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Hỗ trợ</a></li>
+								<li class=""><a href="list-view.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Giỏ hàng</a></li>
+								<li class=""><a href="list-view.html"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;Lịch sử mua hàng</a></li>
+								<li class="dropdown">
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Tài khoản <b class="caret"></b></a>
+									<div class="dropdown-menu">
+										<div style="text-align: center;width:100%;padding: 0">
+											<i class="fa fa-sign-in" aria-hidden="true"></i>
+											<a>Đăng nhập</a>
+										</div>
+										<br>
+										<div style="text-align: center;width:100%;">
+											<i class="fa fa-sign-out" aria-hidden="true"></i>
+											<a>Đăng xuất</a>
+										</div>
 									</div>
 								</li>
-								<li class=""><a href="list-view.html">Hỗ trợ</a></li>
-								<li class=""><a href="list-view.html">Giỏ hàng</a></li>
-								<li class=""><a href="list-view.html">Lịch sử mua hàng</a></li>
-								<li class=""><a href="list-view.html">Tài khoản</a></li>
-								<li class=""><a href="list-view.html">Đăng nhập</a></li>
-								<li class=""><a href="list-view.html">Đăng xuất</a></li>
-
 							</ul>
 
 
@@ -97,18 +124,10 @@ Navigation Bar Section
 					<div class="well well-small">
 						<h2>Loại sản phẩm</h2>
 						<ul class="nav nav-list">
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Fashion</a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Watches</a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Fine Jewelry</a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Fashion Jewelry</a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Engagement & Wedding</a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Men's Jewelry</a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Vintage & Antique</a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Loose Diamonds </a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>Loose Beads</a></li>
-							<li><a href="products.html"><span class="icon-chevron-right"></span>See All Jewelry & Watches</a></li>
+							@foreach ($loaisp as $key)
+							<li><a href="products.html"><span class="icon-chevron-right"></span>{{$key->TenLoai}}</a></li><br>							
+							@endforeach
 							<li style="border:0"> &nbsp;</li>
-
 						</ul>
 					</div>
 				</div>
@@ -194,6 +213,7 @@ Navigation Bar Section
 			<script src="{{asset('public/frontend/js/jquery.easing-1.3.min.js')}}"></script>
 			<script src="{{asset('public/frontend/js/jquery.scrollTo-1.4.3.1-min.js')}}"></script>
 			<script src="{{asset('public/frontend/js/shop.js')}}"></script>
+			<script src="https://kit.fontawesome.com/7e14c6b25d.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

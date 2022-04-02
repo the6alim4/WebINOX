@@ -109,3 +109,7 @@ hr.soften {margin: 8px 0;background: #DDD;}
 #gototop{margin-top:1px;}
 #footerMenu a{ font-size:12px; text-transform:lowercase}
 #sear{width: 100%;display: flex;    justify-content: flex-end;font-size: 200%;} 
+a:hover{
+    background-color: rgb(119, 114, 114);
+    color: rgb(230, 241, 236);
+}
