@@ -121,7 +121,7 @@ Navigation Bar Section
 				<div class="span9">
 					<div class="well np">
 						<div id="myCarousel" class="carousel slide homCar">
-							<div class="carousel-inner">
+							<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;">
 								<div class="spin" id="spin"></div>
 								@foreach($slider as $key)
 									<div class="item">
