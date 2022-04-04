@@ -3,7 +3,15 @@ $(document).ready(function() {
 
 $('#myCarousel').carousel()
 $('#newProductCar').carousel()
-
+$("#btnup").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#gototop").offset().top
+    }, 500);
+});
+setTimeout(() => {
+	const box = document.getElementById('spin');
+	box.style.display = 'none';
+  }, 5500);
 /* Home page item price animation */
 $('.thumbnail').mouseenter(function() {
    $(this).children('.zoomTool').fadeIn();

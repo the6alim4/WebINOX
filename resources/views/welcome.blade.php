@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>INOX HOOK</title>
+	<title>INOX HOMES</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -32,29 +32,13 @@
 		<div class="container">
 			<div id="gototop"> </div>
 			<header id="header">
-				<div class="row">
-					<h1>
-						<div class="logo"  style="display: inline-flex;">
-							<a href="{{url('/trang-chu')}}">
-								<img src="{{('public/frontend/img/logo.jpg')}}" alt="bootstrap sexy shop">
-							</a>
-							&nbsp;
-							&nbsp;
-							<img src="{{('public/frontend/img/logo2.jpg')}}" alt="bootstrap sexy shop">
-							
-							
-						</div>
-					</h1>
-
+				<div id="sear">
+					<form action="#" class="navbar-search pull-left" style="display: inline-flex;font-family:Display;">
+						<i class="fa fa-search" aria-hidden="true"></i>&nbsp;
+						<input type="text" placeholder="Bạn đang tìm sản phẩm nào" class="search-query span2">
+					</form>
 				</div>
 			</header>
-			<div id="sear">
-				<form action="#" class="navbar-search pull-left" style="display: inline-flex;">
-					<i class="fa fa-search" aria-hidden="true"></i>&nbsp;
-					<input type="text" placeholder="Bạn đang tìm sản phẩm nào" class="search-query span2">
-				</form>
-			</div>
-			<br>
 			<!--
 Navigation Bar Section 
 -->
@@ -68,7 +52,7 @@ Navigation Bar Section
 							<span class="icon-bar"></span>
 						</a>
 						<div class="nav-collapse">
-							<ul class="nav">
+							<ul class="nav" style="font-family:Display;font-size: 20px">
 
 								<li class=""><a href="{{url('/trang-chu')}}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Trang chủ </a></li>
 								<li class=""><a href="list-view.html"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
@@ -122,11 +106,12 @@ Navigation Bar Section
 			<!--Body Section-->
 			<div class="row">
 				<div id="sidebar" class="span3">
-					<div class="well well-small">
-						<h2>Loại sản phẩm</h2>
-						<ul class="nav nav-list">
+					<div class="well well-small" style="font-family:Display;">
+						<h2 style="text-align: center; font-size: 22px">Loại sản phẩm</h2>
+						<br>
+						<ul class="nav nav-list" style="font-size: 20px;">
 							@foreach ($loaisp as $key)
-							<li><a href="products.html"><span class="icon-chevron-right"></span>{{$key->TenLoai}}</a></li><br>							
+							<li><a href="products.html"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{$key->TenLoai}}</a></li><br>							
 							@endforeach
 							<li style="border:0"> &nbsp;</li>
 						</ul>
@@ -137,6 +122,7 @@ Navigation Bar Section
 					<div class="well np">
 						<div id="myCarousel" class="carousel slide homCar">
 							<div class="carousel-inner">
+								<div class="spin" id="spin"></div>
 								@foreach($slider as $key)
 									<div class="item">
 										<img style="width:100%" src="{{$key->Anh}}">
@@ -160,7 +146,7 @@ Navigation Bar Section
 			<footer class="footer" style="height: fit-content;">
 				<section class="our_client" style="height: fit-content;">
 					<hr class="soften" />
-					<h4 class="title cntr"><span class="text">Thương hiệu</span></h4>
+					<h4 class="title cntr"><span class="text" style="color: rgb(57, 55, 52)">Thương hiệu</span></h4>
 					<hr class="soften" />
 					<div class="row" style="display: inline-flex;height: fit-content;">
 						@foreach($nsx as $key)
@@ -176,7 +162,7 @@ Navigation Bar Section
 					</div>
 				</section>
 			</footer>
-			<a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+			<a href="#" class="gotop" id="btnup"><i class="icon-double-angle-up"></i></a>
 			<!-- Placed at the end of the document so the pages load faster -->
 			<script src="{{asset('public/frontend/js/jquery.js')}}"></script>
 			<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>

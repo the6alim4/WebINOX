@@ -1,10 +1,46 @@
-body{background:url(assets/img/white_leather.png) repeat 0 0; }
-#header{padding:8px 0 8px;}
+#header{background: url("../img/header.jpg"); height:430px;width: auto;display: flex;
+    background-repeat: no-repeat;
+    align-items: flex-end;
+}
+body{
+    background: -webkit-linear-gradient(#d8ecd5,#90c887,#d8ecd5);  
+    background: -moz-linear-gradient(#ddeadb,#90c887,#d8ecd5);  
+    background: -o-linear-gradient(#ddeadb,#90c887,#d8ecd5);  
+    background: linear-gradient(#d1e8cd,#90c887,#d8ecd5);  
+  
+    -webkit-transition: background 1s ease-out;  
+    -moz-transition: background 1s ease-out;  
+    -o-transition: background 1s ease-out;  
+    transition: background 1s ease-out;  
+}
+  .spin{
+    display: inline-flex;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: rgb(20, 13, 13);
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+h1 {
+    color: #EEEEEE;
+}
 #header a{text-decoration:none}
 #header p{padding:0; margin:0; line-height:1em; font-size:100%}
 #header h1{margin:0;line-height:1em }
 #header h1.dotmark{line-height:1.5em;}
-#header{ padding-top:44px;}
 .logo {padding-top: 11px;display: inline;width: 100%;}
 .logo span{display:none}
 .dotmark{padding:4px; font-size:14px; line-height:1.5em;  background:#fff; border:1px dashed rgb(252, 111, 0); margin:0; color:rgb(252, 111, 0); position:relative;}
@@ -87,7 +123,7 @@ hr.soften {margin: 8px 0;background: #DDD;}
 .thumbnail h5,.thumbnail p{text-align:center}
 .bs-docs-sidenav > li > a {border: 0; border-bottom:1px solid #e5e5e5;}
 .thumbnail{position:relative;}
-.tag {background:url(assets/img/new.png) no-repeat 0 0; position: absolute; display:block; top: -4px;right: -18px; height:48px; width:48px;}
+.tag {position: absolute; display:block; top: -4px;right: -18px; height:48px; width:48px;}
 .np{padding:0}
 .totalInCart{line-height:26px;}
 .absoluteBlk{position:absolute; left:8px; top:8px; width:45%; }
@@ -110,18 +146,18 @@ hr.soften {margin: 8px 0;background: #DDD;}
 #footerMenu a{ font-size:12px; text-transform:lowercase}
 #sear{width: 100%;display: flex;    justify-content: flex-end;font-size: 200%;} 
 a:hover{
-    background-color: rgb(119, 114, 114);
-    color: rgb(230, 241, 236);
+    background-color: rgb(238, 236, 233);
+    color: rgb(216, 167, 94);
 }
 .divhv:hover{
-    background-color: rgb(119, 114, 114);
-    color: rgb(230, 241, 236);
+    background-color: rgb(238, 236, 233);
+    color: rgb(216, 167, 94);
 }
 .divnsx:hover{
-    background-color: rgb(119, 114, 114);
-    color: rgb(230, 241, 236);
+    background-color: rgb(238, 236, 233);
+    color: rgb(216, 167, 94);
 }
 .divus:hover{
-    background-color: rgb(119, 114, 114);
-    color: rgb(230, 241, 236);
+    background-color: rgb(238, 236, 233);
+    color: rgb(216, 167, 94);
 }

@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('content')		
 				<!--New Products-->
-				<div class="well well-small">
+				<div class="well well-small" style="font-family:Display;">
 					<h3>New Products </h3>
 					<hr class="soften" />
 					<div class="row-fluid">
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 				<!--Featured Products-->
-				<div class="well well-small">
+				<div class="well well-small" style="font-family:Display;">
 					<h3><a class="btn btn-mini pull-right" href="products.html" title="View more">VIew More<span class="icon-plus"></span></a> Featured Products </h3>
 					<hr class="soften" />
 					<div class="row-fluid">
@@ -79,12 +79,12 @@
 					</div>
 				</div>
 
-				<div class="well well-small">
+				<div class="well well-small" style="font-family:Display;">
 					<a class="btn btn-mini pull-right" href="#">View more <span class="icon-plus"></span></a>
 					Popular Products
 				</div>
 				<hr>
-				<div class="well well-small">
+				<div class="well well-small" style="font-family:Display;">
 					<a class="btn btn-mini pull-right" href="#">View more <span class="icon-plus"></span></a>
 					Best selling Products
 				</div>

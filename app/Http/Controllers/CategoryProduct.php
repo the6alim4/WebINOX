@@ -47,8 +47,8 @@ class CategoryProduct extends Controller
         $data=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
         ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
         ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
-        ->select('MaSP','TenSP','DonGiaNhap','DonGiaBan','Anh','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')
-        ->paginate(10);          
+        ->select('MaSP','TenSP','DonGiaNhap','DonGiaBan','tbl_sanpham.Anh','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')
+        ->paginate(5);          
         return view('admin.all_category_product', compact('data'));
         
     }
