@@ -10,7 +10,9 @@ $("#btnup").click(function() {
 });
 setTimeout(() => {
 	const box = document.getElementById('spin');
+	const dvv = document.getElementById('dvv');
 	box.style.display = 'none';
+	dvv.style.display = 'inline';
   }, 5500);
 /* Home page item price animation */
 $('.thumbnail').mouseenter(function() {

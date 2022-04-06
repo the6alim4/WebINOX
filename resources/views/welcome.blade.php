@@ -52,7 +52,7 @@ Navigation Bar Section
 							<span class="icon-bar"></span>
 						</a>
 						<div class="nav-collapse">
-							<ul class="nav" style="font-family:Display;font-size: 20px">
+							<ul class="nav" style="font-family:Display;font-size: 18px">
 
 								<li class=""><a href="{{url('/trang-chu')}}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Trang chủ </a></li>
 								<li class=""><a href="list-view.html"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
@@ -68,7 +68,7 @@ Navigation Bar Section
 									</div>
 								</li>
 								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp; Loại sản phẩm <b class="caret"></b></a>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp; Danh mục sản phẩm <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										@foreach($loaisp as $key)
 										<div style="text-align: center;width:100%;" class="divhv">
@@ -84,14 +84,16 @@ Navigation Bar Section
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Tài khoản <b class="caret"></b></a>
 									<div class="dropdown-menu">
-										<div style="text-align: center;width:100%;padding: 0" class="divus">
+										<div style="display: flex;justify-content: center;align-items: center;width:100%;" class="divus">
 											<i class="fa fa-sign-in" aria-hidden="true"></i>
-											<a>Đăng nhập</a>
+											&nbsp;
+											<a href="{{URL::to('/login')}}">Đăng nhập</a>
 										</div>
 										<br>
-										<div style="text-align: center;width:100%;"class="divus">
-											<i class="fa fa-sign-out" aria-hidden="true"></i>
-											<a>Đăng xuất</a>
+										<div style="display: flex;justify-content: center;align-items: center;width:100%;" class="divus">
+											<i class="fa fa-pencil" aria-hidden="true"></i>
+											&nbsp;
+											<a>Đăng ký</a>
 										</div>
 									</div>
 								</li>
@@ -107,7 +109,7 @@ Navigation Bar Section
 			<div class="row">
 				<div id="sidebar" class="span3">
 					<div class="well well-small" style="font-family:Display;">
-						<h2 style="text-align: center; font-size: 22px">Loại sản phẩm</h2>
+						<h2 style="text-align: center; font-size: 22px">Danh mục sản phẩm</h2>
 						<br>
 						<ul class="nav nav-list" style="font-size: 20px;">
 							@foreach ($loaisp as $key)
@@ -121,7 +123,7 @@ Navigation Bar Section
 				<div class="span9">
 					<div class="well np">
 						<div id="myCarousel" class="carousel slide homCar">
-							<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;">
+							<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;" id="dvv">
 								<div class="spin" id="spin"></div>
 								@foreach($slider as $key)
 									<div class="item">

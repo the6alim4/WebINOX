@@ -13,6 +13,7 @@
 //Frontend
 Route::get('/','HomeController@index');
 Route::get('/trang-chu','HomeController@index');
+Route::get('/login','HomeController@login');
 
 //Backend
 Route::get('/admin','AdminController@index');
@@ -20,10 +21,24 @@ Route::get('/dashboard','AdminController@show_dashboard');
 Route::get('/logout','AdminController@logout');
 Route::post('/admin-dashboard','AdminController@dashboard');
 
+//Product
+Route::get('/add-product','CategoryProduct@add_product');
+Route::get('/edit-product/{MaSP}','CategoryProduct@edit_product');
+Route::post('/update-product/{MaSP}','CategoryProduct@update_product');
+Route::get('/delete-product/{MaSP}','CategoryProduct@delete_product');
+Route::get('/all-product','CategoryProduct@all_product');
+Route::post('/save-product','CategoryProduct@save_product');
 //Category Product
 Route::get('/add-category-product','CategoryProduct@add_category_product');
-Route::get('/edit-category-product/{MaSP}','CategoryProduct@edit_category_product');
-Route::post('/update-category-product/{MaSP}','CategoryProduct@update_category_product');
-Route::get('/delete-category-product/{MaSP}','CategoryProduct@delete_category_product');
+Route::get('/edit-category-product/{MaLoai}','CategoryProduct@edit_category_product');
+Route::post('/update-category-product/{MaLoai}','CategoryProduct@update_category_product');
+Route::get('/delete-category-product/{MaLoai}','CategoryProduct@delete_category_product');
 Route::get('/all-category-product','CategoryProduct@all_category_product');
 Route::post('/save-category-product','CategoryProduct@save_category_product');
+//Brand
+Route::get('/add-brand','CategoryProduct@add_brand');
+Route::get('/edit-brand/{MaNSX}','CategoryProduct@edit_brand');
+Route::post('/update-brand/{MaNSX}','CategoryProduct@update_brand');
+Route::get('/delete-brand/{MaNSX}','CategoryProduct@delete_brand');
+Route::get('/all-brand','CategoryProduct@all_brand');
+Route::post('/save-brand','CategoryProduct@save_brand');
