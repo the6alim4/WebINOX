@@ -14,6 +14,12 @@
 Route::get('/','HomeController@index');
 Route::get('/trang-chu','HomeController@index');
 Route::get('/login','HomeController@login');
+Route::get('/help','HomeController@help');
+Route::get('/infor','HomeController@infor');
+
+//Danh mục sản phẩm trang chủ
+Route::get('/danh-muc-san-pham/{MaLoai}','HomeController@show_category_home');
+
 
 //Backend
 Route::get('/admin','AdminController@index');

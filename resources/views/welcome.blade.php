@@ -9,6 +9,8 @@
 	<meta name="author" content="">
 	<!-- Bootstrap styles -->
 	<link href="{{asset('public/frontend/css/bootstrap.css')}}" rel="stylesheet" />
+<link rel="stylesheet" href="{{asset('public/backend/css/bootstrap.min.css')}}" >
+
 	<!-- Customize styles -->
 	<link href="{{asset('public/frontend/css/style.css')}}" rel="stylesheet" />
 	<link href="{{asset('public/frontend/css/bootstrap-responsive.css')}}" rel="stylesheet" />
@@ -55,13 +57,13 @@ Navigation Bar Section
 							<ul class="nav" style="font-family:Display;font-size: 18px">
 
 								<li class=""><a href="{{url('/trang-chu')}}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Trang chủ </a></li>
-								<li class=""><a href="list-view.html"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
+								<li class=""><a href="{{URL::to('/infor')}}""><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa-brands fa-font-awesome"></i>&nbsp; Thương hiệu <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										@foreach($nsx as $key)
 										<div style="text-align: center;width:100%;" class="divnsx">
-											<a>{{$key->TenNSX}}</a>
+											<a href="{{URL::to('/thuong-hieu-san-pham/'.$key->MaNSX)}}">{{$key->TenNSX}}</a>
 										</div>
 										<br>
 										@endforeach
@@ -72,13 +74,13 @@ Navigation Bar Section
 									<div class="dropdown-menu">
 										@foreach($loaisp as $key)
 										<div style="text-align: center;width:100%;" class="divhv">
-											<a style="width: 100%;">{{$key->TenLoai}}</a>
+											<a href="{{URL::to('/danh-muc-san-pham/'.$key->MaLoai)}}" style="width: 100%;">{{$key->TenLoai}}</a>
 										</div>
 										<br>
 										@endforeach
 									</div>
 								</li>								
-								<li class=""><a href="list-view.html"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Hỗ trợ</a></li>
+								<li class=""><a href="{{URL::to('/help')}}"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Hỗ trợ</a></li>
 								<li class=""><a href="list-view.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Giỏ hàng</a></li>
 								<li class=""><a href="list-view.html"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;Lịch sử mua hàng</a></li>
 								<li class="dropdown">
@@ -107,38 +109,55 @@ Navigation Bar Section
 			</div>
 			<!--Body Section-->
 			<div class="row">
-				<div id="sidebar" class="span3">
-					<div class="well well-small" style="font-family:Display;">
-						<h2 style="text-align: center; font-size: 22px">Danh mục sản phẩm</h2>
-						<br>
-						<ul class="nav nav-list" style="font-size: 20px;">
-							@foreach ($loaisp as $key)
-							<li><a href="products.html"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{$key->TenLoai}}</a></li><br>							
-							@endforeach
-							<li style="border:0"> &nbsp;</li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="span9">
-					<div class="well np">
-						<div id="myCarousel" class="carousel slide homCar">
-							<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;" id="dvv">
-								<div class="spin" id="spin"></div>
-								@foreach($slider as $key)
-									<div class="item">
-										<img style="width:100%" src="{{$key->Anh}}">
-									</div>
-								@endforeach								
-							</div>
-							<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-							<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+				<div>
+					<div id="sidebar" class="span3">
+						<div class="well well-small" style="font-family:Display;">
+							<h2 style="text-align: center; font-size: x-large;font-weight: bold;">Danh mục sản phẩm</h2>
+							<br>
+							<ul class="nav nav-list" style="font-size: 20px;">
+								@foreach ($loaisp as $key)
+								<li><a href="{{URL::to('/danh-muc-san-pham/'.$key->MaLoai)}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{$key->TenLoai}}</a></li><br>							
+								@endforeach
+								<li style="border:0"> &nbsp;</li>
+							</ul>
+						</div>
+						<div class="well well-small" style="font-family:Display;">
+							<h2 style="text-align: center; x-large;font-weight: bold;">Thương hiệu</h2>
+							<br>
+							<ul class="nav nav-list" style="font-size: 20px;">
+								@foreach ($nsx as $key)
+								<li><a href="{{URL::to('/thuong-hieu-san-pham/'.$key->MaNSX)}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{$key->TenNSX}}</a></li><br>							
+								@endforeach
+								<li style="border:0"> &nbsp;</li>
+							</ul>
 						</div>
 					</div>
-					@yield('content')
-					<!-- Clients-->
 
 				</div>
+				
+				<div>
+					<div class="span9">
+						<div class="well np">
+							<div id="myCarousel" class="carousel slide homCar">
+								<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;" id="dvv">
+									<div class="spin" id="spin"></div>
+										@foreach($slider as $key)
+											<div class="item">
+												<img style="width:100%" src="{{asset($key->Anh)}}">
+											</div>
+										@endforeach								
+								</div>
+								<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+								<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+							</div>
+						</div>
+					
+					@yield('content')
+
+
+					</div>
+				</div>
+				
 				
 
 			</div>
@@ -155,7 +174,7 @@ Navigation Bar Section
 						@if ($key->Anh==null)
 						@else
 						<div class="span2" style="width: auto;">
-							<a href="#"><img alt="" src="{{$key->Anh}}" style="height: 100px;width:auto;" ></a>
+							<a href="#"><img alt="" src="{{asset($key->Anh)}}" style="height: 100px;width:auto;" ></a>
 						</div>
 						&nbsp;
 						@endif

@@ -10,8 +10,18 @@ use Illuminate\Support\Facades\Redirect;
 session_start();
 class CategoryProduct extends Controller
 {
+    public function AuthLogin()
+    {
+        $admin_id = Session::get('admin_id');
+        if($admin_id) {
+            return Redirect::to('dashboard');
+        } else {
+            return Redirect::to('admin')->send();
+        }
+    }
     //Product
     public function add_product(){
+        $this->AuthLogin();
         $resultnsx = DB::table('tbl_nsx')->get();
         $resultchatlieu = DB::table('tbl_chatlieu')->get();
         $resultloaisp = DB::table('tbl_loaisp')->get();   
@@ -44,6 +54,7 @@ class CategoryProduct extends Controller
 
     }
     public function all_product(){
+        $this->AuthLogin();
         $data=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
         ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
         ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
@@ -54,6 +65,7 @@ class CategoryProduct extends Controller
         
     }
     public function save_product(Request $request){
+        $this->AuthLogin();
         $datasp=[];
         $dataanhbotro=[];
         $addanhbotro=[];
@@ -158,6 +170,7 @@ class CategoryProduct extends Controller
 
     }
     public function edit_product($MaSP){
+        $this->AuthLogin();
         $sp=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
         ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
         ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
@@ -170,6 +183,7 @@ class CategoryProduct extends Controller
         return view('admin.edit_product', compact('sp','anhbotro','kt','chatlieu','nsx','loai'));
     }
     public function update_product(Request $request,$MaSP){
+        $this->AuthLogin();
         $datasp=[];
         $dataanhbotro=[];
         $addanhbotro=[];
@@ -275,6 +289,7 @@ class CategoryProduct extends Controller
         return Redirect::to('all-product');
     }
     public function delete_product($MaSP){
+        $this->AuthLogin();
         DB::table('tbl_kichthuoc')->where('MaSP',$MaSP)->delete();
         DB::table('tbl_anhbotro')->where('MaSP',$MaSP)->delete();
         DB::table('tbl_sanpham')->where('MaSP',$MaSP)->delete();
@@ -283,10 +298,12 @@ class CategoryProduct extends Controller
     }
     //Category Product
     public function add_category_product(){
+        $this->AuthLogin();
         $result = DB::table('tbl_loaisp')->get();       
         return view('admin.add_category_product',compact('result'));
     }
     public function save_category_product(Request $request){
+        $this->AuthLogin();
         $data=[];       
         $data['TenLoai']=$request->category_product_name;        
         DB::table('tbl_loaisp')->insert($data);       
@@ -295,6 +312,7 @@ class CategoryProduct extends Controller
 
     }
     public function all_category_product(){
+        $this->AuthLogin();
         $data=DB::table('tbl_loaisp')
         ->orderby('MaLoai','asc')
         ->paginate(5);          
@@ -302,11 +320,13 @@ class CategoryProduct extends Controller
         
     }
     public function edit_category_product($MaLoai){
+        $this->AuthLogin();
         $sp=DB::table('tbl_loaisp')
         ->where('MaLoai',$MaLoai)->first();     
         return view('admin.edit_category_product', compact('sp'));
     }
     public function update_category_product(Request $request,$MaLoai){
+        $this->AuthLogin();
         $datasp=[];       
         $datasp['TenLoai']=$request->category_product_name;           
         DB::table('tbl_loaisp')->where('Maloai',$MaLoai)->update($datasp);
@@ -314,16 +334,19 @@ class CategoryProduct extends Controller
         return Redirect::to('all-category-product');
     }
     public function delete_category_product($MaLoai){
+        $this->AuthLogin();
         DB::table('tbl_loaisp')->where('MaLoai',$MaLoai)->delete();
         Session::put('message','Xóa danh mục sản phẩm thành công!');
         return Redirect::to('all-category-product');
     }
     //Brand
     public function add_brand(){
+        $this->AuthLogin();
         $result = DB::table('tbl_nsx')->get();       
         return view('admin.add_brand',compact('result'));
     }
     public function save_brand(Request $request){
+        $this->AuthLogin();
         $datasp=[];        
         $datasp['TenNSX']=$request->category_product_name;
         $datasp['SDT']=$request->sdt;
@@ -337,6 +360,7 @@ class CategoryProduct extends Controller
 
     }
     public function all_brand(){
+        $this->AuthLogin();
         $data=DB::table('tbl_nsx')
         ->orderby('MaNSX','asc')
         ->paginate(5);          
@@ -344,10 +368,12 @@ class CategoryProduct extends Controller
         
     }
     public function edit_brand($MaNSX){
+        $this->AuthLogin();
         $sp=DB::table('tbl_nsx')->where('MaNSX',$MaNSX)->first();     
         return view('admin.edit_brand', compact('sp'));
     }
     public function update_brand(Request $request,$MaNSX){
+        $this->AuthLogin();
         $datasp=[];       
         $datasp['TenNSX']=$request->category_product_name;
         $datasp['SDT']=$request->sdt;
@@ -360,8 +386,11 @@ class CategoryProduct extends Controller
         return Redirect::to('all-brand');
     }
     public function delete_brand($MaNSX){
+        $this->AuthLogin();
         DB::table('tbl_nsx')->where('MaNSX',$MaNSX)->delete();
         Session::put('message','Xóa thương hiệu thành công!');
         return Redirect::to('all-brand');
     }
+    //End function admin page
+    
 }

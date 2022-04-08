@@ -41,7 +41,7 @@
               <th style="text-align: center;">Đơn giá nhập</th>
               <th style="text-align: center;">Đơn giá bán</th>
               <th style="text-align: center;min-width: 1000px">Mô tả</th>
-              <th style="text-align: center;">Ảnh</th>
+              <th style="text-align: center;min-width: 300px;">Ảnh sản phẩm</th>
               <th style="text-align: center;">Khuyến mãi</th>
               <th style="text-align: center;">Tên NSX</th>
               <th style="text-align: center;">Tên loại</th>
@@ -56,7 +56,7 @@
               <td>{{$key->DonGiaNhap}}</td>
               <td>{{$key->DonGiaBan}}</td>
               <td>{{$key->MoTa}}</td>
-              <td>{{$key->Anh}}</td>
+              <td><img src="{{asset($key->Anh)}}" style="width: 50%;"></td>
               <td>{{$key->KhuyenMai}}</td>
               <td>{{$key->TenNSX}}</td>
               <td>{{$key->TenLoai}}</td>

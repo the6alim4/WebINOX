@@ -13,6 +13,17 @@ body{
     -o-transition: background 1s ease-out;  
     transition: background 1s ease-out;  
 }
+h3{
+  background: -webkit-linear-gradient(#abe0a3,#72d363,#abe0a3);  
+    background: -moz-linear-gradient(#abe0a3,#72d363,#abe0a3);  
+    background: -o-linear-gradient(#abe0a3,#72d363,#abe0a3);  
+    background: linear-gradient(#abe0a3,#72d363,#abe0a3);  
+  
+    -webkit-transition: background 1s ease-out;  
+    -moz-transition: background 1s ease-out;  
+    -o-transition: background 1s ease-out;  
+    transition: background 1s ease-out; 
+}
   .spin{
     display: inline-block;
     width: 50px;
@@ -159,4 +170,19 @@ a:hover{
 .divus:hover{
     background-color: rgb(238, 236, 233);
     color: rgb(216, 167, 94);
+}
+.sp{
+  width: 90%;
+  margin-left: 5%;
+}
+
+.dssp {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dssp > div {
+  flex: 45%; /* or - flex: 0 50% - or - flex-basis: 50% - */
+  /*demo*/
+  margin-bottom: 10px;
 }
