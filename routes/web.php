@@ -19,6 +19,9 @@ Route::get('/infor','HomeController@infor');
 
 //Danh mục sản phẩm trang chủ
 Route::get('/danh-muc-san-pham/{MaLoai}','HomeController@show_category_home');
+Route::get('/thuong-hieu-san-pham/{MaNSX}','HomeController@show_brand_home');
+Route::get('/tim-kiem','HomeController@search');
+
 
 
 //Backend

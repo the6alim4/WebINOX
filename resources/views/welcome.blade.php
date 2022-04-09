@@ -7,12 +7,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<!-- Bootstrap styles -->
+	<link href="{{asset('public/frontend/css/style.css')}}" rel="stylesheet" />
+	<!-- Bootstrap styles -->\
 	<link href="{{asset('public/frontend/css/bootstrap.css')}}" rel="stylesheet" />
-<link rel="stylesheet" href="{{asset('public/backend/css/bootstrap.min.css')}}" >
+	<link rel="stylesheet" href="{{asset('public/backend/css/bootstrap.min.css')}}" >
 
 	<!-- Customize styles -->
-	<link href="{{asset('public/frontend/css/style.css')}}" rel="stylesheet" />
 	<link href="{{asset('public/frontend/css/bootstrap-responsive.css')}}" rel="stylesheet" />
 	<!-- font awesome styles -->
 	<link href="{{asset('public/frontend/fonts/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
@@ -35,9 +35,9 @@
 			<div id="gototop"> </div>
 			<header id="header">
 				<div id="sear">
-					<form action="#" class="navbar-search pull-left" style="display: inline-flex;font-family:Display;">
-						<i class="fa fa-search" aria-hidden="true"></i>&nbsp;
-						<input type="text" placeholder="Bạn đang tìm sản phẩm nào" class="search-query span2">
+					<form action="{{URL::to('/tim-kiem')}}" class="navbar-search pull-left" style="display: inline-flex;font-family:Display;" method="GET">
+						<input type="text" name="ten" placeholder="Bạn đang tìm sản phẩm nào" class="search-query span2">
+						<button type="submit" name="search" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
 					</form>
 				</div>
 			</header>
@@ -54,7 +54,7 @@ Navigation Bar Section
 							<span class="icon-bar"></span>
 						</a>
 						<div class="nav-collapse">
-							<ul class="nav" style="font-family:Display;font-size: 18px">
+							<ul class="nav" style="font-family:Display;font-size: 17px">
 
 								<li class=""><a href="{{url('/trang-chu')}}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Trang chủ </a></li>
 								<li class=""><a href="{{URL::to('/infor')}}""><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>

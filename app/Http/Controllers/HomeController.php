@@ -50,4 +50,26 @@ class HomeController extends Controller
         $tenloai=DB::table('tbl_loaisp')->where('MaLoai',$MaLoai)->first();
         return view('pages.category.show_category',compact('loaisp','nsx','slider','category_by_id','tenloai'));
     }
+    public function show_brand_home($MaNSX){
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        $category_by_id=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
+        ->where('tbl_sanpham.MaNSX',$MaNSX)->orderby('MaSP','asc')
+        ->select('MaSP','TenSP','DonGiaBan','TenNSX','tbl_sanpham.Anh as AnhSP')
+        ->paginate(6);
+        $tennsx=DB::table('tbl_nsx')->where('MaNSX',$MaNSX)->first();
+        return view('pages.category.show_brand',compact('loaisp','nsx','slider','category_by_id','tennsx'));
+    }
+    public function search(Request $request){
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        $ten=$request->ten;
+        $category_by_id=DB::table('tbl_sanpham')
+        ->where('tbl_sanpham.TenSP','like','%'.$ten.'%')->orderby('MaSP','asc')
+        ->select('MaSP','TenSP','DonGiaBan','Anh')
+        ->paginate(6);
+        return view('pages.category.search',compact('loaisp','nsx','slider','category_by_id'));
+    }
 }

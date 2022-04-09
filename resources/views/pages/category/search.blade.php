@@ -2,8 +2,11 @@
 @section('content')		
 				<!--Featured Products-->
 				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;">
-					<p style="width: 100%;text-align: center;height: 100%;font-size: x-large;font-weight: bold;"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;{{$tenloai->TenLoai}}&nbsp;<i class="fa fa-hand-o-left" aria-hidden="true"></i></p>
+					<p style="width: 100%;text-align: center;height: 100%;font-size: x-large;font-weight: bold;"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;Sản phẩm bạn tìm kiếm &nbsp;<i class="fa fa-hand-o-left" aria-hidden="true"></i></p>
 					<hr class="soften" />
+                    @if(count($category_by_id)==0)
+                    <div style="text-align: center;">Không có san sản phẩm nào như vậy!</div>
+                    @else
                     <div class="row" style="display: flex;justify-content:center;align-items:center ">
                         {{$category_by_id->links()}}          
                     </div>
@@ -39,6 +42,7 @@
                             {{$category_by_id->links()}}          
                         </div>
                     </div>
+                    @endif
 				</div>
                 
 @endsection
