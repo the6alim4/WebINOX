@@ -6,7 +6,30 @@
 					<hr class="soften" />
 					<div class="row-fluid">
 						<div id="newProductCar" class="carousel slide" style="display: flex;justify-content: center;align-items: center; width: 100%;">
-							<ul class="thumbnails">
+							<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;" id="dvv1" >
+								<div class="spin" id="spin1"></div>
+								@foreach($all_product as $key)
+								<div class="item" style="margin-left: 250px;margin-right: auto;width: 350px;height:400px;">
+									<div class="thumbnail" style="width: 350px;height:400px;">
+			
+										<a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> Xem chi tiết</a>
+										<a href="product_details.html"><img src="{{$key->Anh}}" style="width: 350px;height: 250px;" alt=""></a>
+										<div class="caption cntr">
+											<p>{{$key->TenSP}}</p>
+											<p><strong>Giá bán: {{number_format($key->DonGiaBan)}} VND</strong></p>
+											<h4><a class="shopBtn" href="#" title="add to cart"> Thêm vào giỏ hàng </a></h4>
+											<div class="actionList" style="height: 10%;">
+												<a class="pull-left" href="#"><i class="fa fa-heart" aria-hidden="true"></i>Yêu thích</a>
+												<a class="pull-left" href="#"> So sánh</a>
+											</div>
+											<br class="clr">
+										</div>
+									</div>
+								</div>
+											
+								@endforeach					
+							</div>
+							{{-- <ul class="thumbnails">
 							@foreach($all_product as $key)
 							
 							<li class="span4">
@@ -27,7 +50,7 @@
 										</div>
 							</li>
 							@endforeach
-							</ul>
+							</ul> --}}
 							<a class="left carousel-control" href="#newProductCar" data-slide="prev">&lsaquo;</a>
 							<a class="right carousel-control" href="#newProductCar" data-slide="next">&rsaquo;</a>
 						</div>

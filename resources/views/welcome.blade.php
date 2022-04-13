@@ -147,8 +147,8 @@ Navigation Bar Section
 											</div>
 										@endforeach								
 								</div>
-								<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-								<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+								<a class="left carousel-control" href="#myCarousel" data-slide="prev" style="width: 10%;margin-top: 20px;">&lsaquo;</a>
+								<a class="right carousel-control" href="#myCarousel" data-slide="next" style="width: 10%;margin-top: 20px;">&rsaquo;</a>
 							</div>
 						</div>
 					
