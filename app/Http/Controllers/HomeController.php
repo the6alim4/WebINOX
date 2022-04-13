@@ -72,4 +72,8 @@ class HomeController extends Controller
         ->paginate(6);
         return view('pages.category.search',compact('loaisp','nsx','slider','category_by_id'));
     }
+    public function details_product($MaSP){
+        return view('pages.product.show_details');
+
+    } 
 }

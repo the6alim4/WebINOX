@@ -13,7 +13,7 @@
                             
                             <div class="sp" style="width: 350px;height:450px;" >
                                 <div class="thumbnail" style="width: 100%;height: 440px;">
-                                    <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> Xem chi tiết</a>
+                                    <a class="zoomTool" href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}" title="add to cart"><span class="icon-search"></span> Xem chi tiết</a>
                                     <a href="product_details.html"><img src="{{asset($key->AnhSP)}}" style="max-width:100%;height: 250px;" alt=""></a>
                                     <div class="caption cntr" style="width: 100%;">
                                         <p>{{$key->TenSP}}</p>

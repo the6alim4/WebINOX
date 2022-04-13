@@ -22,6 +22,8 @@ Route::get('/danh-muc-san-pham/{MaLoai}','HomeController@show_category_home');
 Route::get('/thuong-hieu-san-pham/{MaNSX}','HomeController@show_brand_home');
 Route::get('/tim-kiem','HomeController@search');
 
+//Chi tiet san pham
+Route::get('/chi-tiet-san-pham/{MaSP}','HomeController@details_product');
 
 
 //Backend

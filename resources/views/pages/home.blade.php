@@ -12,7 +12,7 @@
 								<div class="item" style="margin-left: 250px;margin-right: auto;width: 350px;height:400px;">
 									<div class="thumbnail" style="width: 350px;height:400px;">
 			
-										<a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> Xem chi tiết</a>
+										<a class="zoomTool" href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}" title="add to cart"><span class="icon-search"></span> Xem chi tiết</a>
 										<a href="product_details.html"><img src="{{$key->Anh}}" style="width: 350px;height: 250px;" alt=""></a>
 										<div class="caption cntr">
 											<p>{{$key->TenSP}}</p>

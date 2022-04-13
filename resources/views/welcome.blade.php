@@ -19,7 +19,6 @@
 	<!--[if IE 7]>
 			<link href="{{asset('public/frontendcss/font-awesome-ie7.min.css')}}" rel="stylesheet">
 		<![endif]-->
-
 	<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
