@@ -76,7 +76,22 @@ class HomeController extends Controller
         $loaisp=DB::table('tbl_loaisp')->get();
         $nsx=DB::table('tbl_nsx')->get();
         $slider=DB::table('tbl_slider')->get();
-        return view('pages.product.show_details',compact('loaisp','nsx','slider'));
+        $data=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
+        ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
+        ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
+        ->where('MaSP',$MaSP)
+        ->orderby('MaSP','asc')
+        ->select('MaSP','TenSP','DonGiaBan','tbl_sanpham.Anh as AnhSP','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')->first();
+        $anhbotro=DB::table('tbl_anhbotro')->where('MaSP',$MaSP)->get();
+        $kichthuoc=DB::table('tbl_kichthuoc')->where('MaSP',$MaSP)->get();
+        $tt=DB::table('tbl_sanpham')->where('MaSP',$MaSP)->first();
+        $sptt=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
+        ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
+        ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
+        ->where('MaSP','!=',$MaSP)->where('tbl_sanpham.MaNSX',$tt->MaNSX)->where('tbl_sanpham.MaChatLieu',$tt->MaChatLieu)
+        ->where('tbl_sanpham.MaLoai',$tt->MaLoai)
+        ->select('MaSP','TenSP','DonGiaBan','tbl_sanpham.Anh as AnhSP','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')->limit(4)->get();
+        return view('pages.product.show_details',compact('loaisp','nsx','slider','data','anhbotro','kichthuoc','sptt'));
 
     } 
 }
