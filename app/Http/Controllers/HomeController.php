@@ -73,7 +73,10 @@ class HomeController extends Controller
         return view('pages.category.search',compact('loaisp','nsx','slider','category_by_id'));
     }
     public function details_product($MaSP){
-        return view('pages.product.show_details');
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.product.show_details',compact('loaisp','nsx','slider'));
 
     } 
 }
