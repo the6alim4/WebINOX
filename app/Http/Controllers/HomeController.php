@@ -106,4 +106,12 @@ class HomeController extends Controller
         return view('pages.product.show_details',compact('loaisp','nsx','slider','data','anhbotro','kichthuoc','sptt','maxsize','valfisrtsize'));
 
     } 
+    public function getCountSize(Request $request){
+    $count=DB::table('tbl_kichthuoc')
+    ->where('MaSP',$request->MaSP)
+    ->where('DuongKinh',$request->DuongKinh)
+    ->select('SoLuong')
+    ->get();
+      return $count;
+    }
 }

@@ -33,10 +33,11 @@
         <label class="control-label" style="display: inline-flex;font-size: x-large;">Giá bán: <p id="cost"><strong> {{number_format($data->DonGiaBan)}} </strong> </p> VND</label><br>
         <label class="control-label"><span>Thương hiệu: {{$data->TenNSX}} </span></label><br>
         <label class="control-label"><span>Chất liệu: {{$data->TenChatLieu}}</span></label><br>
-        <label class="control-label" style="display: inline-flex;width: 60%;"><span>Số lượng còn: </span><p id="slcon" style="width:15%;"> {{$valfisrtsize}} </p></label><br>
+        <label class="control-label" style="display: inline-flex;width: 60%;"><span>Số lượng còn: </span><p id="sl" style="width:15%;" > {{$valfisrtsize}} </p></label><br>
         <div class="controls">
-          <label class="control-label"><span>Số lượng mua: </span></label>
-          <input type="number" class="span6" min="0" step="1" id="slmua" style="width: 10%;" required>
+          <label class="control-label" ><span>Số lượng mua: </span></label>
+          <input type="number" class="span6" min="0" step="1" id="slmua" style="width: 10%;" onkeypress="changeQuan()" required>
+          <div id="note" style="visibility: hidden;"></div>
         </div>
         @if(count($kichthuoc)==1)
         @else   
@@ -56,7 +57,9 @@
           <input value='{{$maxsize}}' id='maxsize' readonly style="display: none;">
       @endif
       <input value="{{$data->DonGiaBan}}" id="maxval" style="display: none;">
-      <button type="submit" class="shopBtn" onclick="acceptAdd()"><span class=" icon-shopping-cart"></span> Thêm vào giỏ hàng</button>
+      <input value="{{$valfisrtsize}}" id="slcon" style="display: none;">
+      <input value="{{$data->MaSP}}" id="masp" style="display: none;">
+      <button  class="shopBtn"><span class=" icon-shopping-cart"></span> Thêm vào giỏ hàng</button>
       
     </form>
 </div>
@@ -120,7 +123,8 @@
 
 </div>
 </div>
-<script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+  <script type="text/javascript">
   function format1(n) {
   return n.toFixed(0).replace(/./g, function(c, i, a) {
     return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
@@ -133,14 +137,48 @@ function myFunction(){
 	var selectedsize=document.getElementById("choosesize").value;
 	var newval=(selectedsize/maxsize)*maxval;
 	document.getElementById("cost").innerHTML =format1(newval);
+	var masp=document.getElementById("masp").value;
+$.ajax({
+                url:`../api/getcountsize/?MaSP=${masp}&DuongKinh=${selectedsize}`,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function(rs) {
+                $('#sl').empty();
+                $('#sl').append(`${rs[0].SoLuong}`);
+                }
+                });
+               
+    
 }
-function acceptAdd(){
-	var quantity=parseInt(document.getElementById("slmua").value);
-	var slcon=parseInt(document.getElementById("slcon").value);
-  if(quantity>slcon){
-    return focusElement(slmua, 'Please enter a First Name that is more than 2 and less than 15 characters long.');
+function changeQuan(){
+  var val=document.getElementById("sl").textContent;
+  var quan=document.getElementById("slmua").value;
+  if(parseInt(val)<parseInt(quan)){
+      console.log('hgggggggg');
+      const box = document.getElementById('note');
+      box.style.visibility = 'visible';
+      box.style.color = 'red';
+      $("#note").text("Số lượng vượt quá giới hạn!");
+    }
+  else{
+    const box = document.getElementById('note');
+    box.style.visibility = 'hidden';
   }
-	
+  // $('body').on('focusout', '#slmua', function(e) {
+  //   var val=document.getElementById("sl").textContent;
+  //   var quan=document.getElementById("slmua").value;
+  //   console.log(parseInt(val));
+  //   console.log(quan);
+  //   if(parseInt(val)<parseInt(quan)){
+  //     const box = document.getElementById('note');
+  //     box.style.visibility = 'visible';
+  //     box.style.color = 'red';
+  //     $("#note").text("Số lượng vượt quá giới hạn!");
+  //   }
+    
+// });
+
 }
 </script>
+
 @endsection
