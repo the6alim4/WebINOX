@@ -91,4 +91,12 @@
 				</div>
 			</div>
 		</div>
+<script>
+	  setTimeout(() => {
+	const box = document.getElementById('spin1');
+	const dvv = document.getElementById('dvv1');
+	box.style.display = 'none';
+	dvv.style.display = 'inline';
+  }, 5500);
+</script>
 @endsection

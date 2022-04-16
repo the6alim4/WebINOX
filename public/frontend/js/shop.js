@@ -14,12 +14,7 @@ setTimeout(() => {
 	box.style.display = 'none';
 	dvv.style.display = 'inline';
   }, 5500);
-  setTimeout(() => {
-	const box = document.getElementById('spin1');
-	const dvv = document.getElementById('dvv1');
-	box.style.display = 'none';
-	dvv.style.display = 'inline';
-  }, 5500);
+
 /* Home page item price animation */
 $('.thumbnail').mouseenter(function() {
    $(this).children('.zoomTool').fadeIn();

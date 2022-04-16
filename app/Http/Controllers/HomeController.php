@@ -84,6 +84,18 @@ class HomeController extends Controller
         ->select('MaSP','TenSP','DonGiaBan','tbl_sanpham.Anh as AnhSP','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')->first();
         $anhbotro=DB::table('tbl_anhbotro')->where('MaSP',$MaSP)->get();
         $kichthuoc=DB::table('tbl_kichthuoc')->where('MaSP',$MaSP)->get();
+        $maxsize=0;
+        if(count($kichthuoc)==1){
+
+        }else{
+            foreach($kichthuoc as $key){
+                if($key->DuongKinh>$maxsize){
+                    $maxsize=$key->DuongKinh;
+                }
+            }
+        }
+        $fisrtsize=DB::table('tbl_kichthuoc')->where('MaSP',$MaSP)->first();
+        $valfisrtsize=$fisrtsize->SoLuong;
         $tt=DB::table('tbl_sanpham')->where('MaSP',$MaSP)->first();
         $sptt=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
         ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
@@ -91,7 +103,7 @@ class HomeController extends Controller
         ->where('MaSP','!=',$MaSP)->where('tbl_sanpham.MaNSX',$tt->MaNSX)->where('tbl_sanpham.MaChatLieu',$tt->MaChatLieu)
         ->where('tbl_sanpham.MaLoai',$tt->MaLoai)
         ->select('MaSP','TenSP','DonGiaBan','tbl_sanpham.Anh as AnhSP','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')->limit(4)->get();
-        return view('pages.product.show_details',compact('loaisp','nsx','slider','data','anhbotro','kichthuoc','sptt'));
+        return view('pages.product.show_details',compact('loaisp','nsx','slider','data','anhbotro','kichthuoc','sptt','maxsize','valfisrtsize'));
 
     } 
 }

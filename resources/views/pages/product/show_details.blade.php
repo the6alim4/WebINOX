@@ -30,24 +30,34 @@
         
       <div class="control-group">
         <p style="font-family:Display;font-size: x-large;font-weight: bold; ">{{$data->TenSP}}</p>
-        <label class="control-label"><span><strong>Giá bán: {{number_format($data->DonGiaBan)}} VND</strong> </span></label><br>
+        <label class="control-label" style="display: inline-flex;font-size: x-large;">Giá bán: <p id="cost"><strong> {{number_format($data->DonGiaBan)}} </strong> </p> VND</label><br>
         <label class="control-label"><span>Thương hiệu: {{$data->TenNSX}} </span></label><br>
         <label class="control-label"><span>Chất liệu: {{$data->TenChatLieu}}</span></label><br>
-        <label class="control-label"><span>Số lượng còn: </span></label><br>
+        <label class="control-label" style="display: inline-flex;width: 60%;"><span>Số lượng còn: </span><p id="slcon" style="width:15%;"> {{$valfisrtsize}} </p></label><br>
         <div class="controls">
           <label class="control-label"><span>Số lượng mua: </span></label>
-          <input type="number" class="span6" min="0" step="1" style="width: 10%;" required>
-        </div>        
-        <div class="controls">
-          <select class="span11" style="width: 30%;">
-              <option>Material 1</option>
-              <option>Material 2</option>
-              <option>Material 3</option>
-              <option>Material 4</option>
-            </select>
+          <input type="number" class="span6" min="0" step="1" id="slmua" style="width: 10%;" required>
         </div>
+        @if(count($kichthuoc)==1)
+        @else   
+         
+        <div class="controls">
+          <label class="control-label"><span>Kích thước: </span></label>  
+          <select class="span11" style="width: 10%;" id="choosesize" onchange="myFunction()">
+            @foreach($kichthuoc as $key)
+              <option value="{{$key->DuongKinh}}">{{$key->DuongKinh}}</option>
+            @endforeach
+          </select>
+        </div>
+        @endif
       </div>
-      <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Thêm vào giỏ hàng</button>
+      @if($maxsize==0)
+      @else
+          <input value='{{$maxsize}}' id='maxsize' readonly style="display: none;">
+      @endif
+      <input value="{{$data->DonGiaBan}}" id="maxval" style="display: none;">
+      <button type="submit" class="shopBtn" onclick="acceptAdd()"><span class=" icon-shopping-cart"></span> Thêm vào giỏ hàng</button>
+      
     </form>
 </div>
 <br><br>
@@ -110,5 +120,27 @@
 
 </div>
 </div>
-
+<script>
+  function format1(n) {
+  return n.toFixed(0).replace(/./g, function(c, i, a) {
+    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+  });
+}
+  //change cost when choosing other size
+function myFunction(){
+	var maxsize=document.getElementById("maxsize").value;
+	var maxval=document.getElementById("maxval").value;
+	var selectedsize=document.getElementById("choosesize").value;
+	var newval=(selectedsize/maxsize)*maxval;
+	document.getElementById("cost").innerHTML =format1(newval);
+}
+function acceptAdd(){
+	var quantity=document.getElementById("slmua").value;
+	var slcon=document.getElementById("slcon").value;
+  if(quantity>slcon){
+    alert('Số lượng hàng không đủ! Mời bạn chọn số lượng thấp hơn!')
+  }
+	
+}
+</script>
 @endsection
