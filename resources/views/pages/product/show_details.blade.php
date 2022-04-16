@@ -135,10 +135,10 @@ function myFunction(){
 	document.getElementById("cost").innerHTML =format1(newval);
 }
 function acceptAdd(){
-	var quantity=document.getElementById("slmua").value;
-	var slcon=document.getElementById("slcon").value;
+	var quantity=parseInt(document.getElementById("slmua").value);
+	var slcon=parseInt(document.getElementById("slcon").value);
   if(quantity>slcon){
-    alert('Số lượng hàng không đủ! Mời bạn chọn số lượng thấp hơn!')
+    return focusElement(slmua, 'Please enter a First Name that is more than 2 and less than 15 characters long.');
   }
 	
 }
