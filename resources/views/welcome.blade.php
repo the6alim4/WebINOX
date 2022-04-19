@@ -56,7 +56,7 @@ Navigation Bar Section
 							<ul class="nav" style="font-family:Display;font-size: 17px">
 
 								<li class=""><a href="{{url('/trang-chu')}}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Trang chủ </a></li>
-								<li class=""><a href="{{URL::to('/infor')}}""><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
+								<li class=""><a href="{{URL::to('/infor')}}"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa-brands fa-font-awesome"></i>&nbsp; Thương hiệu <b class="caret"></b></a>
 									<div class="dropdown-menu">

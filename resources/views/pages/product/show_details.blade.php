@@ -26,9 +26,10 @@
         </div>
 
     </div>
-    <form style="margin-left: 35%;">
-        
+    <form style="margin-left: 35%;" action="{{URL::to('/save-cart')}}" method="POST">
+        {{ csrf_field() }}
       <div class="control-group">
+        <input name="masp" type="hidden" value="{{$data->MaSP}}" style="display: none" readonly>
         <p style="font-family:Display;font-size: x-large;font-weight: bold; ">{{$data->TenSP}}</p>
         <label class="control-label" style="display: inline-flex;font-size: x-large;">Giá bán: <p id="cost"><strong> {{number_format($data->DonGiaBan)}} </strong> </p> VND</label><br>
         <label class="control-label"><span>Thương hiệu: {{$data->TenNSX}} </span></label><br>
@@ -36,7 +37,7 @@
         <label class="control-label" style="display: inline-flex;width: 60%;"><span>Số lượng còn: </span><p id="sl" style="width:15%;" > {{$valfisrtsize}} </p></label><br>
         <div class="controls">
           <label class="control-label" ><span>Số lượng mua: </span></label>
-          <input type="number" class="span6" min="0" step="1" id="slmua" style="width: 10%;" onkeypress="changeQuan()" required>
+          <input type="number" name="quantity" class="span6" min="1" step="1" id="slmua" style="width: 10%;"  required>
           <div id="note" style="visibility: hidden;"></div>
         </div>
         @if(count($kichthuoc)==1)
@@ -44,7 +45,7 @@
          
         <div class="controls">
           <label class="control-label"><span>Kích thước: </span></label>  
-          <select class="span11" style="width: 10%;" id="choosesize" onchange="myFunction()">
+          <select class="span11" style="width: 10%;" id="choosesize" name="size" onchange="myFunction()">
             @foreach($kichthuoc as $key)
               <option value="{{$key->DuongKinh}}">{{$key->DuongKinh}}</option>
             @endforeach
@@ -59,7 +60,7 @@
       <input value="{{$data->DonGiaBan}}" id="maxval" style="display: none;">
       <input value="{{$valfisrtsize}}" id="slcon" style="display: none;">
       <input value="{{$data->MaSP}}" id="masp" style="display: none;">
-      <button  class="shopBtn"><span class=" icon-shopping-cart"></span> Thêm vào giỏ hàng</button>
+      <button type="submit" class="shopBtn" id="addtocart"><span class=" icon-shopping-cart"></span> Thêm vào giỏ hàng</button>
       
     </form>
 </div>
@@ -138,6 +139,7 @@ function myFunction(){
 	var newval=(selectedsize/maxsize)*maxval;
 	document.getElementById("cost").innerHTML =format1(newval);
 	var masp=document.getElementById("masp").value;
+  //change so luong con khi chon size
 $.ajax({
                 url:`../api/getcountsize/?MaSP=${masp}&DuongKinh=${selectedsize}`,
                 method: 'GET',
@@ -150,35 +152,30 @@ $.ajax({
                
     
 }
-function changeQuan(){
-  var val=document.getElementById("sl").textContent;
-  var quan=document.getElementById("slmua").value;
-  if(parseInt(val)<parseInt(quan)){
-      console.log('hgggggggg');
+
+  $('body').on('focusout', '#slmua', function(e) {
+    var val=document.getElementById("sl").textContent;
+    var quan=document.getElementById("slmua").value;
+    console.log(parseInt(val));
+    console.log(quan);
+    if(parseInt(val)<parseInt(quan)){
       const box = document.getElementById('note');
       box.style.visibility = 'visible';
       box.style.color = 'red';
       $("#note").text("Số lượng vượt quá giới hạn!");
-    }
-  else{
-    const box = document.getElementById('note');
-    box.style.visibility = 'hidden';
-  }
-  // $('body').on('focusout', '#slmua', function(e) {
-  //   var val=document.getElementById("sl").textContent;
-  //   var quan=document.getElementById("slmua").value;
-  //   console.log(parseInt(val));
-  //   console.log(quan);
-  //   if(parseInt(val)<parseInt(quan)){
-  //     const box = document.getElementById('note');
-  //     box.style.visibility = 'visible';
-  //     box.style.color = 'red';
-  //     $("#note").text("Số lượng vượt quá giới hạn!");
-  //   }
-    
-// });
+      const btn = document.getElementById('addtocart');
+      btn.disabled=true;
 
-}
+    }
+    else{
+      const box = document.getElementById('note');
+      box.style.visibility = 'hidden';
+      const btn = document.getElementById('addtocart');
+      btn.disabled=false;
+    }
+    
+});
+
 </script>
 
 @endsection

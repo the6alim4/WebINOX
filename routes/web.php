@@ -53,3 +53,5 @@ Route::post('/update-brand/{MaNSX}','CategoryProduct@update_brand');
 Route::get('/delete-brand/{MaNSX}','CategoryProduct@delete_brand');
 Route::get('/all-brand','CategoryProduct@all_brand');
 Route::post('/save-brand','CategoryProduct@save_brand');
+//Cart
+Route::post('/save-cart','CartController@save_cart');
