@@ -11,13 +11,20 @@
 								@foreach($all_product as $key)
 								<div class="item" style="margin-left: 250px;margin-right: auto;width: 350px;height:400px;">
 									<div class="thumbnail" style="width: 350px;height:400px;">
-			
+										<form>
+											@csrf
+											<input type="hidden" value="{{$key->MaSP}}" class="cart_product_id_{{$key->MaSP}}">
+											<input type="hidden" value="{{$key->TenSP}}" class="cart_product_name_{{$key->MaSP}}">
+											<input type="hidden" value="{{$key->Anh}}" class="cart_product_image_{{$key->MaSP}}">
+											<input type="hidden" value="{{$key->DonGiaBan}}" class="cart_product_price_{{$key->MaSP}}">
+											<input type="hidden" value="1" class="cart_product_qty_{{$key->MaSP}}">
 										<a class="zoomTool" href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}" title="add to cart"><span class="icon-search"></span> Xem chi tiết</a>
-										<a href="product_details.html"><img src="{{$key->Anh}}" style="width: 350px;height: 250px;" alt=""></a>
+										<img src="{{$key->Anh}}" style="width: 350px;height: 250px;" alt="">
 										<div class="caption cntr">
 											<p>{{$key->TenSP}}</p>
 											<p><strong>Giá bán: {{number_format($key->DonGiaBan)}} VND</strong></p>
-											<h4><a class="shopBtn" href="#" title="add to cart"> Thêm vào giỏ hàng </a></h4>
+											<h4><button type="button" class="shopBtn" data-id_product="{{$key->MaSP}}" name="addtocart" > Thêm vào giỏ hàng </button></h4>
+										</form>
 											<div class="actionList" style="height: 10%;">
 												<a class="pull-left" href="#"><i class="fa fa-heart" aria-hidden="true"></i>Yêu thích</a>
 												<a class="pull-left" href="#"> So sánh</a>
@@ -29,28 +36,6 @@
 											
 								@endforeach					
 							</div>
-							{{-- <ul class="thumbnails">
-							@foreach($all_product as $key)
-							
-							<li class="span4">
-										<div class="thumbnail" style="width: 100%;">
-		
-											<a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> Xem chi tiết</a>
-											<a href="product_details.html"><img src="{{$key->Anh}}" style="width: 100%;height: max-content;" alt=""></a>
-											<div class="caption cntr">
-												<p>{{$key->TenSP}}</p>
-												<p><strong>Giá bán: {{number_format($key->DonGiaBan)}} VND</strong></p>
-												<h4><a class="shopBtn" href="#" title="add to cart"> Thêm vào giỏ hàng </a></h4>
-												<div class="actionList">
-													<a class="pull-left" href="#"><i class="fa fa-heart" aria-hidden="true"></i>Yêu thích</a>
-													<a class="pull-left" href="#"> So sánh</a>
-												</div>
-												<br class="clr">
-											</div>
-										</div>
-							</li>
-							@endforeach
-							</ul> --}}
 							<a class="left carousel-control" href="#newProductCar" data-slide="prev">&lsaquo;</a>
 							<a class="right carousel-control" href="#newProductCar" data-slide="next">&rsaquo;</a>
 						</div>

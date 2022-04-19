@@ -14,6 +14,7 @@
 
 	<!-- Customize styles -->
 	<link href="{{asset('public/frontend/css/bootstrap-responsive.css')}}" rel="stylesheet" />
+	<link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet" />
 	<!-- font awesome styles -->
 	<link href="{{asset('public/frontend/fonts/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
 	<!--[if IE 7]>
@@ -184,11 +185,42 @@ Navigation Bar Section
 			</footer>
 			<a href="#" class="gotop" id="btnup"><i class="icon-double-angle-up"></i></a>
 			<!-- Placed at the end of the document so the pages load faster -->
-			<script src="{{asset('public/frontend/js/jquery.js')}}"></script>
+			<script src="{{asset('public/frontend/js/jquery3x.js')}}"></script>
+			{{-- <script src="{{asset('public/frontend/js/jquery.js')}}"></script> --}}
 			<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 			<script src="{{asset('public/frontend/js/jquery.easing-1.3.min.js')}}"></script>
 			<script src="{{asset('public/frontend/js/jquery.scrollTo-1.4.3.1-min.js')}}"></script>
 			<script src="{{asset('public/frontend/js/shop.js')}}"></script>
+			<script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$('.shopBtn').click(function(){
+						var id = $(this).data('id_product');
+						var cart_product_id = $('.cart_product_id_' + id).val();
+						var cart_product_name = $('.cart_product_name_' + id).val();
+						var cart_product_image = $('.cart_product_image_' + id).val();
+						var cart_product_price = $('.cart_product_price_' + id).val();
+						var cart_product_qty = $('.cart_product_qty_' + id).val();
+						var _token = $('input[name="_token"]').val();
+
+						$.ajax({
+							url: "{{url('/add-cart-ajax')}}",
+                    		method: 'POST',
+							data:{
+								cart_product_id:cart_product_id,
+								cart_product_name:cart_product_name,
+								cart_product_image:cart_product_image,
+								cart_product_price:cart_product_price,
+								cart_product_qty:cart_product_qty,
+								_token:_token
+							},success:function(data){
+								alert(data);
+							}
+
+						});
+					});
+				});
+			</script>
 			<script src="https://kit.fontawesome.com/7e14c6b25d.js" crossorigin="anonymous"></script>
 </body>
 

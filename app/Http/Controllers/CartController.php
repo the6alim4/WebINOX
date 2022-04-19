@@ -10,14 +10,8 @@ session_start();
 class CartController extends Controller
 {
     //
-    public function save_cart(Request $request){
-        $MaSP=$request->masp;
-        $quantity=$request->quantity;
-        $size=$request->size;
-        $loaisp=DB::table('tbl_loaisp')->get();
-        $nsx=DB::table('tbl_nsx')->get();
-        $slider=DB::table('tbl_slider')->get();
-        $data= DB::table('tbl_sanpham')->where('MaSP',$MaSP)->get();
-        return view('pages.cart.show_cart',compact('loaisp','nsx','slider','data',));
+    public function add_cart_ajax(Request $request){
+        $data = $request->all();
+        print_r($data);
     }
 }
