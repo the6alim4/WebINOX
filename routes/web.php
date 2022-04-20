@@ -55,3 +55,4 @@ Route::get('/all-brand','CategoryProduct@all_brand');
 Route::post('/save-brand','CategoryProduct@save_brand');
 //Cart
 Route::post('/add-cart-ajax','CartController@add_cart_ajax');
+Route::get('/gio-hang','CartController@gio_hang');

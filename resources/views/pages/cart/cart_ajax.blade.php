@@ -14,8 +14,8 @@
 <table class="table table-bordered table-condensed">
           <thead>
             <tr>
-              <th style="text-align: center;">Sản phẩm</th>
-              <th style="text-align: center;">Ảnh sản phẩm</th>
+              <th style="text-align: center;">Tên sản phẩm</th>
+              <th style="text-align: center;">Hình ảnh</th>
               <th style="text-align: center;">Kích cỡ</th>
               <th style="text-align: center;">Đơn giá</th>
               <th style="text-align: center;">Số lượng</th>
@@ -25,23 +25,32 @@
           </thead>
           <tbody>
               {{-- san pham --}}
+
+            @foreach(Session::get('cart') as $key)
             <tr>
-              <td><img width="100" src="assets/img/e.jpg" alt=""></td>
-              <td>Items name here<br>Carate : 22<br>Model : n/a</td>
-              <td> - </td>
-              <td><span class="shopBtn"><span class="icon-ok"></span></span> </td>
-              <td>$50.00</td>
+              <td>{{$key['product_name']}}</td>
               <td>
-                
+                <img width="100" src="{{asset($key['product_image'])}}">
+              </td>
+              @if($key['product_size']==0)
+                <td>Không</td>
+              @else
+              <td>
+                {{$key['product_size']}}
+              </td>
+              @endif
+              <td>{{$key['product_price']}}</td>          
+              <td>                
               <div class="input-append">
-                <button class="btn btn-mini" type="button" style="height: 30px;"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                <input class="span1" style="max-width:34px;height: 30px;" id="appendedInputButtons" size="30" type="text" min="1" step="1">
-                <button class="btn btn-mini" type="button" style="height: 30px;"> <i class="fa fa-plus" aria-hidden="true"></i></button>                
+                {{-- <button class="btn btn-mini" id="minus" type="button" style="height: 30px;"><i class="fa fa-minus" aria-hidden="true"></i></button> --}}
+                <input class="span1" type="number" style="width:50px;height: 30px;" id="appendedInputButtons" size="30" type="text" min="1" max="{{$key['product_maxquan']}}" step="1" value="{{$key['product_qty']}}">
+                {{-- <button class="btn btn-mini" id="plus" type="button" style="height: 30px;"> <i class="fa fa-plus" aria-hidden="true"></i></button>                 --}}
             </div>
             </td>
               <td>$100.00</td>
               <td><button class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button></td>
             </tr>
+            @endforeach
                 {{-- san pham --}}
             <tr>
                 <td colspan="6" class="alignR">Phí giao hàng (toàn quốc):	</td>
@@ -97,7 +106,7 @@
               </tr>
           </tbody>
         </table>		
-<a href="products.html" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
+<a href="{{URL::to('/trang-chu')}}" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Tiếp tục mua hàng </a>
 <a href="login.html" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
 
 </div>

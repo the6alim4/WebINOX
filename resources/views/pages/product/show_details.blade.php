@@ -26,11 +26,17 @@
         </div>
 
     </div>
-    <form style="margin-left: 35%;" action="{{URL::to('/save-cart')}}" method="POST">
-        {{ csrf_field() }}
+    <form style="margin-left: 35%;" >
+        @csrf
+        <input type="hidden" value="{{$data->MaSP}}" >
+				<input type="hidden" value="{{$data->TenSP}}" >
+				<input type="hidden" value="{{$data->AnhSP}}" >
+				<input type="hidden" value="{{$data->DonGiaBan}}" >
+				<input type="hidden" value="1" class="cart_product_qty_{{$data->MaSP}}">
       <div class="control-group">
-        <input name="masp" type="hidden" value="{{$data->MaSP}}" style="display: none" readonly>
-        <p style="font-family:Display;font-size: x-large;font-weight: bold; ">{{$data->TenSP}}</p>
+        <input name="masp" type="hidden" id="product_id" value="{{$data->MaSP}}" style="display: none" readonly>
+        <input name="anhsp" type="hidden" id="anhsp" value="{{asset($data->AnhSP)}}" style="display: none" readonly>
+        <p style="font-family:Display;font-size: x-large;font-weight: bold; " id="tensp">{{$data->TenSP}}</p>
         <label class="control-label" style="display: inline-flex;font-size: x-large;">Giá bán: <p id="cost"><strong> {{number_format($data->DonGiaBan)}} </strong> </p> VND</label><br>
         <label class="control-label"><span>Thương hiệu: {{$data->TenNSX}} </span></label><br>
         <label class="control-label"><span>Chất liệu: {{$data->TenChatLieu}}</span></label><br>
@@ -41,6 +47,7 @@
           <div id="note" style="visibility: hidden;"></div>
         </div>
         @if(count($kichthuoc)==1)
+        <input type="hidden" value="0" id="choosesize">
         @else   
          
         <div class="controls">
@@ -59,8 +66,8 @@
       @endif
       <input value="{{$data->DonGiaBan}}" id="maxval" style="display: none;">
       <input value="{{$valfisrtsize}}" id="slcon" style="display: none;">
-      <input value="{{$data->MaSP}}" id="masp" style="display: none;">
-      <button type="submit" class="shopBtn" id="addtocart"><span class=" icon-shopping-cart"></span> Thêm vào giỏ hàng</button>
+      <input value="0" id="maxquan" style="display: none;">
+      <h4><button type="button" class="shopBtn" id="addtocart" name="addtocart" > Thêm vào giỏ hàng </button></h4>
       
     </form>
 </div>
@@ -106,7 +113,7 @@
               <div class="caption cntr" style="width: 100%;">
                   <p>{{$key->TenSP}}</p>
                   <p><strong>Giá bán: {{number_format($key->DonGiaBan)}} VND</strong></p>
-                  <h4><a class="shopBtn" href="#" title="add to cart"> Thêm vào giỏ hàng </a></h4>
+                  <h4><button type="button" class="shopBtn" data-id_product="{{$key->MaSP}}" name="addtocart" > Thêm vào giỏ hàng </button></h4>
                   <div class="actionList">
                       <a class="pull-left" href="#"><i class="fa fa-heart" aria-hidden="true"></i>Yêu thích</a>
                       <a class="pull-left" href="#"> So sánh</a>
@@ -124,8 +131,11 @@
 
 </div>
 </div>
+<script src="{{asset('public/frontend/js/jquery3x.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
-  <script type="text/javascript">
+
+
+<script type="text/javascript">
   function format1(n) {
   return n.toFixed(0).replace(/./g, function(c, i, a) {
     return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
@@ -138,7 +148,7 @@ function myFunction(){
 	var selectedsize=document.getElementById("choosesize").value;
 	var newval=(selectedsize/maxsize)*maxval;
 	document.getElementById("cost").innerHTML =format1(newval);
-	var masp=document.getElementById("masp").value;
+	var masp=document.getElementById("product_id").value;
   //change so luong con khi chon size
 $.ajax({
                 url:`../api/getcountsize/?MaSP=${masp}&DuongKinh=${selectedsize}`,
@@ -156,8 +166,6 @@ $.ajax({
   $('body').on('focusout', '#slmua', function(e) {
     var val=document.getElementById("sl").textContent;
     var quan=document.getElementById("slmua").value;
-    console.log(parseInt(val));
-    console.log(quan);
     if(parseInt(val)<parseInt(quan)){
       const box = document.getElementById('note');
       box.style.visibility = 'visible';
@@ -177,5 +185,48 @@ $.ajax({
 });
 
 </script>
+<script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
+<script type="text/javascript">
+				$(document).ready(function(){
+					$('.shopBtn').click(function(){
+						var cart_product_id = document.getElementById('product_id').value;
+						var cart_product_name = document.getElementById('tensp').textContent;
+						var cart_product_image = document.getElementById('anhsp').value;
+						var cart_product_price = document.getElementById('cost').textContent;
+						var cart_product_qty = document.getElementById('slmua').value;
+						var cart_product_size = document.getElementById('choosesize').value;
+						var cart_product_maxquan = document.getElementById('sl').textContent;
+						var _token = $('input[name="_token"]').val();           
+						$.ajax({
+							url: "{{url('/add-cart-ajax')}}",
+                    		method: 'POST',
+							data:{
+								cart_product_id:cart_product_id,
+								cart_product_name:cart_product_name,
+								cart_product_image:cart_product_image,
+								cart_product_price:cart_product_price,
+								cart_product_qty:cart_product_qty,
+								cart_product_size:cart_product_size,
+                cart_product_maxquan:cart_product_maxquan,
+								_token:_token
+							},success:function(){
+								swal({
+                                title: "Đã thêm sản phẩm vào giỏ hàng",
+                                text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                showCancelButton: true,
+                                cancelButtonText: "Xem tiếp",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Đi đến giỏ hàng",
+                                closeOnConfirm: false
+                            },
+                            function() {
+                                window.location.href = "{{url('/gio-hang')}}";
+                            });
 
+							}
+
+						});
+					});
+				});
+</script>
 @endsection
