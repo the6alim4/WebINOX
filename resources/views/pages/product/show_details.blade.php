@@ -67,6 +67,7 @@
       <input value="{{$data->DonGiaBan}}" id="maxval" style="display: none;">
       <input value="{{$valfisrtsize}}" id="slcon" style="display: none;">
       <input value="0" id="maxquan" style="display: none;">
+      <input value="{{$data->DonGiaBan}}" id='realcost' readonly style="display: none;">
       <h4><button type="button" class="shopBtn" id="addtocart" name="addtocart" > Thêm vào giỏ hàng </button></h4>
       
     </form>
@@ -148,6 +149,9 @@ function myFunction(){
 	var selectedsize=document.getElementById("choosesize").value;
 	var newval=(selectedsize/maxsize)*maxval;
 	document.getElementById("cost").innerHTML =format1(newval);
+	$('#realcost').value(newval);
+  var realcost=document.getElementById("realcost").value;
+  console.log(realcost);
 	var masp=document.getElementById("product_id").value;
   //change so luong con khi chon size
 $.ajax({
@@ -192,11 +196,12 @@ $.ajax({
 						var cart_product_id = document.getElementById('product_id').value;
 						var cart_product_name = document.getElementById('tensp').textContent;
 						var cart_product_image = document.getElementById('anhsp').value;
-						var cart_product_price = document.getElementById('cost').textContent;
+						var cart_product_price = document.getElementById('realcost').value;
 						var cart_product_qty = document.getElementById('slmua').value;
 						var cart_product_size = document.getElementById('choosesize').value;
 						var cart_product_maxquan = document.getElementById('sl').textContent;
-						var _token = $('input[name="_token"]').val();           
+						var _token = $('input[name="_token"]').val();   
+            console.log(cart_product_price);        
 						$.ajax({
 							url: "{{url('/add-cart-ajax')}}",
                     		method: 'POST',

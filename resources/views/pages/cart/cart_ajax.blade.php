@@ -25,8 +25,14 @@
           </thead>
           <tbody>
               {{-- san pham --}}
-
+            @php
+            $total=0;
+            @endphp
             @foreach(Session::get('cart') as $key)
+            @php
+              $subtotal= (int)str_replace(',','',$key['product_price'])*(int)$key['product_qty'];
+              $total+=$subtotal;
+            @endphp
             <tr>
               <td>{{$key['product_name']}}</td>
               <td>
@@ -39,26 +45,33 @@
                 {{$key['product_size']}}
               </td>
               @endif
-              <td>{{$key['product_price']}}</td>          
+              <td>
+                <p id="price">{{number_format($key['product_price'])}}</p>
+                <p style="display: none;" id="realcost">{{$key['product_price']}}</p>
+              </td>          
               <td>                
               <div class="input-append">
-                {{-- <button class="btn btn-mini" id="minus" type="button" style="height: 30px;"><i class="fa fa-minus" aria-hidden="true"></i></button> --}}
-                <input class="span1" type="number" style="width:50px;height: 30px;" id="appendedInputButtons" size="30" type="text" min="1" max="{{$key['product_maxquan']}}" step="1" value="{{$key['product_qty']}}">
-                {{-- <button class="btn btn-mini" id="plus" type="button" style="height: 30px;"> <i class="fa fa-plus" aria-hidden="true"></i></button>                 --}}
+                <input class="span1" type="number" style="width:50px;height: 30px;" id="qty" size="30" type="text" min="1" max="{{$key['product_maxquan']}}" step="1" value="{{$key['product_qty']}}">
             </div>
             </td>
-              <td>$100.00</td>
+              <td>
+                <p id="thanhtien"> {{number_format($subtotal)}}</p>
+                <p style="display: none;" id="realsubtotal">{{$subtotal}}</p>
+              </td>
               <td><button class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button></td>
             </tr>
             @endforeach
                 {{-- san pham --}}
             <tr>
                 <td colspan="6" class="alignR">Phí giao hàng (toàn quốc):	</td>
-                <td> {{number_format(30000)}} VND</td>
+                <td> {{number_format(30000)}}</td>
             </tr>
             <tr>
                 <td colspan="6" class="alignR">Tổng tiền:	</td>
-                <td> $448.42</td>
+                <td> 
+                  <p>{{number_format($total)}}</p>
+                  <p style="display: none;" id="realtotal">{{$total}}</p>
+                </td>
             </tr>            
             </tbody>
         </table><br/>
@@ -112,4 +125,15 @@
 </div>
 </div>
 </div>
+<script src="{{asset('public/frontend/js/jquery3x.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+<script type="text/javascript">
+ $(document).on('keyup mouseup', '#qty', function() {                                                                                                                     
+  var quantity=document.getElementById('qty').value;
+  var price=document.getElementById('realcost').textContent;
+  var total=quantity*price;
+  $('#total').text(total);
+  $('#realtotal').text(total);
+});
+</script>
 @endsection
