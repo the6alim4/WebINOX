@@ -94,7 +94,13 @@ Navigation Bar Section
 										<div style="width:100%;" class="divus">
 											<i class="fa fa-pencil" aria-hidden="true"></i>
 											&nbsp;
-											<a href="">Thông tin cá nhân</a>
+											<a href="{{URL::to('/thong-tin-ca-nhan')}}">Thông tin cá nhân</a>
+										</div>
+										<br>
+										<div style="width:100%;" class="divus">
+											<i class="fa fa-pencil" aria-hidden="true"></i>
+											&nbsp;
+											<a href="{{URL::to('/update-mat-khau')}}">Thay đổi mật khẩu</a>
 										</div>
 										<br>
 										<div style="width:100%;" class="divus">

@@ -13,14 +13,19 @@
 //Frontend
 Route::get('/','HomeController@index');
 Route::get('/trang-chu','HomeController@index');
+Route::get('/help','HomeController@help');
+Route::get('/infor','HomeController@infor');
+//User
 Route::get('/login','HomeController@login');
 Route::post('/login-trang-chu','HomeController@login_Trangchu');
 Route::get('/logout-user','HomeController@logout_user');
 Route::get('/register','HomeController@register');
 Route::post('/dang-ki-tai-khoan','HomeController@dangkitaikhoan');
 Route::post('/dang-ki-thong-tin','HomeController@dangkithongtin');
-Route::get('/help','HomeController@help');
-Route::get('/infor','HomeController@infor');
+Route::get('/thong-tin-ca-nhan','HomeController@thongtincanhan');
+Route::post('/cap-nhat-thong-tin','HomeController@capnhatthongtin');
+Route::get('/update-mat-khau','HomeController@updatematkhau');
+Route::post('/cap-nhat-mat-khau','HomeController@capnhatmatkhau');
 
 //Danh mục sản phẩm trang chủ
 Route::get('/danh-muc-san-pham/{MaLoai}','HomeController@show_category_home');

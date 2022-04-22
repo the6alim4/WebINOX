@@ -104,6 +104,55 @@ class HomeController extends Controller
         $alert='Tạo tài khoản thành công!';
         return Redirect::to('/login')->with('alert', $alert);
     }
+    //Thong tin ca nhan
+    public function thongtincanhan(){
+        $id=Session::get('user_id');
+        $infor=DB::table('tbl_nguoidung')->where('MaNguoiDung',$id)->first();
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.thongtincanhan',compact('infor','loaisp','nsx','slider'));
+    }
+    public function capnhatthongtin(Request $request){
+        $data=[];
+        $id=Session::get('user_id');
+        $data['TenNguoiDung']=$request->input('usname');
+        $data['Email']=$request->input('usemail');
+        $data['SoDienThoai']=$request->input('usphone');
+        DB::table('tbl_nguoidung')->where('MaNguoiDung',$id)->update($data);
+        $alert='Cập nhật thông tin thành công!';
+        return Redirect::to('thong-tin-ca-nhan')->with('alert',$alert);
+    }
+    public function updatematkhau(){
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.updatematkhau',compact('loaisp','nsx','slider'));
+    }
+    public function capnhatmatkhau(Request $request){
+        $matkhau=$request->input('uspassword');
+        $matkhaumoi=$request->input('usnewpassword');
+        $nhaplaimatkhaumoi=$request->input('reusnewpassword');
+        $id=Session::get('user_id');
+        $checkmatkhau=DB::table('tbl_nguoidung')->where('MaNguoiDung',$id)->first();
+        $checkmatkhau=$checkmatkhau->MatKhau;
+        if(md5($matkhau)!=$checkmatkhau){
+            $alert='Mật khẩu không chính xác!';
+            return redirect()->back()->with('alert', $alert);
+        }else{
+            if($matkhaumoi!=$nhaplaimatkhaumoi){
+                $alert='Mật khẩu mới không trùng khớp!';
+                return redirect()->back()->with('alert', $alert);
+            }else{
+                $data=[];
+                $data['MatKhau']=md5($matkhaumoi);
+                DB::table('tbl_nguoidung')->where('MaNguoiDung',$id)->update($data);
+                $alert='Cập nhật mật khẩu thành công!';
+                return redirect()->back()->with('alert',$alert);
+            }
+        }
+
+    }
     public function help(){
         $loaisp=DB::table('tbl_loaisp')->get();
         $nsx=DB::table('tbl_nsx')->get();
