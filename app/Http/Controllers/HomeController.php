@@ -25,6 +25,85 @@ class HomeController extends Controller
         
         return view('pages.home',compact('loaisp','nsx','slider','all_product'));
     }
+    //Login+Logout
+    public function login(){
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        // $data=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
+        // ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
+        // ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
+        // ->orderby('MaSP','asc')->get();
+        $all_product=DB::table('tbl_sanpham')->orderby('MaSP','asc')->limit(4)->get();
+        
+        return view('pages.login',compact('loaisp','nsx','slider','all_product'));
+    }
+    public function login_Trangchu(Request $request){
+        $user_name = $request->input('username');
+        $user_password = md5($request->input('userpassword'));
+        $result = DB::table('tbl_nguoidung')->where('TenDangNhap', $user_name)->where('MatKhau', $user_password)->first();
+        if ($result) {
+            Session::put('user_name', $result->TenNguoiDung);
+            Session::put('user_id', $result->MaNguoiDung);
+            return Redirect::to('/trang-chu');
+        } else {
+            $alert = 'Tài khoản hoặc mật khẩu không đúng!';
+            return redirect()->back()->with('alert', $alert);
+        }
+    }
+    public function logout_user(){
+        Session::put('user_name', null);
+        Session::put('user_id', null);
+        return Redirect::to('/login');
+    }
+    //Đăng kí tài khoản
+    public function register(){
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        // $data=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
+        // ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
+        // ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
+        // ->orderby('MaSP','asc')->get();
+        $all_product=DB::table('tbl_sanpham')->orderby('MaSP','asc')->limit(4)->get();
+        
+        return view('pages.register',compact('loaisp','nsx','slider','all_product'));
+    }
+    public function dangkitaikhoan(Request $request){   
+        $taikhoan=$request->input('username');
+        $matkhau=$request->input('userpassword');
+        $nhaplaimatkhau=$request->input('reuserpassword');
+        $checkusername=DB::table('tbl_nguoidung')->where('TenDangNhap',$taikhoan)->first();
+        if($checkusername){
+            $alert='Tài khoản đã tồn tại!';
+            return redirect()->back()->with('alert', $alert);
+        }else{
+            if($matkhau!=$nhaplaimatkhau){
+            $alert='Mật khẩu không trùng khớp!';
+            return redirect()->back()->with('alert', $alert);
+            }else{
+                Session::put('TaiKhoan',$taikhoan);
+                Session::put('MatKhau',$matkhau);
+                $loaisp=DB::table('tbl_loaisp')->get();
+                $nsx=DB::table('tbl_nsx')->get();
+                $slider=DB::table('tbl_slider')->get();
+                return view('pages.dangkithongtin',compact('loaisp','nsx','slider'));
+            }
+        }
+
+    }
+    public function dangkithongtin(Request $request){
+        $data=[];
+        $data['TenNguoiDung']=$request->input('usname');
+        $data['Email']=$request->input('usemail');
+        $data['SoDienThoai']=$request->input('usphone');
+        $data['MaQuyen']=2;
+        $data['TenDangNhap']=Session::get('TaiKhoan');
+        $data['MatKhau']=md5(Session::get('MatKhau'));
+        DB::table('tbl_nguoidung')->insert($data);
+        $alert='Tạo tài khoản thành công!';
+        return Redirect::to('/login')->with('alert', $alert);
+    }
     public function help(){
         $loaisp=DB::table('tbl_loaisp')->get();
         $nsx=DB::table('tbl_nsx')->get();

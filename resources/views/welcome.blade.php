@@ -55,7 +55,7 @@ Navigation Bar Section
 							<span class="icon-bar"></span>
 						</a>
 						<div class="nav-collapse">
-							<ul class="nav" style="font-family:Display;font-size: 17px">
+							<ul class="nav" style="font-family:Display;font-size: 17px;width: max-content;">
 
 								<li class=""><a href="{{url('/trang-chu')}}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Trang chủ </a></li>
 								<li class=""><a href="{{URL::to('/infor')}}"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
@@ -84,22 +84,44 @@ Navigation Bar Section
 								<li class=""><a href="{{URL::to('/help')}}"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Hỗ trợ</a></li>
 								<li class=""><a href="{{URL::to('/gio-hang')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Giỏ hàng</a></li>
 								<li class=""><a href="list-view.html"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;Lịch sử mua hàng</a></li>
+								@if(Session::get('user_id'))
+								<?php
+								$username=Session::get('user_name');
+								?>
+								<li class="dropdown" style=";float: right;">
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-user" aria-hidden="true"></i>&nbsp; {{$username}} <b class="caret"></b></a>
+									<div class="dropdown-menu">
+										<div style="width:100%;" class="divus">
+											<i class="fa fa-pencil" aria-hidden="true"></i>
+											&nbsp;
+											<a href="">Thông tin cá nhân</a>
+										</div>
+										<br>
+										<div style="width:100%;" class="divus">
+											<i class="fa fa-sign-out" aria-hidden="true"></i>											
+											&nbsp;
+											<a href="{{URL::to('/logout-user')}}">Đăng xuất</a>
+										</div>
+									</div>
+								</li>
+								@else
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Tài khoản <b class="caret"></b></a>
 									<div class="dropdown-menu">
-										<div style="display: flex;justify-content: center;align-items: center;width:100%;" class="divus">
+										<div style="width:100%;" class="divus">
 											<i class="fa fa-sign-in" aria-hidden="true"></i>
 											&nbsp;
 											<a href="{{URL::to('/login')}}">Đăng nhập</a>
 										</div>
 										<br>
-										<div style="display: flex;justify-content: center;align-items: center;width:100%;" class="divus">
+										<div style="width:100%;" class="divus">
 											<i class="fa fa-pencil" aria-hidden="true"></i>
 											&nbsp;
-											<a>Đăng ký</a>
+											<a href="{{URL::to('/register')}}">Đăng ký</a>
 										</div>
 									</div>
 								</li>
+								@endif
 							</ul>
 
 
@@ -187,6 +209,7 @@ Navigation Bar Section
 			<a href="#" class="gotop" id="btnup"><i class="icon-double-angle-up"></i></a>
 			<!-- Placed at the end of the document so the pages load faster -->
 			<script src="{{asset('public/frontend/js/jquery-3.2.1.js')}}"></script>
+			<script src="{{asset('public/frontend/js/jquery.js')}}"></script>
 			{{-- <script src="{{asset('public/frontend/js/jquery.js')}}"></script> --}}
 			<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 			<script src="{{asset('public/frontend/js/jquery.easing-1.3.min.js')}}"></script>

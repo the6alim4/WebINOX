@@ -14,6 +14,11 @@
 Route::get('/','HomeController@index');
 Route::get('/trang-chu','HomeController@index');
 Route::get('/login','HomeController@login');
+Route::post('/login-trang-chu','HomeController@login_Trangchu');
+Route::get('/logout-user','HomeController@logout_user');
+Route::get('/register','HomeController@register');
+Route::post('/dang-ki-tai-khoan','HomeController@dangkitaikhoan');
+Route::post('/dang-ki-thong-tin','HomeController@dangkithongtin');
 Route::get('/help','HomeController@help');
 Route::get('/infor','HomeController@infor');
 

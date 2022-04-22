@@ -8,7 +8,6 @@
 		<li class="active">Giỏ hàng</li>
     </ul>
 <div class="well well-small">
-    <h1>Giỏ hàng <small class="pull-right"> 2 Items are in the cart </small></h1>
 <hr class="soften"/>	
 
 <table class="table table-bordered table-condensed" style="border:1px black;">
@@ -29,7 +28,9 @@
             @php
             $total=30000;
             @endphp
-            
+            @if(!Session::get('cart'))
+            <p style="color: red;font-size: x-large;text-align: center;">Bạn chưa có sản phẩm nào!</p>
+            @else
             @foreach(Session::get('cart') as $key)
             @php
               $subtotal= (int)str_replace(',','',$key['product_price'])*(int)$key['product_qty'];
@@ -66,6 +67,7 @@
               <td><a class="btn btn-mini btn-danger" href="{{URL::to('/delete-cart/'.$key['session_id'])}}"><span class="icon-remove"></span></a></td>
             </tr>
             @endforeach
+            @endif
           
                 {{-- san pham --}}
             <tr>

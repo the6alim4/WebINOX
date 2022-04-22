@@ -288,3 +288,11 @@ a:hover{
 #similar-product .carousel-inner .item img{
 	margin-left: 4px;
 }
+#alertxx {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: auto;
+    background: #ccdfee;
+}
