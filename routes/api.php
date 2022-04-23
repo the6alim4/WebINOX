@@ -23,3 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/getcountsize',[HomeController::class,'getCountSize']);
 
 Route::get('/updatecart',[CartController::class,'updateCart']);
+Route::get('/updiachi',[CartController::class,'updiachi']);

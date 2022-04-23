@@ -14,6 +14,10 @@ setTimeout(() => {
 	box.style.display = 'none';
 	dvv.style.display = 'inline';
   }, 5500);
+  setTimeout(() => {
+	const box = document.getElementById('alertxx');
+	box.style.display = 'none';
+  }, 3000);
 
 /* Home page item price animation */
 $('.thumbnail').mouseenter(function() {

@@ -202,7 +202,7 @@ $.ajax({
 						var _token = $('input[name="_token"]').val();       
 						$.ajax({
 							url: "{{url('/add-cart-ajax')}}",
-              method: 'POST',
+              method: 'GET',
 							data:{
 								cart_product_id:cart_product_id,
 								cart_product_name:cart_product_name,

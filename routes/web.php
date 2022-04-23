@@ -26,7 +26,8 @@ Route::get('/thong-tin-ca-nhan','HomeController@thongtincanhan');
 Route::post('/cap-nhat-thong-tin','HomeController@capnhatthongtin');
 Route::get('/update-mat-khau','HomeController@updatematkhau');
 Route::post('/cap-nhat-mat-khau','HomeController@capnhatmatkhau');
-
+//Đặt hàng
+Route::get('/dat-hang','CartController@dathang');
 //Danh mục sản phẩm trang chủ
 Route::get('/danh-muc-san-pham/{MaLoai}','HomeController@show_category_home');
 Route::get('/thuong-hieu-san-pham/{MaNSX}','HomeController@show_brand_home');
@@ -64,6 +65,6 @@ Route::get('/delete-brand/{MaNSX}','CategoryProduct@delete_brand');
 Route::get('/all-brand','CategoryProduct@all_brand');
 Route::post('/save-brand','CategoryProduct@save_brand');
 //Cart
-Route::post('/add-cart-ajax','CartController@add_cart_ajax');
+Route::get('/add-cart-ajax','CartController@add_cart_ajax');
 Route::get('/gio-hang','CartController@gio_hang');
 Route::get('/delete-cart/{session_id}','CartController@delete_cart');

@@ -9,7 +9,15 @@
     </ul>
 <div class="well well-small">
 <hr class="soften"/>	
+ @if(session('alert'))
+    <section class='alert alert-success' id="alertxx" >
+	{{session('alert')}}
+</section>
+<?
+Session::forget('alert');
 
+?>
+@endif  
 <table class="table table-bordered table-condensed" style="border:1px black;">
           <thead>
             <tr>
@@ -92,16 +100,20 @@
             <form class="form-inline">
               <label style="min-width:159px"> VOUCHER: </label> 
             <input type="text" class="input-medium" placeholder="CODE">
-            <button type="submit" class="shopBtn"> Thêm khuyến mãi</button>
+            <button type="submit" class="shopBtn"> Áp dụng</button>
             </form>
             </td>
+            </tr>
+            <tr>
+              <label style="min-width:159px"> Địa chỉ nhận hàng: </label> 
+              <textarea type="text" id="diachi" style="resize: none" rows="5" required></textarea>
             </tr>
             
         </tbody>
             </table>
 
 <a href="{{URL::to('/trang-chu')}}" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Tiếp tục mua hàng </a>
-<a href="login.html" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
+<a href="{{URL::to('/dat-hang')}}" class="shopBtn btn-large pull-right">Đặt hàng <span class="icon-arrow-right"></span></a>
 
 </div>
 </div>
@@ -198,6 +210,16 @@ $('.btn ').click(function(){
   }
 
 });
-
+$('body').on('focusout', '#diachi', function(e) {
+    var diachi=document.getElementById("diachi").value;
+    $.ajax({
+    url:`../WebINOX/api/updiachi/?diachi=${diachi}`,
+    method: 'GET',
+    contentType: 'application/json',
+    success:function(rs){
+    }
+  });
+    
+});
 </script>
 @endsection

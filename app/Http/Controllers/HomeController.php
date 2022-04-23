@@ -153,6 +153,7 @@ class HomeController extends Controller
         }
 
     }
+    
     public function help(){
         $loaisp=DB::table('tbl_loaisp')->get();
         $nsx=DB::table('tbl_nsx')->get();

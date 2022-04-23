@@ -7,6 +7,7 @@ use DB;
 use App\Http\Requests;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Carbon;
 
 use function PHPUnit\Framework\isNan;
 use function PHPUnit\Framework\isNull;
@@ -99,6 +100,68 @@ class CartController extends Controller
             return redirect()->back();
         }else{
             return redirect()->back();
+        }
+    }
+    //Đặt hàng
+    public function updiachi(Request $request){
+        $diachi=$request->diachi;
+        Session::put('diachi',$diachi);
+    }
+    public function dathang(){
+        if(!Session::get('user_id')){
+            $alert='Bạn chưa đăng nhập! Vui lòng đăng nhập!';
+            Session::put('alert',$alert);
+            $loaisp=DB::table('tbl_loaisp')->get();
+            $nsx=DB::table('tbl_nsx')->get();
+            $slider=DB::table('tbl_slider')->get();
+            return view('pages.login',compact('loaisp','nsx','slider'));
+        }else{
+            $maguoidung=Session::get('user_id');
+            $trangthai=1;
+            $ngaytao=Carbon::now();
+            $cart=Session::get('cart');
+            $tongtien=30000;
+            $diachi=Session::get('diachi');
+            foreach($cart as $key){
+                $tongtien+=$key['product_qty']*$key['product_price'];
+            } 
+            $datahdb=[];
+            $datahdb['MaNguoiDung']=$maguoidung;
+            $datahdb['NgayTao']=$ngaytao;
+            $datahdb['TrangThai']=$trangthai;
+            $datahdb['DiaChi']=$diachi;
+            $datahdb['TongTien']=$tongtien;
+            DB::table('tbl_hoadonban')->insert($datahdb);
+            $mahdb=DB::table('tbl_hoadonban')
+            ->where('MaNguoiDung',$maguoidung)
+            ->where('TrangThai',$trangthai)
+            ->where('TongTien',$tongtien)->first();
+            $mahdb=$mahdb->MaHDB;
+            foreach($cart as $key){
+                $datachitiethdb=[];
+                $datachitiethdb['MaHDB']=$mahdb;
+                $datachitiethdb['MaSP']=$key['product_id'];
+                $datachitiethdb['SoLuong']=$key['product_qty'];
+                $datachitiethdb['DonGiaBan']=$key['product_price'];
+                $datachitiethdb['ThanhTien']=$key['product_qty']*$key['product_price'];
+                DB::table('tbl_chitiethdb')->insert($datachitiethdb);
+                $newquan=(int)$key['product_maxquan']-(int)$key['product_qty'];
+                $idsp=$key['product_id'];
+                $size=$key['product_size'];
+                if($size==0){
+                    $size=Null;
+                }
+                $datasl=[];
+                $datasl['SoLuong']=$newquan;
+                DB::table('tbl_kichthuoc')->where('MaSP',$idsp)->where('DuongKinh',$size)->update($datasl);
+            } 
+            Session::forget('cart');
+            $alert='Đặt hàng thành công!';
+            Session::put('alert',$alert);
+            $loaisp=DB::table('tbl_loaisp')->get();
+            $nsx=DB::table('tbl_nsx')->get();
+            $slider=DB::table('tbl_slider')->get();
+            return view('pages.cart.cart_ajax',compact('loaisp','nsx','slider'));
         }
     }
 }
