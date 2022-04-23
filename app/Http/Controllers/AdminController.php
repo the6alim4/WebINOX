@@ -36,10 +36,11 @@ class AdminController extends Controller
     {
         $admin_name = $request->input('admin_user');
         $admin_password = md5($request->input('admin_pass'));
-        $result = DB::table('tbl_nguoidung')->where('TenDangNhap', $admin_name)->where('MatKhau', $admin_password)->where('MaQuyen', '1')->first();
+        $result = DB::table('tbl_nguoidung')->where('TenDangNhap', $admin_name)->where('MatKhau', $admin_password)->where('MaQuyen','!=','2')->first();
         if ($result) {
             Session::put('admin_name', $result->TenNguoiDung);
             Session::put('admin_id', $result->MaNguoiDung);
+            Session::put('quyen', $result->MaQuyen);
             return Redirect::to('/dashboard');
         } else {
             $alert = 'Tài khoản hoặc mật khẩu không đúng!';
