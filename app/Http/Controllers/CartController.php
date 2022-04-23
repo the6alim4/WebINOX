@@ -156,8 +156,6 @@ class CartController extends Controller
                 DB::table('tbl_kichthuoc')->where('MaSP',$idsp)->where('DuongKinh',$size)->update($datasl);
             } 
             Session::forget('cart');
-            $alert='Đặt hàng thành công!';
-            Session::put('alert',$alert);
             $loaisp=DB::table('tbl_loaisp')->get();
             $nsx=DB::table('tbl_nsx')->get();
             $slider=DB::table('tbl_slider')->get();
