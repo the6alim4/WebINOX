@@ -186,6 +186,16 @@ a:hover{
   /*demo*/
   margin-bottom: 10px;
 }
+.dssp1 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dssp1 > div {
+  flex: 90%; /* or - flex: 0 50% - or - flex-basis: 50% - */
+  /*demo*/
+  margin-bottom: 10px;
+}
 .view-product {
   position: relative;
 }

@@ -84,18 +84,34 @@ Navigation Bar Section
 								<li class=""><a href="{{URL::to('/help')}}"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Hỗ trợ</a></li>
 								<li class=""><a href="{{URL::to('/gio-hang')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Giỏ hàng</a></li>
 								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp; Đơn hàng <b class="caret"></b></a>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp; Đơn hàng 
+										@if((Session::get('check1') && (Session::get('check1')==1)) || (Session::get('check2') && (Session::get('check2')==2)) || (Session::get('check3') && (Session::get('check3')==3)))
+											<i class="fa fa-exclamation" aria-hidden="true" style="color: red;"></i>
+										@endif
+										<b class="caret"></b></a>
 									<div class="dropdown-menu">
 										<div style="width:100%;text-align: center;" class="divus">
-											<a href="{{URL::to('/login')}}">Chờ xác nhận</a>
+											<a href="{{URL::to('/cho-xac-nhan')}}">Chờ xác nhận
+												@if(Session::get('check1') && Session::get('check1')==1)
+													<i class="fa fa-exclamation" aria-hidden="true" style="color: red;"></i>
+												@endif
+											</a>
 										</div>
 										<br>
 										<div style="width:100%;text-align: center;" class="divus">
-											<a href="{{URL::to('/register')}}">Đã xác nhận</a>
+											<a href="{{URL::to('/register')}}">Đã xác nhận
+												@if(Session::get('check2') && Session::get('check2')==2)
+													<i class="fa fa-exclamation" aria-hidden="true" style="color: red;"></i>
+												@endif
+											</a>
 										</div>
 										<br>
 										<div style="width:100%;text-align: center;" class="divus" >
-											<a href="{{URL::to('/register')}}">Đang giao</a>
+											<a href="{{URL::to('/register')}}">Đang giao
+												@if(Session::get('check3') && Session::get('check3')==3)
+													<i class="fa fa-exclamation" aria-hidden="true" style="color: red;"></i>
+												@endif
+											</a>
 										</div>
 										<br>
 										<div style="width:100%;text-align: center;" class="divus">

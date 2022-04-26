@@ -108,6 +108,9 @@ class CartController extends Controller
         Session::put('diachi',$diachi);
     }
     public function dathang(){
+        if(!Session::get('cart')){
+          return Redirect::to('/trang-chu');
+        }else{
         if(!Session::get('user_id')){
             $alert='Bạn chưa đăng nhập! Vui lòng đăng nhập!';
             Session::put('alert',$alert);
@@ -156,11 +159,76 @@ class CartController extends Controller
                 $datasl['SoLuong']=$newquan;
                 DB::table('tbl_kichthuoc')->where('MaSP',$idsp)->where('DuongKinh',$size)->update($datasl);
             } 
+            Session::put('check1',1);
             Session::forget('cart');
             $loaisp=DB::table('tbl_loaisp')->get();
             $nsx=DB::table('tbl_nsx')->get();
             $slider=DB::table('tbl_slider')->get();
             return view('pages.cart.cart_ajax',compact('loaisp','nsx','slider'));
         }
+    }
+    }
+    //Xem đơn hàng user
+    //Đơn hàng chờ xác nhận
+    public function choxacnhan(){
+        $bills=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('TrangThai',1)
+        ->orderby('MaHDB','desc')
+        ->paginate(5);
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.choxacnhan',compact('bills','loaisp','nsx','slider'));
+    }
+    public function detailwaiting($MaHDB){
+        $infor=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('MaHDB',$MaHDB)->first();
+        $sp=DB::table('tbl_chitiethdb')
+        ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
+        ->where('MaHDB',$MaHDB)
+        ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
+        ->get();
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.detailwaiting',compact('infor','sp','loaisp','nsx','slider'));
+    }
+    public function demolishbill($MaHDB){
+        $data=[];
+        $data['TrangThai']=5;
+        DB::table('tbl_hoadonban')->where('MaHDB',$MaHDB)->update($data);
+        $sanpham=DB::table('tbl_chitiethdb')->where('MaHDB',$MaHDB)->get();
+        foreach($sanpham as $key){
+            $kichthuoc=$key->DuongKinh;
+            if($kichthuoc==0){
+                $kichthuoc=Null;
+            }
+            $soluong=DB::table('tbl_kichthuoc')->where('MaSP',$key->MaSP)->where('DuongKinh',$kichthuoc)->first();
+            $soluong=$soluong->SoLuong;
+            $soluongmua=$key->SoLuong;
+            $soluong=$soluong+$soluongmua;
+            $data1=[];
+            $data1['SoLuong']=$soluong;
+            DB::table('tbl_kichthuoc')->where('MaSP',$key->MaSP)->where('DuongKinh',$kichthuoc)->update($data1);
+        }
+        return Redirect::to('/cho-xac-nhan');
+    }
+    public function changeaddress($MaHDB){
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        Session::put('MaHDB',$MaHDB);
+        $all_product=DB::table('tbl_sanpham')->orderby('MaSP','asc')->limit(4)->get();        
+        return view('pages.cart.changeaddress',compact('loaisp','nsx','slider','all_product'));
+    }
+    public function changeadd(Request $request){
+        $data=[];
+        $hdb=Session::get('MaHDB');
+        $data['DiaChi']=$request->addr;
+        DB::table('tbl_hoadonban')->where('MaHDB',$hdb)->update($data);
+        Session::put('MaHDB',null);
+        return Redirect::to('/cho-xac-nhan');
     }
 }

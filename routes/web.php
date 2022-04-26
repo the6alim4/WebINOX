@@ -69,7 +69,39 @@ Route::get('/add-cart-ajax','CartController@add_cart_ajax');
 Route::get('/gio-hang','CartController@gio_hang');
 Route::get('/delete-cart/{session_id}','CartController@delete_cart');
 //Quản lý đơn hàng admin
+//Đơn hàng đang chờ xác nhận
 Route::get('/don-hang-cho','AdminController@donhangcho');
 Route::get('/delete-bill/{MaHDB}','AdminController@deletebill');
 Route::get('/confirm-bill/{MaHDB}','AdminController@confirmbill');
 Route::get('/detail-bill/{MaHDB}','AdminController@detailbill');
+//Đơn hàng đã xác nhận
+Route::get('/don-hang-xac-nhan','AdminController@donhangxacnhan');
+Route::get('/delete-confirmed-bill/{MaHDB}','AdminController@deleteconfirmedbill');
+Route::get('/transport-bill/{MaHDB}','AdminController@transportbill');
+Route::get('/detail-confirmed-bill/{MaHDB}','AdminController@detailconfirmedbill');
+//Đơn hàng đang giao
+Route::get('/don-hang-dang-giao','AdminController@donhangdanggiao');
+Route::get('/finish-bill/{MaHDB}','AdminController@finishbill');
+Route::get('/delete-transporting-bill/{MaHDB}','AdminController@deletetransportingbill');
+Route::get('/detail-transporting-bill/{MaHDB}','AdminController@detailtransportingbill');
+//Đơn hàng đã hoàn thành
+Route::get('/don-hang-hoan-thanh','AdminController@donhanghoanthanh');
+Route::get('/detail-transported-bill/{MaHDB}','AdminController@detailtransportedbill');
+//Đơn hàng lưu trữ
+Route::get('/don-hang-luu-tru','AdminController@donhangluutru');
+Route::get('/detail-archived-bill/{MaHDB}','AdminController@detailarchivedbill');
+//Đơn hàng thất bại
+Route::get('/don-hang-that-bai','AdminController@donhangthatbai');
+Route::get('/detail-failed-bill/{MaHDB}','AdminController@detailfailedbill');
+
+//Xem đơn hàng user
+//Đơn hàng chờ xác nhận
+Route::get('/cho-xac-nhan','CartController@choxacnhan');
+Route::get('/detail-watiing-bill/{MaHDB}','CartController@detailwaiting');
+Route::get('/demolish-bill/{MaHDB}','CartController@demolishbill');
+Route::get('/change-address/{MaHDB}','CartController@changeaddress');
+Route::post('/change-add','CartController@changeadd');
+
+
+
+

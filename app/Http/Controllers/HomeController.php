@@ -45,6 +45,21 @@ class HomeController extends Controller
         if ($result) {
             Session::put('user_name', $result->TenNguoiDung);
             Session::put('user_id', $result->MaNguoiDung);
+            $check1=0;
+            $check2=0;
+            $check3=0;
+            if(DB::table('tbl_hoadonban')->where('MaNguoiDung',$result->MaNguoiDung)->where('TrangThai',1)->first()){
+                $check1=1;
+            }
+            if(DB::table('tbl_hoadonban')->where('MaNguoiDung',$result->MaNguoiDung)->where('TrangThai',2)->first()){
+                $check2=2;
+            }
+            if(DB::table('tbl_hoadonban')->where('MaNguoiDung',$result->MaNguoiDung)->where('TrangThai',3)->first()){
+                $check3=3;
+            }
+            Session::put('check1',$check1);
+            Session::put('check2',$check2);
+            Session::put('check3',$check3);
             return Redirect::to('/trang-chu');
         } else {
             $alert = 'Tài khoản hoặc mật khẩu không đúng!';
@@ -54,6 +69,9 @@ class HomeController extends Controller
     public function logout_user(){
         Session::put('user_name', null);
         Session::put('user_id', null);
+        Session::put('check1', null);
+        Session::put('check2', null);
+        Session::put('check3', null);
         return Redirect::to('/login');
     }
     //Đăng kí tài khoản
