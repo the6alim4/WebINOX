@@ -231,4 +231,50 @@ class CartController extends Controller
         Session::put('MaHDB',null);
         return Redirect::to('/cho-xac-nhan');
     }
+    //Đơn hàng đã xác nhận
+    public function daxacnhan(){
+        $bills=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('TrangThai',2)
+        ->orderby('MaHDB','desc')
+        ->paginate(5);
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.daxacnhan',compact('bills','loaisp','nsx','slider'));
+    }
+    public function detailconfirmedinvoice($MaHDB){
+        $infor=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('MaHDB',$MaHDB)->first();
+        $sp=DB::table('tbl_chitiethdb')
+        ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
+        ->where('MaHDB',$MaHDB)
+        ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
+        ->get();
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.detailconfirmedinvoice',compact('infor','sp','loaisp','nsx','slider'));
+    }
+    public function demolishconfirmedinvoice($MaHDB){
+        $data=[];
+        $data['TrangThai']=5;
+        DB::table('tbl_hoadonban')->where('MaHDB',$MaHDB)->update($data);
+        $sanpham=DB::table('tbl_chitiethdb')->where('MaHDB',$MaHDB)->get();
+        foreach($sanpham as $key){
+            $kichthuoc=$key->DuongKinh;
+            if($kichthuoc==0){
+                $kichthuoc=Null;
+            }
+            $soluong=DB::table('tbl_kichthuoc')->where('MaSP',$key->MaSP)->where('DuongKinh',$kichthuoc)->first();
+            $soluong=$soluong->SoLuong;
+            $soluongmua=$key->SoLuong;
+            $soluong=$soluong+$soluongmua;
+            $data1=[];
+            $data1['SoLuong']=$soluong;
+            DB::table('tbl_kichthuoc')->where('MaSP',$key->MaSP)->where('DuongKinh',$kichthuoc)->update($data1);
+        }
+        return Redirect::to('/da-xac-nhan');
+    }
 }

@@ -101,6 +101,11 @@ Route::get('/detail-watiing-bill/{MaHDB}','CartController@detailwaiting');
 Route::get('/demolish-bill/{MaHDB}','CartController@demolishbill');
 Route::get('/change-address/{MaHDB}','CartController@changeaddress');
 Route::post('/change-add','CartController@changeadd');
+//Đơn hàng xác nhận
+Route::get('/da-xac-nhan','CartController@daxacnhan');
+Route::get('/detail-confirmed-invoice/{MaHDB}','CartController@detailconfirmedinvoice');
+Route::get('/demolish-confirmed-invoice/{MaHDB}','CartController@demolishconfirmedinvoice');
+
 
 
 

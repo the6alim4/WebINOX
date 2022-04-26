@@ -99,7 +99,7 @@ Navigation Bar Section
 										</div>
 										<br>
 										<div style="width:100%;text-align: center;" class="divus">
-											<a href="{{URL::to('/register')}}">Đã xác nhận
+											<a href="{{URL::to('/da-xac-nhan')}}">Đã xác nhận
 												@if(Session::get('check2') && Session::get('check2')==2)
 													<i class="fa fa-exclamation" aria-hidden="true" style="color: red;"></i>
 												@endif
