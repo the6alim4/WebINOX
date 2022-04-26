@@ -83,7 +83,26 @@ Navigation Bar Section
 								</li>								
 								<li class=""><a href="{{URL::to('/help')}}"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Hỗ trợ</a></li>
 								<li class=""><a href="{{URL::to('/gio-hang')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Giỏ hàng</a></li>
-								<li class=""><a href="list-view.html"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;Lịch sử mua hàng</a></li>
+								<li class="dropdown">
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp; Đơn hàng <b class="caret"></b></a>
+									<div class="dropdown-menu">
+										<div style="width:100%;text-align: center;" class="divus">
+											<a href="{{URL::to('/login')}}">Chờ xác nhận</a>
+										</div>
+										<br>
+										<div style="width:100%;text-align: center;" class="divus">
+											<a href="{{URL::to('/register')}}">Đã xác nhận</a>
+										</div>
+										<br>
+										<div style="width:100%;text-align: center;" class="divus" >
+											<a href="{{URL::to('/register')}}">Đang giao</a>
+										</div>
+										<br>
+										<div style="width:100%;text-align: center;" class="divus">
+											<a href="{{URL::to('/register')}}">Đã hoàn thành</a>
+										</div>
+									</div>
+								</li>
 								@if(Session::get('user_id'))
 								<?php
 								$username=Session::get('user_name');

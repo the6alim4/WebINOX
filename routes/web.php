@@ -68,3 +68,8 @@ Route::post('/save-brand','CategoryProduct@save_brand');
 Route::get('/add-cart-ajax','CartController@add_cart_ajax');
 Route::get('/gio-hang','CartController@gio_hang');
 Route::get('/delete-cart/{session_id}','CartController@delete_cart');
+//Quản lý đơn hàng admin
+Route::get('/don-hang-cho','AdminController@donhangcho');
+Route::get('/delete-bill/{MaHDB}','AdminController@deletebill');
+Route::get('/confirm-bill/{MaHDB}','AdminController@confirmbill');
+Route::get('/detail-bill/{MaHDB}','AdminController@detailbill');

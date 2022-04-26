@@ -144,6 +144,7 @@ class CartController extends Controller
                 $datachitiethdb['SoLuong']=$key['product_qty'];
                 $datachitiethdb['DonGiaBan']=$key['product_price'];
                 $datachitiethdb['ThanhTien']=$key['product_qty']*$key['product_price'];
+                $datachitiethdb['DuongKinh']=$key['product_size'];
                 DB::table('tbl_chitiethdb')->insert($datachitiethdb);
                 $newquan=(int)$key['product_maxquan']-(int)$key['product_qty'];
                 $idsp=$key['product_id'];

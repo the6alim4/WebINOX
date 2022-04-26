@@ -147,10 +147,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Đơn hàng</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('/don-hang-cho')}}">Đơn hàng chờ xác nhận</a></li>
-						<li><a href="{{URL::to('/don-hang-xac-nhan')}}">Đỡ hàng đã xác nhận</a></li>
-						<li><a href="{{URL::to('/don-hang-dang-giao')}}">Đỡ hàng đã đang giao</a></li>
-						<li><a href="{{URL::to('/don-hang-hoan-thanh')}}">Đỡ hàng đã hoàn thành</a></li>
+						<li><a href="{{URL::to('/don-hang-cho')}}">Chờ xác nhận</a></li>
+						<li><a href="{{URL::to('/don-hang-xac-nhan')}}">Đã xác nhận</a></li>
+						<li><a href="{{URL::to('/don-hang-dang-giao')}}">Đang giao</a></li>
+						<li><a href="{{URL::to('/don-hang-hoan-thanh')}}">Đã hoàn thành</a></li>
                     </ul>
                 </li>
                 
@@ -166,16 +166,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<section class="wrapper">
         @yield('admin_content')			
     </section>
- <!-- footer -->
-		  <div class="footer">
-			<div class="wthree-copyright" style="text-align: center">
-			  <p>Trang quản lý Admin</p>
-			</div>
-		  </div>
-  <!-- / footer -->
+
 </section>
 <!--main content end-->
 </section>
+
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 <script src="{{asset('public/backend/js/scripts.js')}}"></script>

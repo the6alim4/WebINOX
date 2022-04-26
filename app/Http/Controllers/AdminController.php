@@ -54,4 +54,42 @@ class AdminController extends Controller
         Session::put('admin_id', null);
         return Redirect::to('/admin');
     }
+    //Quản lý đơn hàng
+    public function donhangcho(){
+        $this->AuthLogin();
+        $bills=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('TrangThai',1)
+        ->orderby('MaHDB','asc')
+        ->paginate(5);
+        return view('admin.bill.donhangcho',compact('bills'));
+    }
+    public function deletebill($MaHDB){
+        $this->AuthLogin();
+        $data=[];
+        $data['TrangThai']=5;
+        DB::table('tbl_hoadonban')->where('MaHDB',$MaHDB)->update($data);
+        Session::put('message','Hủy đơn hàng thành công!');
+        return Redirect::to('/don-hang-cho');
+    }
+    public function confirmbill($MaHDB){
+        $this->AuthLogin();
+        $data=[];
+        $data['TrangThai']=2;
+        DB::table('tbl_hoadonban')->where('MaHDB',$MaHDB)->update($data);
+        Session::put('message','Xác nhận đơn hàng thành công!');
+        return Redirect::to('/don-hang-cho');
+    }
+    public function detailbill($MaHDB){
+        $this->AuthLogin();
+        $infor=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('MaHDB',$MaHDB)->first();
+        $sp=DB::table('tbl_chitiethdb')
+        ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
+        ->where('MaHDB',$MaHDB)
+        ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
+        ->get();
+        return view('admin.bill.detail',compact('infor','sp'));
+    }
 }
