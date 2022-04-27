@@ -105,6 +105,13 @@ Route::post('/change-add','CartController@changeadd');
 Route::get('/da-xac-nhan','CartController@daxacnhan');
 Route::get('/detail-confirmed-invoice/{MaHDB}','CartController@detailconfirmedinvoice');
 Route::get('/demolish-confirmed-invoice/{MaHDB}','CartController@demolishconfirmedinvoice');
+//Đơn hàng đang giao
+Route::get('/dang-giao','CartController@danggiao');
+Route::get('/detail-delivering-invoice/{MaHDB}','CartController@detaildeliveringinvoice');
+//Đơn hàng đã hoàn thành
+Route::get('/da-hoan-thanh','CartController@dahoanthanh');
+Route::get('/detail-deliverd-evaluated-invoice/{MaHDB}','CartController@detaildeliveredevaluatedinvoice');
+Route::get('/detail-deliverd-notevaluated-invoice/{MaHDB}','CartController@detaildeliverednotevaluatedinvoice');
 
 
 

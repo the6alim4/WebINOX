@@ -107,7 +107,7 @@ Navigation Bar Section
 										</div>
 										<br>
 										<div style="width:100%;text-align: center;" class="divus" >
-											<a href="{{URL::to('/register')}}">Đang giao
+											<a href="{{URL::to('/dang-giao')}}">Đang giao
 												@if(Session::get('check3') && Session::get('check3')==3)
 													<i class="fa fa-exclamation" aria-hidden="true" style="color: red;"></i>
 												@endif
@@ -115,7 +115,7 @@ Navigation Bar Section
 										</div>
 										<br>
 										<div style="width:100%;text-align: center;" class="divus">
-											<a href="{{URL::to('/register')}}">Đã hoàn thành</a>
+											<a href="{{URL::to('/da-hoan-thanh')}}">Đã hoàn thành</a>
 										</div>
 									</div>
 								</li>

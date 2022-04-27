@@ -173,6 +173,7 @@ class CartController extends Controller
     public function choxacnhan(){
         $bills=DB::table('tbl_hoadonban')
         ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('tbl_hoadonban.MaNguoiDung',Session::get('user_id'))
         ->where('TrangThai',1)
         ->orderby('MaHDB','desc')
         ->paginate(5);
@@ -235,6 +236,7 @@ class CartController extends Controller
     public function daxacnhan(){
         $bills=DB::table('tbl_hoadonban')
         ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('tbl_hoadonban.MaNguoiDung',Session::get('user_id'))
         ->where('TrangThai',2)
         ->orderby('MaHDB','desc')
         ->paginate(5);
@@ -276,5 +278,73 @@ class CartController extends Controller
             DB::table('tbl_kichthuoc')->where('MaSP',$key->MaSP)->where('DuongKinh',$kichthuoc)->update($data1);
         }
         return Redirect::to('/da-xac-nhan');
+    }
+    //Đơn hàng đang giao
+    public function danggiao(){
+        $bills=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('tbl_hoadonban.MaNguoiDung',Session::get('user_id'))
+        ->where('TrangThai',3)
+        ->orderby('MaHDB','desc')
+        ->paginate(5);
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.danggiao',compact('bills','loaisp','nsx','slider'));
+    }
+    public function detaildeliveringinvoice($MaHDB){
+        $infor=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('MaHDB',$MaHDB)->first();
+        $sp=DB::table('tbl_chitiethdb')
+        ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
+        ->where('MaHDB',$MaHDB)
+        ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
+        ->get();
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.detaildeliveringinvoice',compact('infor','sp','loaisp','nsx','slider'));
+    }
+    //Đơn hàng đã hoàn thành
+    public function dahoanthanh(){
+        $bills=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('tbl_hoadonban.MaNguoiDung',Session::get('user_id'))
+        ->where('TrangThai',4)
+        ->orderby('MaHDB','desc')
+        ->paginate(5);
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.dahoanthanh',compact('bills','loaisp','nsx','slider'));
+    }
+    public function detaildeliveredevaluatedinvoice($MaHDB){
+        $infor=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('MaHDB',$MaHDB)->first();
+        $sp=DB::table('tbl_chitiethdb')
+        ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
+        ->where('MaHDB',$MaHDB)
+        ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
+        ->get();
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.detaildeliveredevaluatedinvoice',compact('infor','sp','loaisp','nsx','slider'));
+    }
+    public function detaildeliverednotevaluatedinvoice($MaHDB){
+        $infor=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('MaHDB',$MaHDB)->first();
+        $sp=DB::table('tbl_chitiethdb')
+        ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
+        ->where('MaHDB',$MaHDB)
+        ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
+        ->get();
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.detaildeliverednotevaluatedinvoice',compact('infor','sp','loaisp','nsx','slider'));
     }
 }
