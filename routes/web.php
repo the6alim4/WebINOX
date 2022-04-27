@@ -112,6 +112,7 @@ Route::get('/detail-delivering-invoice/{MaHDB}','CartController@detaildelivering
 Route::get('/da-hoan-thanh','CartController@dahoanthanh');
 Route::get('/detail-deliverd-evaluated-invoice/{MaHDB}','CartController@detaildeliveredevaluatedinvoice');
 Route::get('/detail-deliverd-notevaluated-invoice/{MaHDB}','CartController@detaildeliverednotevaluatedinvoice');
+Route::get('/evaluate/{MaHDB}','CartController@evaluate');
 
 
 

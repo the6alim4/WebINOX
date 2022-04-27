@@ -232,6 +232,16 @@ class HomeController extends Controller
         $anhbotro=DB::table('tbl_anhbotro')->where('MaSP',$MaSP)->get();
         $kichthuoc=DB::table('tbl_kichthuoc')->where('MaSP',$MaSP)->get();
         $maxsize=0;
+        $averagestar=DB::table('tbl_danhgia')->where('MaSP',$MaSP)->get();
+        $rating=0;
+        if(!$averagestar){
+            $rating=5;
+        }else{
+            for($i=0;$i<count($averagestar);$i++){
+                $rating+=$averagestar[$i]->Sao;
+            }
+            $rating=round($rating/count($averagestar));
+        }
         if(count($kichthuoc)==1){
 
         }else{
@@ -250,7 +260,13 @@ class HomeController extends Controller
         ->where('MaSP','!=',$MaSP)->where('tbl_sanpham.MaNSX',$tt->MaNSX)->where('tbl_sanpham.MaChatLieu',$tt->MaChatLieu)
         ->where('tbl_sanpham.MaLoai',$tt->MaLoai)
         ->select('MaSP','TenSP','DonGiaBan','tbl_sanpham.Anh as AnhSP','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')->limit(4)->get();
-        return view('pages.product.show_details',compact('loaisp','nsx','slider','data','anhbotro','kichthuoc','sptt','maxsize','valfisrtsize'));
+        $danhgia=DB::table('tbl_danhgia')
+        ->join('tbl_binhluan','tbl_danhgia.MaHDB','=','tbl_binhluan.MaHDB')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_danhgia.MaNguoiDung')
+        ->where('tbl_danhgia.MaSP',$MaSP)
+        ->where('tbl_binhluan.MaSP',$MaSP)
+        ->select('TenNguoiDung','Sao','NgayBinhLuan','BinhLuan')->paginate(5);
+        return view('pages.product.show_details',compact('loaisp','nsx','slider','data','anhbotro','kichthuoc','sptt','maxsize','valfisrtsize','danhgia','rating'));
 
     } 
     public function getCountSize(Request $request){

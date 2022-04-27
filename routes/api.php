@@ -24,3 +24,4 @@ Route::get('/getcountsize',[HomeController::class,'getCountSize']);
 
 Route::get('/updatecart',[CartController::class,'updateCart']);
 Route::get('/updiachi',[CartController::class,'updiachi']);
+Route::get('/sendevaluate',[CartController::class,'sendEvaluate']);

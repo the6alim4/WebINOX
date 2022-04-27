@@ -134,6 +134,7 @@ class CartController extends Controller
             $datahdb['TrangThai']=$trangthai;
             $datahdb['DiaChi']=$diachi;
             $datahdb['TongTien']=$tongtien;
+            $datahdb['isevaluated']=0;
             DB::table('tbl_hoadonban')->insert($datahdb);
             $mahdb=DB::table('tbl_hoadonban')
             ->where('MaNguoiDung',$maguoidung)
@@ -346,5 +347,45 @@ class CartController extends Controller
         $nsx=DB::table('tbl_nsx')->get();
         $slider=DB::table('tbl_slider')->get();
         return view('pages.cart.detaildeliverednotevaluatedinvoice',compact('infor','sp','loaisp','nsx','slider'));
+    }
+    //Đánh giá sản phẩm
+    public function evaluate($MaHDB){
+        $infor=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('MaHDB',$MaHDB)->first();
+        $sp=DB::table('tbl_chitiethdb')
+        ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
+        ->where('MaHDB',$MaHDB)
+        ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
+        ->get();
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        return view('pages.cart.evaluate',compact('infor','sp','loaisp','nsx','slider'));
+    }
+    public function sendEvaluate(Request $request){
+        $mand=$request->MaNguoiDung;
+        $mahdb=$request->MaHDB;
+        $sao=$request->Sao;
+        $bl=$request->BinhLuan;
+        $datahdb=[];
+        $datahdb['isevaluated']=1;
+        DB::table('tbl_hoadonban')->where('MaHDB',$mahdb)->update($datahdb);
+        $sp=DB::table('tbl_chitiethdb')->where('MaHDB',$mahdb)->get();
+        foreach($sp as $key){
+            $datadanhgia=[];
+            $datadanhgia['Sao']=$sao;
+            $datadanhgia['MaSP']=$key->MaSP;
+            $datadanhgia['MaNguoiDung']=$mand;
+            $datadanhgia['MaHDB']=$mahdb;
+            DB::table('tbl_danhgia')->insert($datadanhgia);
+            $databinhluan=[];
+            $databinhluan['BinhLuan']=$bl;
+            $databinhluan['NgayBinhLuan']=Carbon::now();
+            $databinhluan['MaSP']=$key->MaSP;
+            $databinhluan['MaNguoiDung']=$mand;
+            $databinhluan['MaHDB']=$mahdb;            
+            DB::table('tbl_binhluan')->insert($databinhluan);
+        }
     }
 }

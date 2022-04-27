@@ -93,10 +93,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Đơn hàng</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('/don-hang-cho')}}">Đơn hàng chờ xác nhận</a></li>
-						<li><a href="{{URL::to('/don-hang-xac-nhan')}}">Đỡ hàng đã xác nhận</a></li>
-						<li><a href="{{URL::to('/don-hang-dang-giao')}}">Đỡ hàng đã đang giao</a></li>
-						<li><a href="{{URL::to('/don-hang-hoan-thanh')}}">Đỡ hàng đã hoàn thành</a></li>
+						<li><a href="{{URL::to('/don-hang-cho')}}">Chờ xác nhận</a></li>
+						<li><a href="{{URL::to('/don-hang-xac-nhan')}}">Đã xác nhận</a></li>
+						<li><a href="{{URL::to('/don-hang-dang-giao')}}">Đang giao</a></li>
+						<li><a href="{{URL::to('/don-hang-hoan-thanh')}}">Đã hoàn thành</a></li>
                         <li><a href="{{URL::to('/don-hang-luu-tru')}}">Lưu trữ</a></li>
 						<li><a href="{{URL::to('/don-hang-that-bai')}}">Giao thất bại</a></li>
                     </ul>

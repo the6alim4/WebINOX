@@ -38,6 +38,10 @@
         <input name="anhsp" type="hidden" id="anhsp" value="{{asset($data->AnhSP)}}" style="display: none" readonly>
         <p style="font-family:Display;font-size: x-large;font-weight: bold; " id="tensp">{{$data->TenSP}}</p>
         <label class="control-label" style="display: inline-flex;font-size: x-large;">Giá bán: <p id="cost"><strong> {{number_format($data->DonGiaBan)}} </strong> </p> VND</label><br>
+        @for($i=0;$i<$rating;$i++)
+        <a class="ion-android-star" style="color: rgb(241, 196, 15);font-size:25px;"></a>  
+        @endfor
+        <br>
         <label class="control-label"><span>Thương hiệu: {{$data->TenNSX}} </span></label><br>
         <label class="control-label"><span>Chất liệu: {{$data->TenChatLieu}}</span></label><br>
         <label class="control-label" style="display: inline-flex;width: 60%;"><span>Số lượng còn: </span><p id="sl" style="width:15%;" > {{$valfisrtsize}} </p></label><br>
@@ -78,13 +82,11 @@
         <ul id="productDetail" class="nav nav-tabs">
             <li class="active"><a href="#home" data-toggle="tab">Thông tin chi tiết</a></li>
             <li class=""><a href="#profile" data-toggle="tab">Sản phẩm tương tự </a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acceseries <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#cat1" data-toggle="tab">Category one</a></li>
-                <li><a href="#cat2" data-toggle="tab">Category two</a></li>
-              </ul>
-            </li>
+            @if(count($danhgia)==0)
+            <li class=""><a href="#evaluation" data-toggle="tab">Đánh giá và bình luận </a></li>
+            @else
+            <li class=""><a href="#evaluation" data-toggle="tab">Đánh giá và bình luận ({{count($danhgia)}} đánh giá) </a></li>
+            @endif
           </ul>
     </div>
     
@@ -128,6 +130,45 @@
   @endif
   </div>
   </div>
+  <div class="tab-pane fade" id="evaluation">
+    <div class="row-fluid" style="background: rgb(231, 239, 224)">	  
+      <div class="row" style="display: flex;justify-content:center;align-items:center ">
+        {{$danhgia->links()}}          
+    </div>
+      @if(count($danhgia)==0)
+      <p>Chưa có đánh giá nào! !</p>
+      @else
+      <div style="width: 50%;margin-left:23%;margin-right:auto;">
+        @foreach($danhgia as $key)      
+        <div style="width: 100%;background: rgb(216, 237, 192);height:140px;padding:5%;">
+          <div>
+              <span>
+                  <span style="width: 45%;text-align: start;float: left;">
+                  <img src="{{asset('public/frontend/img/us.png')}}" style="width: 50px;height: 50px;">{{$key->TenNguoiDung}}
+                  </span>
+                  <span style="width: 45%;text-align: end;float: right;">{{$key->NgayBinhLuan}}</span>    
+              </span>                                      
+          </div>
+          <br>
+          <div style="margin-left:20%;display: flex;justify-content: flex-start;align-items: flex-start;width: 100%">
+            <div class="box" style="font-size: 14px;margin-left:0;width: 100%;;display: flex;justify-content: flex-start;align-items: flex-start;">
+              @for($i=0;$i<$key->Sao;$i++)
+              <a class="ion-android-star" style="color: rgb(241, 196, 15)"></a>  
+              @endfor          
+            </div>
+            <br>            
+          </div>   
+          <p style="border: 1px azure;background:azure;height:30px; ">{{$key->BinhLuan}}</p>      
+      </div>
+      <br>
+        @endforeach   
+    </div>
+    @endif
+    </div>
+    <div class="row" style="display: flex;justify-content:center;align-items:center ">
+      {{$danhgia->links()}}          
+  </div>
+    </div>
 
 </div>
 </div>
