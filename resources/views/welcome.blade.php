@@ -195,6 +195,10 @@ Navigation Bar Section
 								<li style="border:0"> &nbsp;</li>
 							</ul>
 						</div>
+						<div class="well well-small" style="font-family:Display;">
+							<h2 style="text-align: center; x-large;font-weight: bold;">Sản phẩm yêu thích</h2>
+							<br>							
+						</div>
 					</div>
 
 				</div>
@@ -249,14 +253,36 @@ Navigation Bar Section
 			</footer>
 			<a href="#" class="gotop" id="btnup"><i class="icon-double-angle-up"></i></a>
 			<!-- Placed at the end of the document so the pages load faster -->
-			<script src="{{asset('public/frontend/js/jquery-3.2.1.js')}}"></script>
-			<script src="{{asset('public/frontend/js/jquery.js')}}"></script>
-			{{-- <script src="{{asset('public/frontend/js/jquery.js')}}"></script> --}}
-			<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
-			<script src="{{asset('public/frontend/js/jquery.easing-1.3.min.js')}}"></script>
-			<script src="{{asset('public/frontend/js/jquery.scrollTo-1.4.3.1-min.js')}}"></script>
-			<script src="{{asset('public/frontend/js/shop.js')}}"></script>			
-			<script src="https://kit.fontawesome.com/7e14c6b25d.js" crossorigin="anonymous"></script>
+<script src="{{asset('public/frontend/js/jquery-3.2.1.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.js')}}"></script>
+{{-- <script src="{{asset('public/frontend/js/jquery.js')}}"></script> --}}
+<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.easing-1.3.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.scrollTo-1.4.3.1-min.js')}}"></script>
+<script src="{{asset('public/frontend/js/shop.js')}}"></script>			
+<script src="https://kit.fontawesome.com/7e14c6b25d.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+function add_wishlist(clicked_id){
+	var id=clicked_id;
+	var name=document.getElementById('wishlist_productname'+id).value;
+	var price=document.getElementById('wishlist_productprice'+id).value;
+	var image=document.getElementById('wishlist_productimg'+id).src;
+	var url=document.getElementById('wishlist_producturl'+id).href;
+	var newItem={
+		'url':url,
+		'id':id,
+		'name':name,
+		'price':price,
+		'image':image
+	};
+	if(localStorage.getItem('data')==null){
+		localStorage.setItem('data','[]');
+	}
+	var old_data=JSON.parse(localStorage.getItem('data'));
+	old_data.push(newItem);
+	localStorage.setItem('data',JSON.stringify(old_data));
+}
+</script>
 </body>
 
 </html>

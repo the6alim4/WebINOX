@@ -116,10 +116,6 @@
                   <p>{{$key->TenSP}}</p>
                   <p><strong>Giá bán: {{number_format($key->DonGiaBan)}} VND</strong></p>
                   <h4><a href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}" class="shopBtn" data-id_product="{{$key->MaSP}}" name="addtocart" > Thêm vào giỏ hàng </a></h4>
-                  <div class="actionList">
-                      <a class="pull-left" href="#"><i class="fa fa-heart" aria-hidden="true"></i>Yêu thích</a>
-                      <a class="pull-left" href="#"> So sánh</a>
-                  </div>
                   {{-- <p style="height: 25px;"></p> --}}
               </div>
           </div>

@@ -234,7 +234,7 @@ class HomeController extends Controller
         $maxsize=0;
         $averagestar=DB::table('tbl_danhgia')->where('MaSP',$MaSP)->get();
         $rating=0;
-        if(!$averagestar){
+        if(count($averagestar)==0){
             $rating=5;
         }else{
             for($i=0;$i<count($averagestar);$i++){
