@@ -8,15 +8,14 @@
 						<div id="newProductCar" class="carousel slide" style="display: flex;justify-content: center;align-items: center; width: 100%;">
 							<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;" id="dvv1" >
 								<div class="spin" id="spin1"></div>
-								@foreach($all_product as $key)
-								<input type="hidden" id="wishlist_productid{{$key->MaSP}}" value="{{$key->MaSP}}">
-								<input type="hidden" id="wishlist_productname{{$key->MaSP}}" value="{{$key->TenSP}}">
-								<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{number_format($key->DonGiaBan)}}">
-								<div class="item" style="margin-left: 250px;margin-right: auto;width: 350px;height:400px;">
+								@foreach($all_product as $key)								
+								<div class="item " style="margin-left: 250px;margin-right: auto;width: 350px;height:400px;">
 									<div class="thumbnail" style="width: 350px;height:400px;">
 										<form>
-											@csrf											
-										{{-- <a class="zoomTool" href="" title="add to cart"><span class="icon-search"></span> Xem chi tiết</a> --}}
+											@csrf	
+										<input type="hidden" id="wishlist_productid{{$key->MaSP}}" value="{{$key->MaSP}}">
+										<input type="hidden" id="wishlist_productname{{$key->MaSP}}" value="{{$key->TenSP}}">
+										<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{number_format($key->DonGiaBan)}}">										
 										<img id="wishlist_productimg{{$key->MaSP}}" src="{{$key->Anh}}" style="width: 350px;height: 250px;" alt="">
 										<div class="caption cntr">
 											<p>{{$key->TenSP}}</p>
@@ -32,10 +31,22 @@
 									</div>
 								</div>
 											
-								@endforeach					
+								@endforeach		
+								<a class="left carousel-control" href="#newProductCar" data-slide="prev" style="    margin-left: 500px;
+								margin-right: 600px;
+								margin-top: 180px;
+								position: absolute;
+								height: 50px;
+								width: 50px;
+								font-size: 30px;">&lsaquo;</a>
+								<a class="right carousel-control" href="#newProductCar" data-slide="next" style="margin-top: 180px;
+								height: 50px;
+								width: 50px;
+								position: absolute;
+								margin-right: 130px;
+								margin-left: 600px;font-size: 30px;">&rsaquo;</a>			
 							</div>
-							<a class="left carousel-control" href="#newProductCar" data-slide="prev">&lsaquo;</a>
-							<a class="right carousel-control" href="#newProductCar" data-slide="next">&rsaquo;</a>
+							
 						</div>
 					</div>
 				</div>
@@ -74,7 +85,9 @@
 				</div>
 			</div>
 		</div>
-<script>
+<script src="{{asset('public/frontend/js/jquery-3.2.1.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.js')}}"></script>
+<script type="text/javascript">
 	  setTimeout(() => {
 	const box = document.getElementById('spin1');
 	const dvv = document.getElementById('dvv1');

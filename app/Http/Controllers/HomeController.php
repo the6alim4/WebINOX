@@ -21,7 +21,7 @@ class HomeController extends Controller
         // ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
         // ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
         // ->orderby('MaSP','asc')->get();
-        $all_product=DB::table('tbl_sanpham')->orderby('MaSP','asc')->limit(4)->get();
+        $all_product=DB::table('tbl_sanpham')->orderby('MaSP','asc')->limit(15)->get();
         
         return view('pages.home',compact('loaisp','nsx','slider','all_product'));
     }

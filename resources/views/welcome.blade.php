@@ -185,7 +185,7 @@ Navigation Bar Section
 								<li style="border:0"> &nbsp;</li>
 							</ul>
 						</div>
-						<div class="well well-small" style="font-family:Display;">
+						<div class="well well-small" style="font-family:Display;overflow: scroll;height: 600px;">
 							<h2 style="text-align: center; x-large;font-weight: bold;">Thương hiệu</h2>
 							<br>
 							<ul class="nav nav-list" style="font-size: 20px;">
@@ -197,7 +197,10 @@ Navigation Bar Section
 						</div>
 						<div class="well well-small" style="font-family:Display;">
 							<h2 style="text-align: center; x-large;font-weight: bold;">Sản phẩm yêu thích</h2>
-							<br>							
+							<br>	
+							<div id="row_wishlist" class="row">
+							
+							</div>						
 						</div>
 					</div>
 
@@ -262,6 +265,24 @@ Navigation Bar Section
 <script src="{{asset('public/frontend/js/shop.js')}}"></script>			
 <script src="https://kit.fontawesome.com/7e14c6b25d.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
+function view(){
+	if(localStorage.getItem('data')!=null){
+		var data=JSON.parse(localStorage.getItem('data'));
+		data.reverse();
+		document.getElementById('row_wishlist').style.overflow='scroll';
+		document.getElementById('row_wishlist').style.height='600px;';
+		for(i=0;i<data.length;i++){
+			var name=data[i].name;
+			var price=data[i].price;
+			var image=data[i].image;
+			var url=data[i].url;
+			$('#row_wishlist').append(`<div class="row" style="margin-left:20px;margin-right:15px;border:solid 1px white;width:90%;padding:5px;"><div class="col-md-4">
+				<img src="${image}" style="width:150px;height:70px;"></div><div class="col-md-8"><p>${name}</p>
+				<p style="color:#FE980F;font-size:20px;">${price}VND</p><a href="${url}" class="shopBtn" style="font-size:12px;">Thêm vào giỏ hàng</a></div></div><br>`);
+		}
+	}
+}
+view();
 function add_wishlist(clicked_id){
 	var id=clicked_id;
 	var name=document.getElementById('wishlist_productname'+id).value;
@@ -279,7 +300,19 @@ function add_wishlist(clicked_id){
 		localStorage.setItem('data','[]');
 	}
 	var old_data=JSON.parse(localStorage.getItem('data'));
-	old_data.push(newItem);
+	var matches=$.grep(old_data,function(obj){
+		return obj.id==id;
+	})
+	if(matches.length){
+		alert('Sản phẩm đã yêu thích!')
+	}else{
+		old_data.push(newItem);
+		$('#row_wishlist').append(`<div class="row" style="margin-left:20px;margin-right:15px;border:solid 1px white;width:90%;padding:5px;"><div class="col-md-4">
+				<img src="${newItem.image}" style="width:150px;height:70px;"></div><div class="col-md-8"><p>${newItem.name}</p>
+				<p style="color:#FE980F;font-size:20px;">${newItem.price}VND</p><a href="${newItem.url}" class="shopBtn" style="font-size:12px;">Thêm vào giỏ hàng</a></div></div><br>`);
+		alert('Thêm sản phẩm vào yêu thích thành công!!')
+		
+	}
 	localStorage.setItem('data',JSON.stringify(old_data));
 }
 </script>
