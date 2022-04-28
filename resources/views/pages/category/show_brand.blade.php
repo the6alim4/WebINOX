@@ -16,6 +16,8 @@
                                         @csrf
                                         <input type="hidden" id="wishlist_productid{{$key->MaSP}}" value="{{$key->MaSP}}">
 										<input type="hidden" id="wishlist_productname{{$key->MaSP}}" value="{{$key->TenSP}}">
+                                        <input type="hidden" id="wishlist_productnsx{{$key->MaSP}}" value="{{$key->TenNSX}}">
+										<input type="hidden" id="wishlist_productchatlieu{{$key->MaSP}}" value="{{$key->TenChatLieu}}">
 										<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{number_format($key->DonGiaBan)}}">
                                     <img id="wishlist_productimg{{$key->MaSP}}" src="{{asset($key->AnhSP)}}" style="max-width:100%;height: 250px;" alt="">
                                     <div class="caption cntr" style="width: 100%;">
@@ -25,7 +27,7 @@
                                     </form>
                                         <div class="actionList">
                                             <a class="pull-left" href="#" id="{{$key->MaSP}}" onclick="add_wishlist(this.id);"><i class="fa fa-plus" aria-hidden="true"></i>Yêu thích</a>
-                                            <a class="pull-left" href="#"><i class="fa fa-plus" aria-hidden="true"></i>So sánh</a>
+                                            <a class="pull-left" href="#" onclick="add_compare({{$key->MaSP}});"><i class="fa fa-plus" aria-hidden="true"></i>So sánh</a>
                                         </div>
                                         {{-- <p style="height: 25px;"></p> --}}
                                     </div>

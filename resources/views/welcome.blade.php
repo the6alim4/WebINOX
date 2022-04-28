@@ -171,6 +171,49 @@ Navigation Bar Section
 					</div>
 				</div>
 			</div>
+			<div class="container" style="width: 100%;">
+				<!-- Modal -->
+				<div class="modal fade" id="sosanh" role="dialog" style="width: 70%;height:100%;margin-left: 15%;margin-right: 15%;margin-bottom: 5%;">
+				  <div class="modal-dialog" style="width: 100%;height: 100%;margin-top: 0;margin-bottom: 0;">
+				  
+					<!-- Modal content-->
+					<div class="modal-content" style="width: 100%;height: 100%;margin-top: 0;margin-bottom: 0;">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title"><span id="title-compare" style="text-align: center;"></span></h4>
+					  </div>
+					  <div class="modal-body">
+						<div id="row_compare">
+							<table class="table table-hover">
+								<thead>
+								  <tr>
+									<th>Tên sản phẩm</th>
+									<th>Hình ảnh</th>
+									<th>Giá bán</th>
+									<th>Chất liệu</th>
+									<th>Nhà sản xuất</th>
+									<th>Đặt hàng</th>
+									<th>Xóa</th>
+								  </tr>
+								</thead>
+								<tbody>
+															
+								</tbody>
+							  </table>
+						</div>
+						
+					  </div>
+					  {{-- <div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					  </div> --}}
+					</div>
+					
+				  </div>
+				</div>
+				
+			  </div>
+			  
+			</div>
 			<!--Body Section-->
 			<div class="row">
 				<div>
@@ -225,8 +268,7 @@ Navigation Bar Section
 					
 					@yield('content')
 
-
-					</div>
+					
 				</div>
 				
 				
@@ -259,12 +301,98 @@ Navigation Bar Section
 <script src="{{asset('public/frontend/js/jquery-3.2.1.js')}}"></script>
 <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
 {{-- <script src="{{asset('public/frontend/js/jquery.js')}}"></script> --}}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/jquery.easing-1.3.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/jquery.scrollTo-1.4.3.1-min.js')}}"></script>
 <script src="{{asset('public/frontend/js/shop.js')}}"></script>			
 <script src="https://kit.fontawesome.com/7e14c6b25d.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
+//So sánh SP
+function delete_compare(id){
+	if(localStorage.getItem('compare')!=null){
+		var data=JSON.parse(localStorage.getItem('compare'));
+		var index=data.findIndex(item=>item.id===id);
+		data.splice(index,1);
+		localStorage.setItem('compare',JSON.stringify(data));
+		//remove element by id
+		document.getElementById('row_compare'+id).remove();
+	}
+}
+sosanh();
+function sosanh(){
+	if(localStorage.getItem('compare')!=null){
+		var data=JSON.parse(localStorage.getItem('compare'));
+		for(i=0;i<data.length;i++){
+			var name=data[i].name;
+			var price=data[i].price;
+			var image=data[i].image;
+			var url=data[i].url;
+			var id=data[i].id;
+			var nsx=data[i].nsx;
+			var chatlieu=data[i].chatlieu;
+			$('#row_compare').find('tbody').append(`
+			<tr id="row_compare${id}">
+								<td>${name}</td>
+								<td><img src="${image}" style="width:200px;height:200px;"></td>
+								<td>${price}</td>
+								<td>${chatlieu}</td>
+								<td>${nsx}</td>
+								<td><a href="${url}" class="shopBtn" style="font-size:8px;cursor:pointer;">Thêm vào giỏ hàng</a></td>
+								<td><a class="shopBtn" onclick="delete_compare(${id})" style="font-size:8px;cursor:pointer;">Xóa so sánh</a></td>
+			</tr>	
+			`);
+		}
+	}
+}
+
+function add_compare(product_id){
+	document.getElementById('title-compare').innerText='Chỉ cho phép so sánh tối đa 2 sản phẩm!'
+	var id=product_id;
+	var name=document.getElementById('wishlist_productname'+id).value;
+	var price=document.getElementById('wishlist_productprice'+id).value;
+	var image=document.getElementById('wishlist_productimg'+id).src;
+	var url=document.getElementById('wishlist_producturl'+id).href;
+	var nsx=document.getElementById('wishlist_productnsx'+id).value;
+	var chatlieu=document.getElementById('wishlist_productchatlieu'+id).value;
+	var newItem={
+		'url':url,
+		'id':id,
+		'name':name,
+		'price':price,
+		'image':image,
+		'nsx':nsx,
+		'chatlieu':chatlieu
+	};
+	if(localStorage.getItem('compare')==null){
+		localStorage.setItem('compare','[]');
+	}
+	var old_data=JSON.parse(localStorage.getItem('compare'));
+	var matches=$.grep(old_data,function(obj){
+		return obj.id==id;
+	})
+	if(matches.length){
+		alert('Sản phẩm đã thêm vào so sánh!')
+	}else{
+		if(old_data.length<2){
+			old_data.push(newItem);
+			$('#row_compare').find('tbody').append(`
+			<tr id="row_compare${newItem.id}">
+								<td>${newItem.name}</td>
+								<td><img src="${newItem.image}" style="width:200px;height:200px;"></td>
+								<td>${newItem.price}</td>
+								<td>${newItem.chatlieu}</td>
+								<td>${newItem.nsx}</td>
+								<td><a href="${newItem.url}" class="shopBtn" style="font-size:8px;cursor:pointer;">Thêm vào giỏ hàng</a></td>
+								<td><a class="shopBtn" onclick="delete_compare(${newItem.id})" style="font-size:8px;cursor:pointer;">Xóa so sánh</a></td>
+			</tr>	
+			`);
+		}
+	}
+	localStorage.setItem('compare',JSON.stringify(old_data));
+	$('#sosanh').modal();
+}
+//SP yêu thích
 function view(){
 	if(localStorage.getItem('data')!=null){
 		var data=JSON.parse(localStorage.getItem('data'));
@@ -278,7 +406,7 @@ function view(){
 			var url=data[i].url;
 			$('#row_wishlist').append(`<div class="row" style="margin-left:20px;margin-right:15px;border:solid 1px white;width:90%;padding:5px;"><div class="col-md-4">
 				<img src="${image}" style="width:150px;height:70px;"></div><div class="col-md-8"><p>${name}</p>
-				<p style="color:#FE980F;font-size:20px;">${price}VND</p><a href="${url}" class="shopBtn" style="font-size:12px;">Thêm vào giỏ hàng</a></div></div><br>`);
+				<p style="color:#FE980F;font-size:20px;">${price}VND</p><a href="${url}" class="shopBtn" style="font-size:10px;cursor:pointer;">Thêm vào giỏ hàng</a></div></div><br>`);
 		}
 	}
 }
@@ -309,7 +437,7 @@ function add_wishlist(clicked_id){
 		old_data.push(newItem);
 		$('#row_wishlist').append(`<div class="row" style="margin-left:20px;margin-right:15px;border:solid 1px white;width:90%;padding:5px;"><div class="col-md-4">
 				<img src="${newItem.image}" style="width:150px;height:70px;"></div><div class="col-md-8"><p>${newItem.name}</p>
-				<p style="color:#FE980F;font-size:20px;">${newItem.price}VND</p><a href="${newItem.url}" class="shopBtn" style="font-size:12px;">Thêm vào giỏ hàng</a></div></div><br>`);
+				<p style="color:#FE980F;font-size:20px;">${newItem.price}VND</p><a href="${newItem.url}" class="shopBtn" style="font-size:12px;cursor:pointer;">Thêm vào giỏ hàng</a></div></div><br>`);
 		alert('Thêm sản phẩm vào yêu thích thành công!!')
 		
 	}

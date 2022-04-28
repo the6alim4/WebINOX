@@ -21,7 +21,11 @@ class HomeController extends Controller
         // ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
         // ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
         // ->orderby('MaSP','asc')->get();
-        $all_product=DB::table('tbl_sanpham')->orderby('MaSP','asc')->limit(15)->get();
+        $all_product=DB::table('tbl_sanpham')
+        ->join('tbl_chatlieu','tbl_chatlieu.MaChatLieu','=','tbl_sanpham.MaChatLieu')
+        ->join('tbl_nsx','tbl_nsx.MaNSX','=','tbl_sanpham.MaNSX')
+        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu')
+        ->orderby('MaSP','asc')->limit(15)->get();
         
         return view('pages.home',compact('loaisp','nsx','slider','all_product'));
     }
@@ -191,8 +195,10 @@ class HomeController extends Controller
         $nsx=DB::table('tbl_nsx')->get();
         $slider=DB::table('tbl_slider')->get();
         $category_by_id=DB::table('tbl_sanpham')->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
+        ->join('tbl_chatlieu','tbl_chatlieu.MaChatLieu','=','tbl_sanpham.MaChatLieu')
+        ->join('tbl_nsx','tbl_nsx.MaNSX','=','tbl_sanpham.MaNSX')
         ->where('tbl_sanpham.MaLoai',$MaLoai)->orderby('MaSP','asc')
-        ->select('MaSP','TenSP','DonGiaBan','TenLoai','Anh')
+        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu','TenLoai')
         ->paginate(6);
         $tenloai=DB::table('tbl_loaisp')->where('MaLoai',$MaLoai)->first();
         return view('pages.category.show_category',compact('loaisp','nsx','slider','category_by_id','tenloai'));
@@ -201,9 +207,11 @@ class HomeController extends Controller
         $loaisp=DB::table('tbl_loaisp')->get();
         $nsx=DB::table('tbl_nsx')->get();
         $slider=DB::table('tbl_slider')->get();
-        $category_by_id=DB::table('tbl_sanpham')->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
+        $category_by_id=DB::table('tbl_sanpham')
+        ->join('tbl_chatlieu','tbl_chatlieu.MaChatLieu','=','tbl_sanpham.MaChatLieu')
+        ->join('tbl_nsx','tbl_nsx.MaNSX','=','tbl_sanpham.MaNSX')
         ->where('tbl_sanpham.MaNSX',$MaNSX)->orderby('MaSP','asc')
-        ->select('MaSP','TenSP','DonGiaBan','TenNSX','tbl_sanpham.Anh as AnhSP')
+        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu')
         ->paginate(6);
         $tennsx=DB::table('tbl_nsx')->where('MaNSX',$MaNSX)->first();
         return view('pages.category.show_brand',compact('loaisp','nsx','slider','category_by_id','tennsx'));
@@ -214,8 +222,10 @@ class HomeController extends Controller
         $slider=DB::table('tbl_slider')->get();
         $ten=$request->ten;
         $category_by_id=DB::table('tbl_sanpham')
+        ->join('tbl_chatlieu','tbl_chatlieu.MaChatLieu','=','tbl_sanpham.MaChatLieu')
+        ->join('tbl_nsx','tbl_nsx.MaNSX','=','tbl_sanpham.MaNSX')
         ->where('tbl_sanpham.TenSP','like','%'.$ten.'%')->orderby('MaSP','asc')
-        ->select('MaSP','TenSP','DonGiaBan','Anh')
+        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu')
         ->paginate(6);
         return view('pages.category.search',compact('loaisp','nsx','slider','category_by_id'));
     }
