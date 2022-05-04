@@ -52,6 +52,7 @@
 					</div>                    
 				</div>
                 </div>
+            </div>
 <script src="{{asset('public/frontend/js/jquery3x.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
 <script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>

@@ -1,8 +1,10 @@
 @extends('welcome')
 @section('content')		
 				<!--Featured Products-->
-				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;">
-					<p style="width: 100%;text-align: center;height: 100%;font-size: x-large;font-weight: bold;"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;Sản phẩm bạn tìm kiếm &nbsp;<i class="fa fa-hand-o-left" aria-hidden="true"></i></p>
+				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;background: rgb(221, 231, 214);
+                box-shadow: 15px 10px 8px -6px #ccc;
+                border-radius: 24px;">
+					<h2 style="width: 100%;text-align: center;height: 100%;font-size: x-large;font-weight: bold;color: rgb(228, 116, 11)"><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;Sản phẩm bạn tìm kiếm &nbsp;<i class="fa fa-star-o" aria-hidden="true"></i></h2>
 					<hr class="soften" />
                     @if(count($category_by_id)==0)
                     <div style="text-align: center;">Không có sản phẩm nào như vậy!</div>
@@ -50,5 +52,6 @@
                     </div>
                     @endif
 				</div>
+            </div>
                 
 @endsection

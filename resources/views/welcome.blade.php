@@ -27,6 +27,12 @@
 
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="{{asset('public/frontend/ico/favicon.ico')}}">
+	<style>
+		body{
+			background-color: #eee;
+			color: whitesmoke;
+		}
+	</style>
 </head>
 
 <body>
@@ -47,20 +53,20 @@ Navigation Bar Section
 -->
 
 			<div class="navbar">
-				<div class="navbar-inner">
-					<div class="container">
+				<div class="navbar-inner" style="background: #5fab2d;color:#ffffff00;">
+					<div class="container" style="color: #ffffff00;">
 						<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</a>
-						<div class="nav-collapse">
-							<ul class="nav" style="font-family:Display;font-size: 17px;width: max-content;">
+						<div class="nav-collapse" style="color: #ffffff00;">
+							<ul class="nav" style="font-family:Display;font-size: 17px;width: max-content;color:#ffffff00;">
 
-								<li class=""><a href="{{url('/trang-chu')}}"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Trang chủ </a></li>
-								<li class=""><a href="{{URL::to('/infor')}}"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Giới thiệu</a></li>
+								<li class="" ><a href="{{url('/trang-chu')}}" style="color: #ffffff00;"><i class="fa fa-home" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp;Trang chủ </a></li>
+								<li class=""><a href="{{URL::to('/infor')}}" style="color: #ffffff00;"><i class="fa fa-info-circle" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp;Giới thiệu</a></li>
 								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa-brands fa-font-awesome"></i>&nbsp; Thương hiệu <b class="caret"></b></a>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#" style="color: #ffffff00;"></span><i class="fa-brands fa-font-awesome" style="color: #ffffff00;"></i>&nbsp; Thương hiệu <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										@foreach($nsx as $key)
 										<div style="text-align: center;width:100%;" class="divnsx">
@@ -71,7 +77,7 @@ Navigation Bar Section
 									</div>
 								</li>
 								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp; Danh mục sản phẩm <b class="caret"></b></a>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#" style="color: #ffffff00;"></span><i class="fa fa-cutlery" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp; Danh mục sản phẩm <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										@foreach($loaisp as $key)
 										<div style="text-align: center;width:100%;" class="divhv">
@@ -81,10 +87,10 @@ Navigation Bar Section
 										@endforeach
 									</div>
 								</li>								
-								<li class=""><a href="{{URL::to('/help')}}"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Hỗ trợ</a></li>
-								<li class=""><a href="{{URL::to('/gio-hang')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Giỏ hàng</a></li>
+								<li class=""><a href="{{URL::to('/help')}}" style="color: #ffffff00;"><i class="fa fa-phone" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp;Hỗ trợ</a></li>
+								<li class=""><a href="{{URL::to('/gio-hang')}}" style="color: #ffffff00;"><i class="fa fa-shopping-cart" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp;Giỏ hàng</a></li>
 								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp; Đơn hàng 
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#" style="color: #ffffff00;"></span><i class="fa fa-list-alt" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp; Đơn hàng 
 										@if((Session::get('check1') && (Session::get('check1')==1)) || (Session::get('check2') && (Session::get('check2')==2)) || (Session::get('check3') && (Session::get('check3')==3)))
 											<i class="fa fa-exclamation" aria-hidden="true" style="color: red;"></i>
 										@endif
@@ -124,7 +130,7 @@ Navigation Bar Section
 								$username=Session::get('user_name');
 								?>
 								<li class="dropdown" style=";float: right;">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-user" aria-hidden="true"></i>&nbsp; {{$username}} <b class="caret"></b></a>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#" style="color: #ffffff00;"></span><i class="fa fa-user" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp; {{$username}} <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										<div style="width:100%;" class="divus">
 											<i class="fa fa-pencil" aria-hidden="true"></i>
@@ -147,7 +153,7 @@ Navigation Bar Section
 								</li>
 								@else
 								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"></span><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Tài khoản <b class="caret"></b></a>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#" style="color: #ffffff00;"></span><i class="fa fa-user" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp; Tài khoản <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										<div style="width:100%;" class="divus">
 											<i class="fa fa-sign-in" aria-hidden="true"></i>
@@ -215,30 +221,35 @@ Navigation Bar Section
 			  
 			</div>
 			<!--Body Section-->
-			<div class="row">
+			<div class="row"style="margin-left:-18px;">
 				<div>
 					<div id="sidebar" class="span3">
-						<div class="well well-small" style="font-family:Display;">
+						<div class="well well-small" style="font-family:Display;
+						box-shadow: 15px 10px 8px -6px #ccc;
+						border-radius: 24px;">
 							<h2 style="text-align: center; font-size: x-large;font-weight: bold;">Danh mục sản phẩm</h2>
 							<br>
 							<ul class="nav nav-list" style="font-size: 20px;">
 								@foreach ($loaisp as $key)
-								<li><a href="{{URL::to('/danh-muc-san-pham/'.$key->MaLoai)}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{$key->TenLoai}}</a></li><br>							
+								<li><a href="{{URL::to('/danh-muc-san-pham/'.$key->MaLoai)}}" style="color: whitesmoke;"><i class="fa fa-star-half-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; {{$key->TenLoai}}</a></li>						
 								@endforeach
-								<li style="border:0"> &nbsp;</li>
+
 							</ul>
 						</div>
-						<div class="well well-small" style="font-family:Display;overflow: scroll;height: 600px;">
+						<div class="well well-small" style="font-family:Display;overflow: scroll;height: 450px;
+						box-shadow: 15px 10px 8px -6px #ccc;
+						border-radius: 24px;">
 							<h2 style="text-align: center; x-large;font-weight: bold;">Thương hiệu</h2>
 							<br>
 							<ul class="nav nav-list" style="font-size: 20px;">
 								@foreach ($nsx as $key)
-								<li><a href="{{URL::to('/thuong-hieu-san-pham/'.$key->MaNSX)}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{$key->TenNSX}}</a></li><br>							
+								<li><a href="{{URL::to('/thuong-hieu-san-pham/'.$key->MaNSX)}}" style="color: whitesmoke;"><i class="fa fa-star-half-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{$key->TenNSX}}</a></li>							
 								@endforeach
-								<li style="border:0"> &nbsp;</li>
 							</ul>
 						</div>
-						<div class="well well-small" style="font-family:Display;">
+						<div class="well well-small" style="font-family:Display;background-color: white;
+						box-shadow: 15px 10px 8px -6px #ccc;
+						border-radius: 24px;">
 							<h2 style="text-align: center; x-large;font-weight: bold;">Sản phẩm yêu thích</h2>
 							<br>	
 							<div id="row_wishlist" class="row">
@@ -250,8 +261,10 @@ Navigation Bar Section
 				</div>
 				
 				<div>
-					<div class="span9">
-						<div class="well np">
+					<div class="span9" style="margin-left: 36px;">
+						<div class="well np" style="background-color: white;
+						box-shadow: 15px 10px 8px -6px #ccc;
+						border-radius: 24px;">
 							<div id="myCarousel" class="carousel slide homCar">
 								<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;" id="dvv">
 									<div class="spin" id="spin"></div>
@@ -296,7 +309,7 @@ Navigation Bar Section
 					</div>
 				</section>
 			</footer>
-			<a href="#" class="gotop" id="btnup"><i class="icon-double-angle-up"></i></a>
+			<a href="#" class="gotop" id="btnup" style="color: rgb(242, 175, 51);"><i class="icon-double-angle-up" style="color: rgb(236, 176, 64);"></i></a>
 			<!-- Placed at the end of the document so the pages load faster -->
 <script src="{{asset('public/frontend/js/jquery-3.2.1.js')}}"></script>
 <script src="{{asset('public/frontend/js/jquery.js')}}"></script>

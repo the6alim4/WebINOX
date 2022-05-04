@@ -16,4 +16,5 @@
         <p >Chào mừng quý khách đến với chúng tôi!</p>
         <p >Xin cảm ơn!</p>
     </div>
+</div>
 @endsection

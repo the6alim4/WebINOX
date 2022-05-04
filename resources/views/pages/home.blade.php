@@ -1,9 +1,11 @@
 @extends('welcome')
 @section('content')		
 				<!--New Products-->				
-				<div class="well well-small" style="font-family:Display;">
-					<h3 style="width: 100%;text-align: center;height: 100%;">Sản phẩm mới </h3>
-					<hr class="soften" />
+				<div class="well well-small" style="font-family:Display;background: rgb(221, 231, 214);
+				box-shadow: 15px 10px 8px -6px #ccc;
+				border-radius: 24px;">
+					<h2 style="width: 100%;text-align: center;height: 100%;color: rgb(228, 116, 11)"><i class="fa fa-star-o" aria-hidden="true"></i>Sản phẩm mới<i class="fa fa-star-o" aria-hidden="true"></i></h2>
+					<hr class="soften" style="color: color: rgb(228, 116, 11)"/>
 					<div class="row-fluid">
 						<div id="newProductCar" class="carousel slide" style="display: flex;justify-content: center;align-items: center; width: 100%;">
 							<div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;" id="dvv1" >
@@ -53,8 +55,10 @@
 					</div>
 				</div>
 				<!--Featured Products-->
-				<div class="well well-small" style="font-family:Display;">
-					<h3 100%;text-align: center;height: 100%;><a class="btn btn-mini pull-right" href="products.html" title="View more">VIew More<span class="icon-plus"></span></a> Featured Products </h3>
+				<div class="well well-small" style="font-family:Display;background: rgb(221, 231, 214);
+				box-shadow: 15px 10px 8px -6px #ccc;
+				border-radius: 24px;">
+					<h3 100%;text-align: center;height: 100%; style="color: rgb(228, 116, 11)"><a class="btn btn-mini pull-right" href="products.html" title="View more">VIew More<span class="icon-plus"></span></a> Featured Products </h3>
 					<hr class="soften" />
 					<div class="row-fluid">
 						<ul class="thumbnails">
@@ -76,13 +80,17 @@
 					</div>
 				</div>
 
-				<div class="well well-small" style="font-family:Display;">
-					<a class="btn btn-mini pull-right" href="#">View more <span class="icon-plus"></span></a>
+				<div class="well well-small" style="font-family:Display;background: rgb(221, 231, 214);
+				box-shadow: 15px 10px 8px -6px #ccc;
+				border-radius: 24px;">
+					<a class="btn btn-mini pull-right" href="#" style="color: rgb(228, 116, 11)">View more <span class="icon-plus"></span></a>
 					Popular Products
 				</div>
 				<hr>
-				<div class="well well-small" style="font-family:Display;">
-					<a class="btn btn-mini pull-right" href="#">View more <span class="icon-plus"></span></a>
+				<div class="well well-small" style="font-family:Display;background: rgb(221, 231, 214);
+				box-shadow: 15px 10px 8px -6px #ccc;
+				border-radius: 24px;">
+					<a class="btn btn-mini pull-right" href="#" style="color: rgb(228, 116, 11)">View more <span class="icon-plus"></span></a>
 					Best selling Products
 				</div>
 			</div>

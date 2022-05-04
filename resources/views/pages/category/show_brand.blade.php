@@ -1,8 +1,10 @@
 @extends('welcome')
 @section('content')		
 				<!--Featured Products-->
-				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;">
-					<p style="width: 100%;text-align: center;height: 100%;font-size: x-large;font-weight: bold;"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;Thương hiệu {{$tennsx->TenNSX}}&nbsp;<i class="fa fa-hand-o-left" aria-hidden="true"></i></p>
+				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;background: rgb(221, 231, 214);
+                box-shadow: 15px 10px 8px -6px #ccc;
+                border-radius: 24px;">
+					<h2 style="width: 100%;text-align: center;height: 100%;font-size: x-large;font-weight: bold;color: rgb(228, 116, 11)"><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;Thương hiệu {{$tennsx->TenNSX}}&nbsp;<i class="fa fa-star-o" aria-hidden="true"></i></h2>
 					<hr class="soften" />
                     <div class="row" style="display: flex;justify-content:center;align-items:center ">
                         {{$category_by_id->links()}}          
@@ -46,5 +48,6 @@
                         </div>
                     </div>
 				</div>
+            </div>
                 
 @endsection

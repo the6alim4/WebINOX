@@ -3142,7 +3142,7 @@ table th[class*="span"],
           background: -webkit-linear-gradient(#eaf0d9,#d2eaa1,#eaf0d9);  
     background: -moz-linear-gradient(#eaf0d9,#d2eaa1,#eaf0d9);  
     background: -o-linear-gradient(#eaf0d9,#d2eaa1,#eaf0d9);  
-    background: linear-gradient(#eaf0d9,#d2eaa1,#eaf0d9);  
+    background: linear-gradient(#5fab2d,#7ab055,#28790db0);
   
     -webkit-transition: background 1s ease-out;  
     -moz-transition: background 1s ease-out;  

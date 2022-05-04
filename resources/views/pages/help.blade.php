@@ -5,4 +5,5 @@
         <p>Liên hệ đường dây nóng: {{$ttch->SDT}}</p>
         <p>Địa chỉ: {{$ttch->DiaChi}}</p>
     </div>
+</div>
 @endsection
