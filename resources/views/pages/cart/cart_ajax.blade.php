@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('content')	
 <!-- Body Section -->
-<div class="row" style="width: 873px;">
+<div class="row" style="width: 873px;background: none;color: whitesmoke;">
 	<div class="span12" style="width: 873px;">
     <ul class="breadcrumb">
 		<li><a href="{{url('/trang-chu')}}">Trang chủ</a> <span class="divider">/</span></li>

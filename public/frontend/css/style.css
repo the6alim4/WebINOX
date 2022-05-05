@@ -133,7 +133,7 @@ hr.soften {margin: 8px 0;background: #DDD;}
 #sidebar ul {margin: 0;padding: 0;}
 #sidebar .alert {padding: 8px;}
 #sidebar .nav a{color:#000}
-#sidebar .nav a:hover{color:#f89406}
+#sidebar .nav a:hover{background:#f89406}
 #sidebar .cart{border:1px solid #B94A48; }
 #sidebar h4{margin:0;  line-height:1.5em; padding:0 13px;  }
 #sidebar h2{font-size:21px; line-height:21px;}
@@ -170,20 +170,20 @@ hr.soften {margin: 8px 0;background: #DDD;}
 #footerMenu a{ font-size:12px; text-transform:lowercase}
 #sear{width: 100%;display: flex;    justify-content: flex-end;font-size: 200%;} 
 a:hover{
-    background-color: rgb(238, 236, 233);
-    color: rgb(216, 167, 94);
+    background-color: rgb(241, 163, 47);
+    color: rgb(242, 240, 238);
 }
 .divhv:hover{
-    background-color: rgb(238, 236, 233);
-    color: rgb(216, 167, 94);
+  background-color: rgb(241, 163, 47);
+  color: rgb(242, 240, 238);
 }
 .divnsx:hover{
-    background-color: rgb(238, 236, 233);
-    color: rgb(216, 167, 94);
+  background-color: rgb(241, 163, 47);
+  color: rgb(242, 240, 238);
 }
 .divus:hover{
-    background-color: rgb(238, 236, 233);
-    color: rgb(216, 167, 94);
+  background-color: rgb(241, 163, 47);
+  color: rgb(242, 240, 238);
 }
 .sp{
   width: 90%;

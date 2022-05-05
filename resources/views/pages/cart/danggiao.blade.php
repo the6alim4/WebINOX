@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('content')		
 				<!--Featured Products-->
-				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;">
+				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;background: rgb(193, 227, 170);color: rgb(24, 23, 23);">
                     <div >
                         <ul class="breadcrumb">
                         <li><a href="{{url('/trang-chu')}}">Trang chủ</a> <span class="divider">/</span></li>
@@ -19,7 +19,7 @@
                             <div class="sp" style="width: 350px;" >
                                 <div class="thumbnail" style="width: 70%;">
                                     @foreach($bills as $key)
-                                    <div style="width: 100%;background: rgb(216, 237, 192);height:160px;padding:5%;">
+                                    <div style="width: 100%;background: rgb(167, 230, 94);height:160px;padding:5%;">
                                         <div>
                                             <span>
                                                 <span style="width: 45%;text-align: start;float: left;">Mã hóa đơn:{{$key->MaHDB}}</span>

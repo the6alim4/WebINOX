@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('content')		
 				<!--Featured Products-->
-				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;">
+				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;background: rgb(193, 227, 170);color: rgb(24, 23, 23);">
                     <div >
                         <ul class="breadcrumb">
                         <li><a href="{{url('/trang-chu')}}">Trang chủ</a> <span class="divider">/</span></li>
@@ -16,7 +16,7 @@
                             <div class="sp" style="width: 350px;" >
                                 <div class="thumbnail" style="width: 100%;">                                   
                                     @foreach($sp as $key)
-                                    <div style="width: 100%;background: rgb(216, 237, 192);height:120px;padding:5%;">
+                                    <div style="width: 100%;background: rgb(169, 237, 91);height:120px;padding:5%;">
                                         <span style="height: 100%;width: 100%;">
                                             <span style="width: 15%;height: 15%;float: left;">
                                                 <img src="{{asset($key->Anh)}}">

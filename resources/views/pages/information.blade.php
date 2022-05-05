@@ -1,6 +1,6 @@
 @extends('welcome')
 @section('content')		
-    <div style="width: 100%;">
+    <div style="width: 100%;color: rgb(24, 23, 23);">
         <div style="text-align: center;width: 100%;">
             <h1>INOX Homes</h1>
         </div>

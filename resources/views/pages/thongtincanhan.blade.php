@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('content')	
 <div class="row" style="width: 873px;">
-<div class="span9" >
+<div class="span9" style="background: rgb(193, 227, 170);color: rgb(24, 23, 23);" >
   <ul class="breadcrumb">
   <li><a href="{{url('/trang-chu')}}">Trang chủ</a> <span class="divider">/</span></li>
   <li class="active">Thông tin cá nhân</li>
@@ -38,7 +38,7 @@
         </div>
       <div class="control-group">
       <div class="controls">
-        <button type="submit" class="defaultBtn">Cập nhật thông tin</button>
+        <button style="margin-left: 22%;" type="submit" class="defaultBtn">Cập nhật thông tin</button>
       </div>
       </div>
     </form>

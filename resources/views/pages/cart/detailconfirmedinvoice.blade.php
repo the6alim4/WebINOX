@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('content')		
 				<!--Featured Products-->
-				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;">
+				<div class="well well-small" style="font-family:Display;padding-right:40px;padding-left:0px;background: rgb(193, 227, 170);color: rgb(24, 23, 23);">
                     <div >
                         <ul class="breadcrumb">
                         <li><a href="{{url('/trang-chu')}}">Trang chủ</a> <span class="divider">/</span></li>
@@ -20,7 +20,7 @@
                                         <div>Địa chỉ nhận hàng:{{$infor->DiaChi}}</div>
                                     </div>
                                     @foreach($sp as $key)
-                                    <div style="width: 100%;background: rgb(216, 237, 192);height:120px;padding:5%;">
+                                    <div style="width: 100%;background: rgb(164, 230, 88);height:120px;padding:5%;">
                                         <span style="height: 100%;width: 100%;">
                                             <span style="width: 60%;text-align: start;float: left;">
                                                 

@@ -4,7 +4,7 @@
 				<div class="well well-small" style="font-family:Display;background: rgb(221, 231, 214);
 				box-shadow: 15px 10px 8px -6px #ccc;
 				border-radius: 24px;">
-					<h2 style="width: 100%;text-align: center;height: 100%;color: rgb(228, 116, 11)"><i class="fa fa-star-o" aria-hidden="true"></i>Sản phẩm mới<i class="fa fa-star-o" aria-hidden="true"></i></h2>
+					<h2 style="width: 100%;text-align: center;height: 100%;color: rgb(228, 116, 11);font-weight: bold;"><i class="fa fa-star-o" aria-hidden="true"></i>Sản phẩm mới<i class="fa fa-star-o" aria-hidden="true"></i></h2>
 					<hr class="soften" style="color: color: rgb(228, 116, 11)"/>
 					<div class="row-fluid">
 						<div id="newProductCar" class="carousel slide" style="display: flex;justify-content: center;align-items: center; width: 100%;">
