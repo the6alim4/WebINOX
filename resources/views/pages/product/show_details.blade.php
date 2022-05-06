@@ -5,7 +5,7 @@
     <hr class="soft"/>
     <div style="width: 41.66666666666667%;float: left;position: relative;min-height: 1px;padding-right: 15px;padding-left: 15px;display: block;">
         <div class="view-product">
-            <img src="{{asset($data->AnhSP)}}" alt="" />
+            <img src="{{asset($data->AnhSP)}}" alt="" id="realimg" />
             <h3><i class="fa fa-search" aria-hidden="true"></i></h3>
         </div>
         <div id="similar-product" class="carousel slide " style="height:90px;width: 100%;background-color: transparent;border: 1px rgb(236, 210, 175);">
@@ -26,6 +26,9 @@
         </div>
 
     </div>
+    @php
+        $cost=round((1-$data->KhuyenMai)*$data->DonGiaBan,1);
+    @endphp
     <form style="margin-left: 35%;" >
         @csrf
         <input type="hidden" value="{{$data->MaSP}}" >
@@ -37,7 +40,12 @@
         <input name="masp" type="hidden" id="product_id" value="{{$data->MaSP}}" style="display: none" readonly>
         <input name="anhsp" type="hidden" id="anhsp" value="{{asset($data->AnhSP)}}" style="display: none" readonly>
         <p style="font-family:Display;font-size: x-large;font-weight: bold; " id="tensp">{{$data->TenSP}}</p>
+        @if($data->KhuyenMai>0)        
+        <label class="control-label" style="display: inline-flex;font-size: large;">Giá gốc: <p><s id="precost"><strong> {{number_format($data->DonGiaBan)}} </strong></s> </p> VND</label><br>
+        <label class="control-label" style="display: inline-flex;font-size: x-large;">Giá bán: <p id="cost"><strong> {{number_format($cost)}} </strong> </p> VND</label><br>
+        @else
         <label class="control-label" style="display: inline-flex;font-size: x-large;">Giá bán: <p id="cost"><strong> {{number_format($data->DonGiaBan)}} </strong> </p> VND</label><br>
+        @endif
         @for($i=0;$i<$rating;$i++)
         <a class="ion-android-star" style="color: rgb(241, 196, 15);font-size:25px;"></a>  
         @endfor
@@ -69,6 +77,7 @@
           <input value='{{$maxsize}}' id='maxsize' readonly style="display: none;">
       @endif
       <input value="{{$data->DonGiaBan}}" id="maxval" style="display: none;">
+      <input value="{{$data->KhuyenMai}}" id="discount" style="display: none;">
       <input value="{{$valfisrtsize}}" id="slcon" style="display: none;">
       <input value="0" id="maxquan" style="display: none;">
       <input value="{{$data->DonGiaBan}}" id='realcost' type="hidden">
@@ -183,9 +192,18 @@
 function myFunction(){
 	var maxsize=document.getElementById("maxsize").value;
 	var maxval=document.getElementById("maxval").value;
+	var discount=document.getElementById("discount").value;
 	var selectedsize=document.getElementById("choosesize").value;
-	var newval=(selectedsize/maxsize)*maxval;
-	document.getElementById("cost").innerHTML =format1(newval);
+  if(discount>0){
+	var newval=(selectedsize/maxsize)*maxval*(1-discount);
+  document.getElementById("cost").innerHTML =format1(newval);
+	document.getElementById("precost").innerHTML =format1((selectedsize/maxsize)*maxval);
+  }else{
+    var newval=(selectedsize/maxsize)*maxval;
+    document.getElementById("cost").innerHTML =format1(newval);
+  }
+	
+	
 	$('#realcost').val(newval);
   var realcost=$("#realcost").val();
 	var masp=document.getElementById("product_id").value;
@@ -236,8 +254,16 @@ $.ajax({
 						var cart_product_qty = document.getElementById('slmua').value;
 						var cart_product_size = document.getElementById('choosesize').value;
 						var cart_product_maxquan = document.getElementById('sl').textContent;
-						var _token = $('input[name="_token"]').val();       
-						$.ajax({
+						var _token = $('input[name="_token"]').val();    
+            if(cart_product_qty<1){
+              const box = document.getElementById('note');
+              box.style.visibility = 'visible';
+              box.style.color = 'red';
+              $("#note").text("Số lượng quá ít!");
+              const btn = document.getElementById('addtocart');
+              btn.disabled=true;
+            }else{
+              $.ajax({
 							url: "{{url('/add-cart-ajax')}}",
               method: 'GET',
 							data:{
@@ -250,7 +276,7 @@ $.ajax({
                 cart_product_maxquan:cart_product_maxquan,
 								_token:_token
 							},success:function(){
-								swal({
+								swal({  
                                 title: "Đã thêm sản phẩm vào giỏ hàng",
                                 text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
                                 showCancelButton: true,
@@ -266,6 +292,8 @@ $.ajax({
 							}
 
 						});
+            }   
+						
 					});
 				});
 </script>

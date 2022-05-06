@@ -30,7 +30,7 @@
 	<style>
 		body{
 			background-color: #eee;
-			color: whitesmoke;
+			
 		}
 	</style>
 </head>
@@ -227,7 +227,7 @@ Navigation Bar Section
 						<div class="well well-small" style="font-family:Display;
 						box-shadow: 15px 10px 8px -6px #ccc;
 						border-radius: 24px;">
-							<h2 style="text-align: center; font-size: x-large;font-weight: bold;">Danh mục sản phẩm</h2>
+							<h2 style="text-align: center; font-size: x-large;font-weight: bold;color: whitesmoke;">Danh mục sản phẩm</h2>
 							<br>
 							<ul class="nav nav-list" style="font-size: 20px;">
 								@foreach ($loaisp as $key)
@@ -239,7 +239,7 @@ Navigation Bar Section
 						<div class="well well-small" style="font-family:Display;overflow: scroll;height: 450px;
 						box-shadow: 15px 10px 8px -6px #ccc;
 						border-radius: 24px;">
-							<h2 style="text-align: center; x-large;font-weight: bold;">Thương hiệu</h2>
+							<h2 style="text-align: center; x-large;font-weight: bold;color: whitesmoke;">Thương hiệu</h2>
 							<br>
 							<ul class="nav nav-list" style="font-size: 20px;">
 								@foreach ($nsx as $key)
@@ -248,9 +248,9 @@ Navigation Bar Section
 							</ul>
 						</div>
 						<div class="well well-small" style="font-family:Display;background-color: white;
-						box-shadow: 15px 10px 8px -6px #ccc;
+						box-shadow: 15px 10px 8px -6px #ccc;color: whitesmoke;
 						border-radius: 24px;">
-							<h2 style="text-align: center; x-large;font-weight: bold;">Sản phẩm yêu thích</h2>
+							<h2 style="text-align: center; x-large;font-weight: bold;color: whitesmoke;">Sản phẩm yêu thích</h2>
 							<br>	
 							<div id="row_wishlist" class="row">
 							

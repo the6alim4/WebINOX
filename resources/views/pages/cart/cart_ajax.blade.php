@@ -106,7 +106,7 @@ Session::forget('alert');
             </tr>
             <tr>
               <label style="min-width:159px"> Địa chỉ nhận hàng: </label> 
-              <textarea type="text" id="diachi" style="resize: none" rows="5" required></textarea>
+              <textarea type="text" id="diachi" style="resize: none;color: black;" rows="5" required></textarea>
             </tr>
             
         </tbody>
