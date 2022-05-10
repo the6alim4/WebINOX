@@ -11,12 +11,12 @@ $("#btnup").click(function() {
 setTimeout(() => {
 	const box = document.getElementById('spin');
 	const dvv = document.getElementById('dvv');
-	box.style.display = 'none';
-	dvv.style.display = 'inline';
+	$('#spin').css('display','none');
+	$('#dvv').css('display','inline');
   }, 5500);
   setTimeout(() => {
-	const box = document.getElementById('alertxx');
-	box.style.display = 'none';
+	$('#alertxx').css('display','none');
+
   }, 3000);
 
 /* Home page item price animation */

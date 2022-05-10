@@ -114,6 +114,8 @@ Route::get('/detail-deliverd-evaluated-invoice/{MaHDB}','CartController@detailde
 Route::get('/detail-deliverd-notevaluated-invoice/{MaHDB}','CartController@detaildeliverednotevaluatedinvoice');
 Route::get('/evaluate/{MaHDB}','CartController@evaluate');
 
+//Voucher
+Route::get('/xoa-ss-voucher','CartController@xoavoucher');
 
 
 

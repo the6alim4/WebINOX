@@ -56,6 +56,11 @@
             <div>
                 Phí giao hàng (toàn quốc):{{number_format(30000)}} VND
             </div>
+            @if($infor->KhuyenMai>0)
+            <div>
+              Giảm giá:{{number_format($infor->KhuyenMai)}} VND
+            </div>
+            @endif
             <div>
                 Tổng tiền:{{number_format($infor->TongTien)}} VND
             </div>

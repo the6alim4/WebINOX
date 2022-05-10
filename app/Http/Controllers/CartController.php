@@ -129,17 +129,29 @@ class CartController extends Controller
                 $tongtien+=$key['product_qty']*$key['product_price'];
             } 
             $datahdb=[];
+            if(Session::get('idvoucher')<1){
+                $datahdb['IDKM']=null;
+                $datahdb['KhuyenMai']=null;
+            }else{
+                $datahdb['IDKM']=Session::get('idvoucher');
+                $datahdb['KhuyenMai']=Session::get('voucher');
+                $slvc=DB::table('tbl_khuyenmai')->where('IDKM',Session::get('idvoucher'))->first();
+                $slvcmoi=(int)$slvc->SoLuongCon-1;
+                $datakm=[];
+                $datakm['SoLuongCon']=$slvcmoi;
+                DB::table('tbl_khuyenmai')->where('IDKM',Session::get('idvoucher'))->update($datakm);
+            }
             $datahdb['MaNguoiDung']=$maguoidung;
             $datahdb['NgayTao']=$ngaytao;
             $datahdb['TrangThai']=$trangthai;
             $datahdb['DiaChi']=$diachi;
-            $datahdb['TongTien']=$tongtien;
+            $datahdb['TongTien']=$tongtien-(int)Session::get('voucher');
             $datahdb['isevaluated']=0;
             DB::table('tbl_hoadonban')->insert($datahdb);
             $mahdb=DB::table('tbl_hoadonban')
             ->where('MaNguoiDung',$maguoidung)
             ->where('TrangThai',$trangthai)
-            ->where('TongTien',$tongtien)->first();
+            ->where('TongTien',$tongtien-(int)Session::get('voucher'))->first();
             $mahdb=$mahdb->MaHDB;
             foreach($cart as $key){
                 $datachitiethdb=[];
@@ -162,6 +174,9 @@ class CartController extends Controller
             } 
             Session::put('check1',1);
             Session::forget('cart');
+            Session::forget('idvoucher',0);
+            Session::forget('voucher',0);
+
             $loaisp=DB::table('tbl_loaisp')->get();
             $nsx=DB::table('tbl_nsx')->get();
             $slider=DB::table('tbl_slider')->get();
@@ -387,5 +402,32 @@ class CartController extends Controller
             $databinhluan['MaHDB']=$mahdb;            
             DB::table('tbl_binhluan')->insert($databinhluan);
         }
+    }
+    //use Voucher
+    public function useCode(Request $request){
+        $code=$request->code;
+        $todaydate=strtotime(Carbon::now());
+        $res=DB::table('tbl_khuyenmai')->where('MaKM',$code)->first();
+        if($res==null){
+            return 1;
+        }
+        else{
+            if($res->SoLuongCon<1){
+                return 2;
+            }else{
+                $ngaybd=strtotime($res->NgayBatDau);
+                $ngaykt=strtotime($res->NgayKetThuc);
+                if($todaydate>$ngaybd && $todaydate<$ngaykt){
+                    Session::put('voucher',$res->GiamGia);
+                    Session::put('idvoucher',$res->IDKM);
+                    return $res->GiamGia;
+                }else{
+                    return 4;
+                }
+            }
+        }
+    }
+    public function xoavoucher(){
+        Session::put('idvoucher',0);
     }
 }

@@ -80,8 +80,15 @@
       <input value="{{$data->KhuyenMai}}" id="discount" style="display: none;">
       <input value="{{$valfisrtsize}}" id="slcon" style="display: none;">
       <input value="0" id="maxquan" style="display: none;">
+      @if($data->KhuyenMai<0)
       <input value="{{$data->DonGiaBan}}" id='realcost' type="hidden">
-      <h4><button type="button" class="shopBtn" id="addtocart" name="addtocart" > Thêm vào giỏ hàng </button></h4>
+      @else
+      @php
+      $afcost=$data->DonGiaBan*(1-$data->KhuyenMai);
+      @endphp
+      <input value="{{$afcost}}" id='realcost' type="hidden">
+      @endif
+      <h4><button type="button" class="shopBtn" id="addtocart" name="addtocart" disabled> Thêm vào giỏ hàng </button></h4>
       
     </form>
 </div>

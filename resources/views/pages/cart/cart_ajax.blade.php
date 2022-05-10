@@ -82,13 +82,18 @@ Session::forget('alert');
                 <td colspan="6" class="alignR">Phí giao hàng (toàn quốc):	</td>
                 <td> {{number_format(30000)}}</td>
             </tr>
+            <tr id="giamgia" style="display: none;">
+              <td colspan="6" class="alignR">Mã giảm giá:	</td>
+              <td><p id="tiengiamgia"></p></td>
+            </tr>  
             <tr>
                 <td colspan="6" class="alignR">Tổng tiền:	</td>
                 <td> 
                   <p id="total">{{number_format($total)}}</p>
                   <p style="display: none;" id="realtotal">{{$total}}</p>
                 </td>
-            </tr>            
+            </tr>    
+                  
             </tbody>
         </table><br/>
       
@@ -99,21 +104,25 @@ Session::forget('alert');
               <td> 
             <form class="form-inline">
               <label style="min-width:159px"> VOUCHER: </label> 
-            <input type="text" class="input-medium" placeholder="CODE">
-            <button type="submit" class="shopBtn"> Áp dụng</button>
+            <input type="text" class="input-medium" id="vouchercode" placeholder="CODE">
+            <a class="shopBtn"id="apdung" onclick="useVC();" style="cursor: pointer;"> Áp dụng</a>
+            <div id="warningvoucher" style="visibility: hidden;"></div>
+
             </form>
             </td>
             </tr>
             <tr>
               <label style="min-width:159px"> Địa chỉ nhận hàng: </label> 
               <textarea type="text" id="diachi" style="resize: none;color: black;" rows="5" required></textarea>
+              <div id="warning" style="visibility: hidden;"></div>
+
             </tr>
             
         </tbody>
             </table>
 
 <a href="{{URL::to('/trang-chu')}}" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Tiếp tục mua hàng </a>
-<a href="{{URL::to('/dat-hang')}}" class="shopBtn btn-large pull-right">Đặt hàng <span class="icon-arrow-right"></span></a>
+<a href="{{URL::to('/dat-hang')}}" class="shopBtn btn-large pull-right" id="dathang" style="pointer-events: none;">Đặt hàng <span class="icon-arrow-right"></span></a>
 
 </div>
 </div>
@@ -127,7 +136,49 @@ function format1(n) {
     return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
   });
 }
+function useVC(){
+  var code=document.getElementById('vouchercode').value;
+  if(code==''){
 
+  }else{
+    $.ajax({
+      url:`../WebINOX/api/useCode/?code=${code}`,
+      method: 'GET',
+      contentType: 'application/json',
+      success:function(rs){
+        if(rs==1){
+          $("#warningvoucher").text("Voucher không tồn tại!");
+          $("#warningvoucher").css('visibility','visible');
+          $("#warningvoucher").css('color','red');
+        }
+        else if(rs==2){
+          $("#warningvoucher").text("Voucher đã được dùng hết!");
+          $("#warningvoucher").css('visibility','visible');
+          $("#warningvoucher").css('color','red');
+        }
+        else if(rs==4){
+          $("#warningvoucher").text("Voucher đã chưa bắt đầu hoặc đã hết hạn!");
+          $("#warningvoucher").css('visibility','visible');
+          $("#warningvoucher").css('color','red');
+        }
+        else if(rs>100){
+          $("#warningvoucher").text("Áp dụng thành công!");
+          $("#warningvoucher").css('visibility','visible');
+          $("#warningvoucher").css('color','green');
+          var result_style = document.getElementById('giamgia').style;
+          result_style.display = 'table-row';
+          $('#tiengiamgia').empty();
+          $('#tiengiamgia').append(`-${format1(parseInt(rs))}`);
+          var total=document.getElementById('realtotal').textContent;
+          var newtotal=parseInt(total)-parseInt(rs);
+          $('#total').empty();
+          $('#total').append(`${format1(newtotal)}`)
+        }
+      }
+    });
+  }
+  
+}
 function updateCart(sessionid,qty){
   $.ajax({
     url:`../WebINOX/api/updatecart/?sessionid=${sessionid}&qty=${qty}`,
@@ -211,15 +262,38 @@ $('.btn ').click(function(){
   }
 
 });
-$('body').on('focusout', '#diachi', function(e) {
-    var diachi=document.getElementById("diachi").value;
-    $.ajax({
-    url:`../WebINOX/api/updiachi/?diachi=${diachi}`,
-    method: 'GET',
-    contentType: 'application/json',
-    success:function(rs){
+$('body').on('focusout', '#vouchercode', function(e) {
+    var voucher=document.getElementById("vouchercode").value;
+    if(voucher==''){
+      $.ajax({
+      url:"{{url('/xoa-ss-voucher')}}",
+      method: 'GET',
+      contentType: 'application/json',
+      success:function(rs){
     }
   });
+}
+});
+$('body').on('focusout', '#diachi', function(e) {
+    var diachi=document.getElementById("diachi").value;
+    if(diachi==''){
+      $('#dathang').css('pointer-events','none');
+      $("#warning").text("Vui lòng nhập địa chỉ nhận hàng!");
+      $("#warning").css('visibility','visible');
+      $("#warning").css('color','red');
+      
+    }else{
+      $.ajax({
+      url:`../WebINOX/api/updiachi/?diachi=${diachi}`,
+      method: 'GET',
+      contentType: 'application/json',
+      success:function(rs){
+      }
+    });
+    $("#warning").css('visibility','hidden');
+    $('#dathang').css('pointer-events','auto');
+    }
+    
     
 });
 </script>
