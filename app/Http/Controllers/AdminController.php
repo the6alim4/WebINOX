@@ -9,6 +9,8 @@ use Illuminate\Http\Middleware\FrameGuard;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Carbon;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 session_start();
 class AdminController extends Controller
@@ -297,6 +299,18 @@ class AdminController extends Controller
     public function gdvoucherdanghd(){
         $this->AuthLogin();
         $voucher=DB::select('SELECT * from tbl_khuyenmai where CURDATE() BETWEEN NgayBatDau and NgayKetThuc');
+        $voucher = $this->paginate($voucher,2);
+        $voucher->path('WebINOX/giao-dien-voucher-danghd/');
         return view('admin.voucher.gdvoucherdanghd',compact('voucher'));
     }
+    public function paginate($items, $perPage = 4, $page = null)
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $total=count($items);
+        $currentpage=$page;
+        $offset=($currentpage*$perPage)-$perPage;
+        $itemstoshow=array_slice($items,$offset,$perPage);
+        return new LengthAwarePaginator($itemstoshow,$total,$perPage);
+    }
+    
 }

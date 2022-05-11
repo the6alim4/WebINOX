@@ -56,15 +56,15 @@
               </td>
             
              @endforeach
-             {{-- {{$voucher->links()}} --}}
+             {!! $voucher->withPath('giao-dien-voucher-danghd/') !!}
           </tbody>
         </table>
       </div>
-      {{-- <footer class="panel-footer">
+      <footer class="panel-footer">
         <div class="row">
-          {{$voucher->links()}}          
+          {!! $voucher->withPath('giao-dien-voucher-danghd/') !!}          
         </div>
-      </footer> --}}
+      </footer>
     </div>
   </div>
 @endsection
