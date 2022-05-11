@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('content')
 <div style="background: rgb(221, 231, 214);color: rgb(12, 10, 8);padding:10px;height: 600px;">
-    <p style="font-family: Display;font-size: x-large;text-align: center;"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;Túi Voucher &nbsp;<i class="fa fa-hand-o-left" aria-hidden="true"></i></p>
+    <p style="font-family: Display;font-size: x-large;text-align: center;"><i class="fa fa-ticket" aria-hidden="true"></i>&nbsp;Túi Voucher &nbsp;<i class="fa fa-ticket" aria-hidden="true"></i></p>
     <hr class="soft"/>   
     <div style="display: block;background: rgb(221, 231, 214);color: rgb(12, 12, 12);height: 80%;">
         <div>
