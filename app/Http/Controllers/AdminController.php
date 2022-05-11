@@ -8,9 +8,9 @@ use App\Http\Requests;
 use Illuminate\Http\Middleware\FrameGuard;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Carbon;
 
 session_start();
-
 class AdminController extends Controller
 {
     //
@@ -277,5 +277,26 @@ class AdminController extends Controller
         ->get();
         return view('admin.bill.detailfailed',compact('infor','sp'));
     }
-
+    //Voucher
+    public function gdthemvoucher(){
+        $this->AuthLogin();
+        return view('admin.voucher.gdthemvoucher');
+    }
+    public function themvoucher(Request $request){
+        $this->AuthLogin();
+        $data=[];
+        $data['MaKM']=$request->macode;
+        $data['GiamGia']=$request->giamgia;
+        $data['SoLuongCon']=$request->soluong;
+        $data['NgayBatDau']=$request->ngaybd;
+        $data['NgayKetThuc']=$request->ngaykt;
+        DB::table('tbl_khuyenmai')->insert($data);
+        Session::put('message','Thêm mới voucher thành công!');
+        return redirect()->back();
+    }
+    public function gdvoucherdanghd(){
+        $this->AuthLogin();
+        $voucher=DB::select('SELECT * from tbl_khuyenmai where CURDATE() BETWEEN NgayBatDau and NgayKetThuc');
+        return view('admin.voucher.gdvoucherdanghd',compact('voucher'));
+    }
 }

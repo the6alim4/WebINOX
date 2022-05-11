@@ -116,6 +116,11 @@ Route::get('/evaluate/{MaHDB}','CartController@evaluate');
 
 //Voucher
 Route::get('/xoa-ss-voucher','CartController@xoavoucher');
+Route::get('/giao-dien-them-voucher','AdminController@gdthemvoucher');
+Route::post('/them-voucher','AdminController@themvoucher');
+Route::get('/giao-dien-voucher-danghd','AdminController@gdvoucherdanghd');
+
+
 
 
 

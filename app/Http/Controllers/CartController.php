@@ -145,13 +145,18 @@ class CartController extends Controller
             $datahdb['NgayTao']=$ngaytao;
             $datahdb['TrangThai']=$trangthai;
             $datahdb['DiaChi']=$diachi;
-            $datahdb['TongTien']=$tongtien-(int)Session::get('voucher');
+            if(($tongtien-(int)Session::get('voucher'))<0){
+                $tongtien=0;
+            }else{
+                $tongtien=$tongtien-(int)Session::get('voucher');
+            }
+            $datahdb['TongTien']=$tongtien;
             $datahdb['isevaluated']=0;
             DB::table('tbl_hoadonban')->insert($datahdb);
             $mahdb=DB::table('tbl_hoadonban')
             ->where('MaNguoiDung',$maguoidung)
             ->where('TrangThai',$trangthai)
-            ->where('TongTien',$tongtien-(int)Session::get('voucher'))->first();
+            ->where('TongTien',$tongtien)->first();
             $mahdb=$mahdb->MaHDB;
             foreach($cart as $key){
                 $datachitiethdb=[];

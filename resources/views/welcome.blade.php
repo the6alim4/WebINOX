@@ -347,7 +347,7 @@ function sosanh(){
 			$('#row_compare').find('tbody').append(`
 			<tr id="row_compare${id}">
 								<td>${name}</td>
-								<td><img src="${image}" style="width:200px;height:200px;"></td>
+								<td><img src="${image}" style="width:100px;height:100px;"></td>
 								<td>${price}</td>
 								<td>${chatlieu}</td>
 								<td>${nsx}</td>
@@ -392,7 +392,7 @@ function add_compare(product_id){
 			$('#row_compare').find('tbody').append(`
 			<tr id="row_compare${newItem.id}">
 								<td>${newItem.name}</td>
-								<td><img src="${newItem.image}" style="width:200px;height:200px;"></td>
+								<td><img src="${newItem.image}" style="width:100px;height:100px;"></td>
 								<td>${newItem.price}</td>
 								<td>${newItem.chatlieu}</td>
 								<td>${newItem.nsx}</td>
