@@ -118,9 +118,20 @@ Route::get('/evaluate/{MaHDB}','CartController@evaluate');
 Route::get('/xoa-ss-voucher','CartController@xoavoucher');
 Route::get('/giao-dien-them-voucher','AdminController@gdthemvoucher');
 Route::post('/them-voucher','AdminController@themvoucher');
+//voucher dang hd
 Route::get('/giao-dien-voucher-danghd','AdminController@gdvoucherdanghd');
-
-
+Route::get('/gd-sua-voucher-danghd/{IDKM}','AdminController@gdsuavoucherdanghd');
+Route::post('/sua-voucher-danghd/{IDKM}','AdminController@suavoucherdanghd');
+//voucher da het han
+Route::get('/giao-dien-voucher-dahh','AdminController@gdvoucherdahh');
+Route::get('/gd-sua-voucher-dahh/{IDKM}','AdminController@gdsuavoucherdahh');
+Route::post('/sua-voucher-dahh/{IDKM}','AdminController@suavoucherdahh');
+//voucher sap dien ra
+Route::get('/giao-dien-voucher-sapco','AdminController@gdvouchersapco');
+Route::get('/gd-sua-voucher-sapco/{IDKM}','AdminController@gdsuavouchersapco');
+Route::post('/sua-voucher-sapco/{IDKM}','AdminController@suavouchersapco');
+//tui voucher
+Route::get('/tui-voucher','HomeController@tuivoucher');
 
 
 

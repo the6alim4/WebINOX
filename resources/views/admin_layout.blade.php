@@ -165,7 +165,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <ul class="sub">
 						<li><a href="{{URL::to('/giao-dien-them-voucher')}}">Thêm mới voucher </a></li>
 						<li><a href="{{URL::to('/giao-dien-voucher-danghd')}}">Voucher đang hoạt động</a></li>
-						<li><a href="{{URL::to('/don-hang-dang-giao')}}">Voucher đã hết hạn</a></li>
+						<li><a href="{{URL::to('/giao-dien-voucher-dahh')}}">Voucher đã hết hạn</a></li>
+						<li><a href="{{URL::to('/giao-dien-voucher-sapco')}}">Voucher sắp diễn ra</a></li>
                     </ul>
                 </li>
             </ul>            

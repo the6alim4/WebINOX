@@ -3,7 +3,7 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Voucher đang hoạt động
+        Voucher sắp diễn ra
       </div>
       <div class="row w3-res-tb">
         <div class="col-sm-4">
@@ -47,19 +47,19 @@
               <td>{{$key->NgayBatDau}}</td>
               <td>{{$key->NgayKetThuc}}</td>
               <td>
-                <a href="{{URL::to('/gd-sua-voucher-danghd/'.$key->IDKM)}}" class="active styling-edit" ui-toggle-class="">
+                <a href="{{URL::to('/gd-sua-voucher-sapco/'.$key->IDKM)}}" class="active styling-edit" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i>
                 </a>
               </td>
             
              @endforeach
-             {!! $voucher->withPath('giao-dien-voucher-danghd/') !!}
+             {!! $voucher->withPath('giao-dien-voucher-sapco/') !!}
           </tbody>
         </table>
       </div>
       <footer class="panel-footer">
         <div class="row">
-          {!! $voucher->withPath('giao-dien-voucher-danghd/') !!}          
+          {!! $voucher->withPath('giao-dien-voucher-sapco/') !!}          
         </div>
       </footer>
     </div>

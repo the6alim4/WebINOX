@@ -296,6 +296,7 @@ class AdminController extends Controller
         Session::put('message','Thêm mới voucher thành công!');
         return redirect()->back();
     }
+    //voucher dang dien ra
     public function gdvoucherdanghd(){
         $this->AuthLogin();
         $voucher=DB::select('SELECT * from tbl_khuyenmai where CURDATE() BETWEEN NgayBatDau and NgayKetThuc');
@@ -312,5 +313,77 @@ class AdminController extends Controller
         $itemstoshow=array_slice($items,$offset,$perPage);
         return new LengthAwarePaginator($itemstoshow,$total,$perPage);
     }
+    public function gdsuavoucherdanghd($IDKM){
+        $this->AuthLogin();
+        $voucher=DB::table('tbl_khuyenmai')
+        ->where('IDKM',$IDKM)->first();
+        return view('admin.voucher.gdsuavoucherdanghd',compact('voucher'));
+
+    }
     
+    public function suavoucherdanghd($IDKM,Request $request){
+        $data=[];
+        $data['MaKM']=$request->macode;
+        $data['GiamGia']=$request->giamgia;
+        $data['SoLuongCon']=$request->soluong;
+        $data['NgayBatDau']=$request->ngaybd;
+        $data['NgayKetThuc']=$request->ngaykt;
+        DB::table('tbl_khuyenmai')->where('IDKM',$IDKM)->update($data);
+        Session::put('message','Thêm mới voucher thành công!');
+        return redirect()->back();
+    }
+
+    //voucher da het han
+    public function gdvoucherdahh(){
+        $this->AuthLogin();
+        $voucher=DB::select('SELECT * from tbl_khuyenmai where CURDATE()'.'>'.'NgayKetThuc');
+        $voucher = $this->paginate($voucher,2);
+        $voucher->path('WebINOX/giao-dien-voucher-dahh/');
+        return view('admin.voucher.gdvoucherdahh',compact('voucher'));
+    }
+    public function gdsuavoucherdahh($IDKM){
+        $this->AuthLogin();
+        $voucher=DB::table('tbl_khuyenmai')
+        ->where('IDKM',$IDKM)->first();
+        return view('admin.voucher.gdsuavoucherdahh',compact('voucher'));
+
+    }
+    public function suavoucherdahh($IDKM,Request $request){
+        $data=[];
+        $data['MaKM']=$request->macode;
+        $data['GiamGia']=$request->giamgia;
+        $data['SoLuongCon']=$request->soluong;
+        $data['NgayBatDau']=$request->ngaybd;
+        $data['NgayKetThuc']=$request->ngaykt;
+        DB::table('tbl_khuyenmai')->where('IDKM',$IDKM)->update($data);
+        Session::put('message','Thêm mới voucher thành công!');
+        return redirect()->back();
+    }
+
+    //voucher sap dien ra
+    public function gdvouchersapco(){
+        $this->AuthLogin();
+        $voucher=DB::select('SELECT * from tbl_khuyenmai where CURDATE()'.'<'.'NgayBatDau');
+        $voucher = $this->paginate($voucher,2);
+        $voucher->path('WebINOX/giao-dien-voucher-sapco/');
+        return view('admin.voucher.gdvouchersapco',compact('voucher'));
+    }
+    public function gdsuavouchersapco($IDKM){
+        $this->AuthLogin();
+        $voucher=DB::table('tbl_khuyenmai')
+        ->where('IDKM',$IDKM)->first();
+        return view('admin.voucher.gdsuavouchersapco',compact('voucher'));
+
+    }
+    public function suavouchersapco($IDKM,Request $request){
+        $data=[];
+        $data['MaKM']=$request->macode;
+        $data['GiamGia']=$request->giamgia;
+        $data['SoLuongCon']=$request->soluong;
+        $data['NgayBatDau']=$request->ngaybd;
+        $data['NgayKetThuc']=$request->ngaykt;
+        DB::table('tbl_khuyenmai')->where('IDKM',$IDKM)->update($data);
+        Session::put('message','Thêm mới voucher thành công!');
+        return redirect()->back();
+    }
 }

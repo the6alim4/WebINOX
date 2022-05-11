@@ -7,6 +7,8 @@ use DB;
 use App\Http\Requests;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 session_start();
 
 class HomeController extends Controller
@@ -286,5 +288,14 @@ class HomeController extends Controller
     ->select('SoLuong')
     ->get();
       return $count;
+    }
+    // tui voucher
+    public function tuivoucher(){
+        $loaisp=DB::table('tbl_loaisp')->get();
+        $nsx=DB::table('tbl_nsx')->get();
+        $slider=DB::table('tbl_slider')->get();
+        $vcdhd=DB::select('SELECT * from tbl_khuyenmai where CURDATE() BETWEEN NgayBatDau and NgayKetThuc');
+        $vcsc=DB::select('SELECT * from tbl_khuyenmai where CURDATE()'.'<'.' NgayBatDau');
+        return view('pages.tuivoucher',compact('loaisp','nsx','slider','vcdhd','vcsc'));
     }
 }

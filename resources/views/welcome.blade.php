@@ -133,19 +133,25 @@ Navigation Bar Section
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#" style="color: #ffffff00;"></span><i class="fa fa-user" aria-hidden="true" style="color: #ffffff00;"></i>&nbsp; {{$username}} <b class="caret"></b></a>
 									<div class="dropdown-menu">
 										<div style="width:100%;" class="divus">
-											<i class="fa fa-pencil" aria-hidden="true"></i>
+											<i class="fa fa-pencil" aria-hidden="true" style="color: rgb(99, 99, 230);"></i>
 											&nbsp;
 											<a href="{{URL::to('/thong-tin-ca-nhan')}}">Thông tin cá nhân</a>
 										</div>
 										<br>
 										<div style="width:100%;" class="divus">
-											<i class="fa fa-pencil" aria-hidden="true"></i>
+											<i class="fa fa-pencil" aria-hidden="true" style="color: rgb(99, 99, 230);"></i>
 											&nbsp;
 											<a href="{{URL::to('/update-mat-khau')}}">Thay đổi mật khẩu</a>
 										</div>
 										<br>
 										<div style="width:100%;" class="divus">
-											<i class="fa fa-sign-out" aria-hidden="true"></i>											
+											<i class="fa fa-ticket" aria-hidden="true" style="color: rgb(99, 99, 230);"></i>
+											&nbsp;
+											<a href="{{URL::to('/tui-voucher')}}">Túi voucher</a>
+										</div>
+										<br>
+										<div style="width:100%;" class="divus">
+											<i class="fa fa-sign-out" aria-hidden="true" style="color: rgb(99, 99, 230);"></i>											
 											&nbsp;
 											<a href="{{URL::to('/logout-user')}}">Đăng xuất</a>
 										</div>
