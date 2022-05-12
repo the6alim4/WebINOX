@@ -25,8 +25,6 @@
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
-	<!-- Favicons -->
-	<link rel="shortcut icon" href="{{asset('public/frontend/ico/favicon.ico')}}">
 	<style>
 		body{
 			background-color: #eee;
@@ -306,7 +304,7 @@ Navigation Bar Section
 						@if ($key->Anh==null)
 						@else
 						<div class="span2" style="width: auto;">
-							<a href="#"><img alt="" src="{{asset($key->Anh)}}" style="height: 100px;width:auto;" ></a>
+							<img alt="" src="{{asset($key->Anh)}}" style="height: 100px;width:auto;" >
 						</div>
 						&nbsp;
 						@endif
@@ -350,11 +348,13 @@ function sosanh(){
 			var id=data[i].id;
 			var nsx=data[i].nsx;
 			var chatlieu=data[i].chatlieu;
+			var km=data[i].km;
+			var gia=new Intl.NumberFormat().format(Math.round(price*(1-km),0));
 			$('#row_compare').find('tbody').append(`
 			<tr id="row_compare${id}">
 								<td>${name}</td>
 								<td><img src="${image}" style="width:100px;height:100px;"></td>
-								<td>${price}</td>
+								<td>${gia}</td>
 								<td>${chatlieu}</td>
 								<td>${nsx}</td>
 								<td><a href="${url}" class="shopBtn" style="font-size:8px;cursor:pointer;">Thêm vào giỏ hàng</a></td>
@@ -374,6 +374,7 @@ function add_compare(product_id){
 	var url=document.getElementById('wishlist_producturl'+id).href;
 	var nsx=document.getElementById('wishlist_productnsx'+id).value;
 	var chatlieu=document.getElementById('wishlist_productchatlieu'+id).value;
+	var km=document.getElementById('wishlist_productkm'+id).value;
 	var newItem={
 		'url':url,
 		'id':id,
@@ -381,7 +382,8 @@ function add_compare(product_id){
 		'price':price,
 		'image':image,
 		'nsx':nsx,
-		'chatlieu':chatlieu
+		'chatlieu':chatlieu,
+		'km':km
 	};
 	if(localStorage.getItem('compare')==null){
 		localStorage.setItem('compare','[]');
@@ -395,11 +397,12 @@ function add_compare(product_id){
 	}else{
 		if(old_data.length<2){
 			old_data.push(newItem);
+			var gia=new Intl.NumberFormat().format(Math.round(newItem.price*(1-newItem.km),0));
 			$('#row_compare').find('tbody').append(`
 			<tr id="row_compare${newItem.id}">
 								<td>${newItem.name}</td>
 								<td><img src="${newItem.image}" style="width:100px;height:100px;"></td>
-								<td>${newItem.price}</td>
+								<td>${gia}VND</td>
 								<td>${newItem.chatlieu}</td>
 								<td>${newItem.nsx}</td>
 								<td><a href="${newItem.url}" class="shopBtn" style="font-size:8px;cursor:pointer;">Thêm vào giỏ hàng</a></td>
@@ -423,9 +426,11 @@ function view(){
 			var price=data[i].price;
 			var image=data[i].image;
 			var url=data[i].url;
+			var km=data[i].km;
+			var gia=new Intl.NumberFormat().format(Math.round(price*(1-km),0));
 			$('#row_wishlist').append(`<div class="row" style="margin-left:20px;margin-right:15px;border:solid 1px white;width:90%;padding:5px;"><div class="col-md-4">
 				<img src="${image}" style="width:150px;height:70px;"></div><div class="col-md-8"><p>${name}</p>
-				<p style="color:#FE980F;font-size:20px;">${price}VND</p><a href="${url}" class="shopBtn" style="font-size:10px;cursor:pointer;">Thêm vào giỏ hàng</a></div></div><br>`);
+				<p style="color:#FE980F;font-size:20px;">${gia}VND</p><a href="${url}" class="shopBtn" style="font-size:10px;cursor:pointer;">Thêm vào giỏ hàng</a></div></div><br>`);
 		}
 	}
 }
@@ -436,12 +441,14 @@ function add_wishlist(clicked_id){
 	var price=document.getElementById('wishlist_productprice'+id).value;
 	var image=document.getElementById('wishlist_productimg'+id).src;
 	var url=document.getElementById('wishlist_producturl'+id).href;
+	var km=document.getElementById('wishlist_productkm'+id).value;
 	var newItem={
 		'url':url,
 		'id':id,
 		'name':name,
 		'price':price,
-		'image':image
+		'image':image,
+		'km':km
 	};
 	if(localStorage.getItem('data')==null){
 		localStorage.setItem('data','[]');
@@ -454,9 +461,10 @@ function add_wishlist(clicked_id){
 		alert('Sản phẩm đã yêu thích!')
 	}else{
 		old_data.push(newItem);
+		var gia=new Intl.NumberFormat().format(Math.round(newItem.price*(1-newItem.km),0));
 		$('#row_wishlist').append(`<div class="row" style="margin-left:20px;margin-right:15px;border:solid 1px white;width:90%;padding:5px;"><div class="col-md-4">
 				<img src="${newItem.image}" style="width:150px;height:70px;"></div><div class="col-md-8"><p>${newItem.name}</p>
-				<p style="color:#FE980F;font-size:20px;">${newItem.price}VND</p><a href="${newItem.url}" class="shopBtn" style="font-size:12px;cursor:pointer;">Thêm vào giỏ hàng</a></div></div><br>`);
+				<p style="color:#FE980F;font-size:20px;">${gia}VND</p><a href="${newItem.url}" class="shopBtn" style="font-size:12px;cursor:pointer;">Thêm vào giỏ hàng</a></div></div><br>`);
 		alert('Thêm sản phẩm vào yêu thích thành công!!')
 		
 	}

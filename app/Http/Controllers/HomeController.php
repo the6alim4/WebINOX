@@ -26,10 +26,22 @@ class HomeController extends Controller
         $all_product=DB::table('tbl_sanpham')
         ->join('tbl_chatlieu','tbl_chatlieu.MaChatLieu','=','tbl_sanpham.MaChatLieu')
         ->join('tbl_nsx','tbl_nsx.MaNSX','=','tbl_sanpham.MaNSX')
-        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu')
+        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu','KhuyenMai')
         ->orderby('MaSP','asc')->limit(15)->get();
-        
-        return view('pages.home',compact('loaisp','nsx','slider','all_product'));
+        $spbanchay=DB::select('SELECT TenSP,KhuyenMai,tbl_chitiethdb.MaSP,tbl_sanpham.Anh AnhSP,TenNSX,TenChatLieu,tbl_chitiethdb.DonGiaBan,COUNT(tbl_chitiethdb.MaSP) total FROM tbl_chitiethdb
+        join tbl_sanpham on tbl_chitiethdb.MaSP=tbl_sanpham.MaSP
+        join tbl_nsx on tbl_nsx.MaNSX=tbl_sanpham.MaNSX
+        join tbl_chatlieu on tbl_chatlieu.MaChatLieu=tbl_sanpham.MaChatLieu
+        GROUP BY tbl_chitiethdb.MaSP
+        ORDER BY total DESC
+        LIMIT 6');    
+        $spgiamgia=DB::select('SELECT TenSP,KhuyenMai,MaSP,tbl_sanpham.Anh AnhSP,TenNSX,TenChatLieu,DonGiaBan FROM tbl_sanpham 
+        join tbl_nsx on tbl_nsx.MaNSX=tbl_sanpham.MaNSX 
+        join tbl_chatlieu on tbl_chatlieu.MaChatLieu=tbl_sanpham.MaChatLieu 
+        GROUP BY MaSP 
+        ORDER BY KhuyenMai 
+        DESC LIMIT 6'); 
+        return view('pages.home',compact('loaisp','nsx','slider','all_product','spbanchay','spgiamgia'));
     }
     //Login+Logout
     public function login(){

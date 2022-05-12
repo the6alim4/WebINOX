@@ -37,7 +37,7 @@ Session::forget('alert');
             $total=30000;
             @endphp
             @if(!Session::get('cart'))
-            <p style="color: red;font-size: x-large;text-align: center;">Bạn chưa có sản phẩm nào!</p>
+            <p style="color: rgb(222, 160, 27);font-size: x-large;text-align: center;">Bạn chưa có sản phẩm nào!</p>
             @else
             @foreach(Session::get('cart') as $key)
             @php

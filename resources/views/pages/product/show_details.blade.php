@@ -4,17 +4,19 @@
     <p style="font-family: Display;font-size: x-large;text-align: center;"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;Chi tiết sản phẩm &nbsp;<i class="fa fa-hand-o-left" aria-hidden="true"></i></p>
     <hr class="soft"/>
     <div style="width: 41.66666666666667%;float: left;position: relative;min-height: 1px;padding-right: 15px;padding-left: 15px;display: block;">
-        <div class="view-product">
+        <div class="view-product" id="anhchinh">
             <img src="{{asset($data->AnhSP)}}" alt="" id="realimg" />
-            <h3><i class="fa fa-search" aria-hidden="true"></i></h3>
         </div>
         <div id="similar-product" class="carousel slide " style="height:90px;width: 100%;background-color: transparent;border: 1px rgb(236, 210, 175);">
             
               <!-- Wrapper for slides -->
                 <div class="carousel-inner" style="display: flex;justify-content: center;align-items: center;top:30%;">
+                  <div class="item" style="width: 100px;height:50px;">
+                    <a onclick="show_anh(0);"><img src="{{asset($data->AnhSP)}}" alt="" id="anh0" /></a>             
+                  </div>
                   @foreach($anhbotro as $key)
                     <div class="item" style="width: 100px;height:50px;">
-                      <a href=""><img src="{{asset($key->Anhbotro)}}" alt="" style="width: 100px;height:50px;"></a>                      
+                      <a onclick="show_anh({{$key->MaAnh}});" style="cursor: pointer;"><img src="{{asset($key->Anhbotro)}}" id="anh{{$key->MaAnh}}" alt="" style="width: 100px;height:50px;"></a>                
                     </div>  
                   @endforeach                 
                 </div>
@@ -190,6 +192,13 @@
 
 
 <script type="text/javascript">
+//show anh
+function show_anh(img_id){
+  var id=img_id;
+  var image=document.getElementById('anh'+id).src;
+  $("#anhchinh").empty();
+  $("#anhchinh").append(`<img src="${image}" alt="" id="realimg" />`)
+}
   function format1(n) {
   return n.toFixed(0).replace(/./g, function(c, i, a) {
     return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
