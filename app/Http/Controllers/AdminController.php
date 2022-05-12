@@ -102,12 +102,22 @@ class AdminController extends Controller
         $infor=DB::table('tbl_hoadonban')
         ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
         ->where('MaHDB',$MaHDB)->first();
+        $mand=$infor->MaNguoiDung;
+        $countbill=DB::table('tbl_hoadonban')->where('MaNguoiDung',$mand)->get();
+        $tilebomhang=0;
+        if(count($countbill)>1){
+            $countbillbom=DB::table('tbl_hoadonban')
+            ->where('MaNguoiDung',$mand)
+            ->where('TrangThai',5)
+            ->get();
+            $tilebomhang=round(100*count($countbillbom)/count($countbill),1);
+        }
         $sp=DB::table('tbl_chitiethdb')
         ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
         ->where('MaHDB',$MaHDB)
         ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
         ->get();
-        return view('admin.bill.detail',compact('infor','sp'));
+        return view('admin.bill.detail',compact('infor','sp','tilebomhang'));
     }
     //Đơn hàng đã xác nhận
     public function donhangxacnhan(){

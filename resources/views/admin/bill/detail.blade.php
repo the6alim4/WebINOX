@@ -19,7 +19,7 @@
       <div class="table-responsive">
           <div>
               <div>Mã HDB:{{$infor->MaHDB}}</div>
-              <div>Người đặt hàng:{{$infor->TenNguoiDung}}</div>
+              <div>Người đặt hàng:{{$infor->TenNguoiDung}} <strong>(tỉ đơn thất bại:{{$tilebomhang}}%)</strong></div>
               <div>Số điện thoại:{{$infor->SoDienThoai}}</div>
               <div>Địa chỉ nhận hàng:{{$infor->DiaChi}}</div>
           </div>

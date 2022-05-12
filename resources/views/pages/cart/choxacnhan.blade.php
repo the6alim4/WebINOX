@@ -39,7 +39,7 @@
                                                     <h4><a class="shopBtn" href="{{URL::to('/detail-watiing-bill/'.$key->MaHDB)}}"> Chi tiết đơn hàng </a></h4>
                                                 </span>
                                                 <span style="width: 45%;text-align: end;float: right;">
-                                                    <h4><a class="shopBtn" href="{{URL::to('/demolish-bill/'.$key->MaHDB)}}"> Hủy đơn hàng </a></h4>
+                                                    <h4><a onclick="return confirm('Bạn có chắc hủy đơn hàng?')" class="shopBtn" href="{{URL::to('/demolish-bill/'.$key->MaHDB)}}"> Hủy đơn hàng </a></h4>
                                                 </span>
                                             </span>
                                         </div>

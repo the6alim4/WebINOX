@@ -41,6 +41,12 @@
                                     @endforeach 
                                     <div>
                                         <p style="text-align: left;"> Phí giao hàng (toàn quốc):{{number_format(30000)}} VND</p>
+                                        @if($infor->KhuyenMai>0)
+                                            <div>
+                                            Giảm giá:{{number_format($infor->KhuyenMai)}} VND
+                                            </div>
+                                            <br>
+                                        @endif
                                         <p style="text-align: left;"><strong>Tổng tiền:{{number_format($infor->TongTien)}}VND</strong></p>
                                     </div>
                                     
