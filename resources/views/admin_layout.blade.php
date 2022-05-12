@@ -104,6 +104,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 
             </ul>            
 		</div>
+        @elseif(Session::get('quyen')==4){
+            <div class="leftside-navigation">
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <li>
+                        <a class="active" href="{{url('/dashboard')}}">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Tổng quan</span>
+                        </a>
+                    </li>                
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Vận chuyển</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('/don-hang-cho')}}">Chờ vận chuyển</a></li>
+                            <li><a href="{{URL::to('/don-hang-xac-nhan')}}">Đã giao cho đơn vị vận chuyển</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>            
+            </div>
+        }
 		@else
 		<div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
