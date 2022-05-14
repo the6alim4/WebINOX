@@ -42,12 +42,14 @@
                 <a href="{{URL::to('/detail-transporting-bill/'.$key->MaHDB)}}" class="active styling-edit" ui-toggle-class="">
                     <i class="fa fa-info" aria-hidden="true"></i>
                 </a>
+                @if(Session::get('quyen')!=3)
                 <a onclick="return confirm('Đơn hàng giao thất bại?')" href="{{URL::to('/delete-transporting-bill/'.$key->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
                   <i class="fa fa-times text-danger text"></i>
                 </a>
                 <a onclick="return confirm('Giao hàng thành công?')" href="{{URL::to('/finish-bill/'.$key->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
                     <i class="fa fa-check" aria-hidden="true"></i>
                   </a>
+                @endif
               </td>
             
              @endforeach

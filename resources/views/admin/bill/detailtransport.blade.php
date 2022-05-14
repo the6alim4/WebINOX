@@ -65,6 +65,7 @@
                 Tổng tiền:{{number_format($infor->TongTien)}} VND
             </div>
             <br>
+            @if(Session::get('quyen')!=3)
             <div style="display:flex;justify-content: center;align-items: center;">
                 <span>
                     <a id="btndt1" style="font-size: 14px;color: black;background: rgb(230, 200, 146);border-radius:5px;" onclick="return confirm('Đơn hàng gio thất bại?')" href="{{URL::to('/delete-transporting-bill/'.$infor->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
@@ -77,6 +78,7 @@
                     </a>
                 </span>
             </div>
+            @endif
         </div>
       </div>
     </div>

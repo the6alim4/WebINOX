@@ -5,7 +5,7 @@
 	<div class="span1" style="width: 950px;">
     <ul class="breadcrumb">
 		<li><a href="{{url('/dashboard')}}">Admin</a> <span class="divider">/</span></li>
-		<li class="active">Đơn hàng chờ xác nhận</li>
+		<li class="active">Đơn hàng đã xác nhận</li>
     </ul>
 <div class="well well-small">
 <hr class="soften"/>	
@@ -65,6 +65,7 @@
                 Tổng tiền:{{number_format($infor->TongTien)}} VND
             </div>
             <br>
+            @if(Session::get('quyen')!=3)
             <div style="display:flex;justify-content: center;align-items: center;">
                 <span>
                     <a id="btndt1" style="font-size: 14px;color: black;background: rgb(230, 200, 146);border-radius:5px;" onclick="return confirm('Bạn có chắc hủy đơn hàng?')" href="{{URL::to('/delete-confirmed-bill/'.$infor->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
@@ -72,11 +73,12 @@
                     </a>
                     &nbsp;
                     &nbsp;
-                    <a id="btndt2" style="font-size: 14px;color: black;background: rgb(230, 200, 146);border-radius:5px;" onclick="return confirm('Bạn có chắc xác nhận đơn hàng?')" href="{{URL::to('/transport-bill/'.$infor->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
+                    <a id="btndt2" style="font-size: 14px;color: black;background: rgb(230, 200, 146);border-radius:5px;" onclick="return confirm('Bạn có chắc giao đơn hàng cho bên vận chuyển?')" href="{{URL::to('/transport-bill/'.$infor->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
                         Vận chuyển đơn hàng
                     </a>
                 </span>
             </div>
+            @endif
         </div>
       </div>
     </div>

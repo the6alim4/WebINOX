@@ -119,8 +119,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <span>Vận chuyển</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="{{URL::to('/don-hang-cho')}}">Chờ vận chuyển</a></li>
-                            <li><a href="{{URL::to('/don-hang-xac-nhan')}}">Đã giao cho đơn vị vận chuyển</a></li>
+                            <li><a href="{{URL::to('/don-hang-xac-nhan')}}">Đã xác nhận</a></li>
+                            <li><a href="{{URL::to('/don-hang-dang-giao')}}">Đang vận chuyển</a></li>
                         </ul>
                     </li>
                     

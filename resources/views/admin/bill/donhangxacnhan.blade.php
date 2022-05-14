@@ -42,12 +42,14 @@
                 <a href="{{URL::to('/detail-confirmed-bill/'.$key->MaHDB)}}" class="active styling-edit" ui-toggle-class="">
                     <i class="fa fa-info" aria-hidden="true"></i>
                 </a>
+                @if(Session::get('quyen')!=3)
                 <a onclick="return confirm('Bạn có chắc hủy đơn hàng?')" href="{{URL::to('/delete-confirmed-bill/'.$key->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
                   <i class="fa fa-times text-danger text"></i>
                 </a>
-                <a onclick="return confirm('Bạn có chắc vận chuyển đơn hàng?')" href="{{URL::to('/transport-bill/'.$key->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
+                <a onclick="return confirm('Bạn có chắc giao đơn hàng cho bên vận chuyển?')" href="{{URL::to('/transport-bill/'.$key->MaHDB)}}" class="active styling-edit" ui-toggle-class="">  
                     <i class="fa fa-check" aria-hidden="true"></i>
-                  </a>
+                </a>
+                @endif
               </td>
             
              @endforeach
