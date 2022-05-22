@@ -33,7 +33,7 @@
             @foreach ($bills as $key ) 
               <tr>
               <td>{{$key->MaHDB}}</td>
-              <td>{{$key->NgayTao}}</td>
+              <td>{{date("d-m-Y", strtotime($key->NgayTao))}}</td>
               <td>{{$key->TenNguoiDung}}</td>
               <td>{{$key->SoDienThoai}}</td>
               <td>{{$key->DiaChi}}</td>

@@ -9,6 +9,7 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Carbon;
 session_start();
 
 class HomeController extends Controller
@@ -63,6 +64,10 @@ class HomeController extends Controller
         if ($result) {
             Session::put('user_name', $result->TenNguoiDung);
             Session::put('user_id', $result->MaNguoiDung);
+            $data=[];
+            $data['MaNguoiDung']=$result->MaNguoiDung;
+            $data['NgayDangNhap']=Carbon::now();
+            DB::table('tbl_view')->insert($data);
             $check1=0;
             $check2=0;
             $check3=0;

@@ -42,6 +42,11 @@ Route::get('/admin','AdminController@index');
 Route::get('/dashboard','AdminController@show_dashboard');
 Route::get('/logout','AdminController@logout');
 Route::post('/admin-dashboard','AdminController@dashboard');
+Route::get('/go-to-view','AdminController@gotoview');
+Route::get('/go-to-bill','AdminController@gotobill');
+Route::get('/go-to-detail-bill/{MaHDB}','AdminController@gotodetailbill');
+
+
 
 //Product
 Route::get('/add-product','CategoryProduct@add_product');

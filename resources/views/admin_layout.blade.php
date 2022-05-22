@@ -204,7 +204,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<section class="wrapper">
         @yield('admin_content')			
     </section>
-
 </section>
 <!--main content end-->
 </section>

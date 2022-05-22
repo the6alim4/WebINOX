@@ -8,14 +8,6 @@
       <div class="row w3-res-tb">
         <div class="col-sm-4">
         </div>
-        <div class="col-sm-3">
-          <div class="input-group">
-            <input type="text" class="input-sm form-control" placeholder="Search">
-            <span class="input-group-btn">
-              <button class="btn btn-sm btn-default" type="button">Go!</button>
-            </span>
-          </div>
-        </div>
       </div>
       <?php
             $message=Session::get('message');
@@ -44,8 +36,8 @@
               <td>{{$key->MaKM}}</td>
               <td>{{$key->GiamGia}}</td>
               <td>{{$key->SoLuongCon}}</td>
-              <td>{{$key->NgayBatDau}}</td>
-              <td>{{$key->NgayKetThuc}}</td>
+              <td>{{date("d-m-Y", strtotime($key->NgayBatDau))}}</td>
+              <td>{{date("d-m-Y", strtotime($key->NgayKetThuc))}}</td>
               <td>
                 <a href="{{URL::to('/gd-sua-voucher-dahh/'.$key->IDKM)}}" class="active styling-edit" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i>

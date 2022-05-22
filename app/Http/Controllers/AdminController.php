@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function AuthLogin()
     {
         $admin_id = Session::get('admin_id');
-        if($admin_id) {
+        if($admin_id) {           
             return Redirect::to('dashboard');
         } else {
             return Redirect::to('admin')->send();
@@ -32,7 +32,20 @@ class AdminController extends Controller
     public function show_dashboard()
     {
         $this->AuthLogin();
-        return view('admin.dashboard');
+        $thang=Carbon::now()->month;
+        $nam=Carbon::now()->year;
+        $sodonhang=DB::select('select * from tbl_hoadonban where  MONTH(NgayTao)='.$thang.' AND YEAR(NgayTao)='.$nam.' AND TrangThai !=5 AND TrangThai !=6');
+        $tongdonhang=count($sodonhang);
+        $tongdoanhthu=0;
+        $soview=DB::table('tbl_view')
+        ->whereMonth('NgayDangNhap',$thang)
+        ->whereYear('NgayDangNhap',$nam)
+        ->get();
+        foreach($sodonhang as $key){
+            $tongdoanhthu+=$key->TongTien;
+        }
+        $view=count($soview);
+        return view('admin.dashboard',compact('tongdonhang','tongdoanhthu','view'));
     }
     public function dashboard(Request $request)
     {
@@ -395,5 +408,53 @@ class AdminController extends Controller
         DB::table('tbl_khuyenmai')->where('IDKM',$IDKM)->update($data);
         Session::put('message','Thêm mới voucher thành công!');
         return redirect()->back();
+    }
+    //thống kê tháng
+    //views
+    public function gotoview(){
+        $this->AuthLogin();
+        $thang=Carbon::now()->month;
+        $nam=Carbon::now()->year;
+        $soview=DB::table('tbl_view')
+        ->whereMonth('NgayDangNhap',$thang)
+        ->whereYear('NgayDangNhap',$nam)
+        ->paginate(5);
+        return view('admin.gotoview',compact('soview'));
+    }
+    //bill
+    public function gotobill(){
+        $this->AuthLogin();
+        $thang=Carbon::now()->month;
+        $nam=Carbon::now()->year;
+        $sodonhang=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.manguoidung')
+        ->whereMonth('NgayTao',$thang)
+        ->whereYear('NgayTao',$nam)
+        ->where('TrangThai','!=','5')
+        ->where('TrangThai','!=','6')
+        ->paginate(5);
+        return view('admin.gotobill',compact('sodonhang'));
+    }
+    public function gotodetailbill($MaHDB){
+        $this->AuthLogin();
+        $infor=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('MaHDB',$MaHDB)->first();
+        $mand=$infor->MaNguoiDung;
+        $countbill=DB::table('tbl_hoadonban')->where('MaNguoiDung',$mand)->get();
+        $tilebomhang=0;
+        if(count($countbill)>1){
+            $countbillbom=DB::table('tbl_hoadonban')
+            ->where('MaNguoiDung',$mand)
+            ->where('TrangThai',5)
+            ->get();
+            $tilebomhang=round(100*count($countbillbom)/count($countbill),1);
+        }
+        $sp=DB::table('tbl_chitiethdb')
+        ->join('tbl_sanpham','tbl_sanpham.MaSP','=','tbl_chitiethdb.MaSP')
+        ->where('MaHDB',$MaHDB)
+        ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
+        ->get();
+        return view('admin.gotodetailbill',compact('infor','sp','tilebomhang'));
     }
 }
