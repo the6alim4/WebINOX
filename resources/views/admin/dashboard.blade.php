@@ -35,12 +35,23 @@
                 </div>
                 <div class="col-md-8 market-update-left">
                     <h4>Doanh thu</h4>
-                    <h4>{{number_format($tongdoanhthu)}}</h4>
+                    <a href="{{URL::to('/go-to-bill')}}"><h4>{{number_format($tongdoanhthu)}}</h4></a>
                 </div>
               <div class="clearfix"> </div>
             </div>
         </div>
-
+        <div class="col-md-3 market-update-gd">
+            <div class="market-update-block clr-block-4">
+                <div class="col-md-4 market-update-right">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </div>
+                <div class="col-md-8 market-update-left">
+                    <h5 style="color: white;">Best seller:</h5>
+                    <a href="{{URL::to('/chi-tiet-product/'.$spbanchay[0]->MaS)}}"><h5 style="color: white;">{{$spbanchay[0]->TenSP}}({{$spbanchay[0]->total}}sp)</h5></a>
+                </div>
+              <div class="clearfix"> </div>
+            </div>
+        </div>
        <div class="clearfix"> </div>
     </div>	
     <!-- //thang-->

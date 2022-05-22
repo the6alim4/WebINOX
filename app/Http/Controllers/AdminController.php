@@ -45,7 +45,14 @@ class AdminController extends Controller
             $tongdoanhthu+=$key->TongTien;
         }
         $view=count($soview);
-        return view('admin.dashboard',compact('tongdonhang','tongdoanhthu','view'));
+        $spbanchay=DB::select('SELECT TenSP,tbl_chitiethdb.MaSP MaS,COUNT(tbl_chitiethdb.MaSP) total FROM tbl_chitiethdb
+        join tbl_sanpham on tbl_chitiethdb.MaSP=tbl_sanpham.MaSP
+        join tbl_hoadonban on tbl_chitiethdb.MaHDB=tbl_hoadonban.MaHDB
+        where MONTH(NgayTao)='.$thang.' AND YEAR(NgayTao)='.$nam.' AND TrangThai !=5 AND TrangThai !=6
+        GROUP BY tbl_chitiethdb.MaSP
+        ORDER BY total DESC
+        LIMIT 1');
+        return view('admin.dashboard',compact('tongdonhang','tongdoanhthu','view','spbanchay'));
     }
     public function dashboard(Request $request)
     {
@@ -456,5 +463,18 @@ class AdminController extends Controller
         ->select('TenSP','Anh','DuongKinh','SoLuong','tbl_chitiethdb.DonGiaBan as DonGia','ThanhTien')
         ->get();
         return view('admin.gotodetailbill',compact('infor','sp','tilebomhang'));
+    }
+    //top product
+    public function chitietproduct($MaSP){
+        $this->AuthLogin();
+        $data=DB::table('tbl_sanpham')
+        ->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
+        ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
+        ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
+        ->where('tbl_sanpham.MaSP',$MaSP)
+        ->select('MaSP','TenSP','DonGiaNhap','DonGiaBan','tbl_sanpham.Anh as AnhSP' ,'MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')
+        ->first();          
+        return view('admin.chitietproduct', compact('data','MaSP'));
+        
     }
 }

@@ -45,6 +45,7 @@ Route::post('/admin-dashboard','AdminController@dashboard');
 Route::get('/go-to-view','AdminController@gotoview');
 Route::get('/go-to-bill','AdminController@gotobill');
 Route::get('/go-to-detail-bill/{MaHDB}','AdminController@gotodetailbill');
+Route::get('/chi-tiet-product/{MaHDB}','AdminController@chitietproduct');
 
 
 
