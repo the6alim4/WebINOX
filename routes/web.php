@@ -50,6 +50,7 @@ Route::get('/chi-tiet-product/{MaHDB}','AdminController@chitietproduct');
 //tke ngày
 Route::get('/tke-ngay','AdminController@tkengay');
 Route::get('/chi-tiet-view-ngay/{NgayTK}','AdminController@chitietviewngay');
+Route::get('/chi-tiet-bill-ngay/{NgayTK}','AdminController@chitietbillngay');
 
 
 

@@ -52,8 +52,92 @@ class AdminController extends Controller
         where MONTH(NgayTao)='.$thang.' AND YEAR(NgayTao)='.$nam.' AND TrangThai !=5 AND TrangThai !=6
         GROUP BY tbl_chitiethdb.MaSP
         ORDER BY total DESC
-        LIMIT 1');
-        return view('admin.dashboard',compact('tongdonhang','tongdoanhthu','view','spbanchay'));
+        LIMIT 5');
+        $tongsp=DB::table('tbl_chitiethdb')
+        ->join('tbl_hoadonban','tbl_hoadonban.MaHDB','=','tbl_chitiethdb.MaHDB')
+        ->whereMonth('NgayTao',$thang)
+        ->whereYear('NgayTao',$nam)
+        ->where('TrangThai','!=',5)
+        ->where('TrangThai','!=',6)
+        ->get();
+        $tongsosp=count($tongsp);
+        $t1=DB::table('tbl_hoadonban')->whereMonth('NgayTao',1)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t2=DB::table('tbl_hoadonban')->whereMonth('NgayTao',2)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t3=DB::table('tbl_hoadonban')->whereMonth('NgayTao',3)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t4=DB::table('tbl_hoadonban')->whereMonth('NgayTao',4)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t5=DB::table('tbl_hoadonban')->whereMonth('NgayTao',5)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t6=DB::table('tbl_hoadonban')->whereMonth('NgayTao',6)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t7=DB::table('tbl_hoadonban')->whereMonth('NgayTao',7)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t8=DB::table('tbl_hoadonban')->whereMonth('NgayTao',8)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t9=DB::table('tbl_hoadonban')->whereMonth('NgayTao',9)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t10=DB::table('tbl_hoadonban')->whereMonth('NgayTao',10)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t11=DB::table('tbl_hoadonban')->whereMonth('NgayTao',11)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $t12=DB::table('tbl_hoadonban')->whereMonth('NgayTao',12)->where('TrangThai','!=',5)->where('TrangThai','!=',6)->whereYear('NgayTao',$nam)->get();
+        $donhang=[];        
+        $donhang[0]=count($t1);
+        $donhang[1]=count($t2);
+        $donhang[2]=count($t3);
+        $donhang[3]=count($t4);
+        $donhang[4]=count($t5);
+        $donhang[5]=count($t6);
+        $donhang[6]=count($t7);
+        $donhang[7]=count($t8);
+        $donhang[8]=count($t9);
+        $donhang[9]=count($t10);
+        $donhang[10]=count($t11);
+        $donhang[11]=count($t12);
+        $doanhthu=[];
+        $dt1=0;$dt2=0;$dt3=0;$dt4=0;$dt5=0;$dt6=0;$dt7=0;$dt8=0;$dt9=0;$dt10=0;$dt11=0;$dt12=0;
+        foreach($t1 as $key){
+            $dt1+=$key->TongTien;
+        }
+        foreach($t2 as $key){
+            $dt2+=$key->TongTien;
+        }   
+        foreach($t3 as $key){
+            $dt3+=$key->TongTien;
+        }   
+        foreach($t4 as $key){
+            $dt4+=$key->TongTien;
+        }   
+        foreach($t5 as $key){
+            $dt5+=$key->TongTien;
+        }   
+        foreach($t6 as $key){
+            $dt6+=$key->TongTien;
+        }   
+        foreach($t7 as $key){
+            $dt7+=$key->TongTien;
+        }   
+        foreach($t8 as $key){
+            $dt8+=$key->TongTien;
+        }   
+        foreach($t9 as $key){
+            $dt9+=$key->TongTien;
+        }   
+        foreach($t10 as $key){
+            $dt10+=$key->TongTien;
+        }   
+        foreach($t11 as $key){
+            $dt11+=$key->TongTien;
+        }   
+        foreach($t12 as $key){
+            $dt12+=$key->TongTien;
+        }           
+        $doanhthu[0]=$dt1;
+        $doanhthu[1]=$dt2;
+        $doanhthu[2]=$dt3;
+        $doanhthu[3]=$dt4;
+        $doanhthu[4]=$dt5;
+        $doanhthu[5]=$dt6;
+        $doanhthu[6]=$dt7;
+        $doanhthu[7]=$dt8;
+        $doanhthu[8]=$dt9;
+        $doanhthu[9]=$dt10;
+        $doanhthu[10]=$dt11;
+        $doanhthu[11]=$dt12;
+        
+        return view('admin.dashboard',compact('tongdonhang','tongdoanhthu','view','spbanchay','tongsosp','donhang','doanhthu'));
     }
     public function dashboard(Request $request)
     {
@@ -465,19 +549,6 @@ class AdminController extends Controller
         ->get();
         return view('admin.gotodetailbill',compact('infor','sp','tilebomhang'));
     }
-    //top product
-    public function chitietproduct($MaSP){
-        $this->AuthLogin();
-        $data=DB::table('tbl_sanpham')
-        ->join('tbl_nsx','tbl_sanpham.MaNSX','=','tbl_nsx.MaNSX')
-        ->join('tbl_loaisp','tbl_sanpham.MaLoai','=','tbl_loaisp.MaLoai')
-        ->join('tbl_chatlieu','tbl_sanpham.MaChatLieu','=','tbl_chatlieu.MaChatLieu')
-        ->where('tbl_sanpham.MaSP',$MaSP)
-        ->select('MaSP','TenSP','DonGiaNhap','DonGiaBan','tbl_sanpham.Anh as AnhSP' ,'MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')
-        ->first();          
-        return view('admin.chitietproduct', compact('data','MaSP'));
-        
-    }
     //tke ngay
     public function tkengay(Request $request){
         $this->AuthLogin();
@@ -517,5 +588,16 @@ class AdminController extends Controller
         ->where('NgayDangNhap',$ngaytk)
         ->paginate(5);
         return view('admin.chitietviewngay',compact('views','ngaytk'));  
+    }
+    public function chitietbillngay($NgayTK){
+        $this->AuthLogin();
+        $ngaytk=$NgayTK;
+        $bills=DB::table('tbl_hoadonban')
+        ->join('tbl_nguoidung','tbl_nguoidung.MaNguoiDung','=','tbl_hoadonban.MaNguoiDung')
+        ->where('NgayTao',$ngaytk)
+        ->where('TrangThai','!=',5)
+        ->where('TrangThai','!=',6)
+        ->paginate(5);
+        return view('admin.chitietbillngay',compact('bills','ngaytk'));  
     }
 }
