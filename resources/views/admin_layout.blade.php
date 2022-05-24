@@ -87,7 +87,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Tổng quan</span>
                     </a>
                 </li>                
-                <li class="sub-menu">
+                <li class="sub-menu">:get('quyen')==4
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
                         <span>Đơn hàng</span>

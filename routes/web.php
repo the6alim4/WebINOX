@@ -42,10 +42,14 @@ Route::get('/admin','AdminController@index');
 Route::get('/dashboard','AdminController@show_dashboard');
 Route::get('/logout','AdminController@logout');
 Route::post('/admin-dashboard','AdminController@dashboard');
+//tke tháng
 Route::get('/go-to-view','AdminController@gotoview');
 Route::get('/go-to-bill','AdminController@gotobill');
 Route::get('/go-to-detail-bill/{MaHDB}','AdminController@gotodetailbill');
 Route::get('/chi-tiet-product/{MaHDB}','AdminController@chitietproduct');
+//tke ngày
+Route::get('/tke-ngay','AdminController@tkengay');
+Route::get('/chi-tiet-view-ngay/{NgayTK}','AdminController@chitietviewngay');
 
 
 

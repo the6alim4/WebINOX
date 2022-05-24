@@ -53,7 +53,52 @@
             </div>
         </div>
        <div class="clearfix"> </div>
-    </div>	
+    </div>
+    <h3 style="color: white;">Thống theo ngày</h3>	
+    <br>
+    <div>
+        <div>
+            <label>Chọn ngày thống kê:</label>
+            <input type="date" id="ngaytk">
+            <a type="submit" name="tke_ngay" class="btn btn-info" onclick="TKE();">Thống kê</a>
+        </div>
+        <div id="showngay">
+
+        </div>
+
+    </div>
     <!-- //thang-->
 @endif
+<script src="{{asset('public/frontend/js/jquery3x.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+<script type="text/javascript">
+    function TKE(){
+        var ngay=document.getElementById('ngaytk').value;
+        if(ngay==''){
+
+        }else{
+            //tke
+            $.ajax({
+                url:"{{url('/tke-ngay')}}",
+                method: 'GET',
+                contentType: 'application/json',
+                data:{
+                    ngaytk:ngay
+                },
+                success:function(rs){
+                    var soview=rs[0];
+                    var sodonhang=rs[1];
+                    var doanhthu=new Intl.NumberFormat().format(Math.round(rs[2],0));
+                    var dayss=String(rs[3]);
+                    $('#showngay').empty()
+                    $('#showngay').append(`<div style="display:flex;"><p style="width:max-content;">Lượt ghé thăm:${soview}</p><a style="cursor:pointer;" href="{{URL::to('/chi-tiet-view-ngay/'.'${dayss}')}}">&nbsp;<i class="fa fa-info-circle" aria-hidden="true"></i></a></div>
+                                           <p>Số đơn hàng:${sodonhang}</p>
+                                           <p>Doanh thu:${doanhthu}VND</p>`)
+                }
+            });
+        }
+        
+
+    }
+</script>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Middleware\FrameGuard;
 use Session;
 use Illuminate\Support\Facades\Redirect;
@@ -476,5 +477,45 @@ class AdminController extends Controller
         ->first();          
         return view('admin.chitietproduct', compact('data','MaSP'));
         
+    }
+    //tke ngay
+    public function tkengay(Request $request){
+        $this->AuthLogin();
+        $ngay=$request->ngaytk;
+        $view=DB::table('tbl_view')
+        ->where('NgayDangNhap',$ngay)->get();
+        $soview=count($view);
+        if($soview<1){
+            $soview=0;
+        }
+        $donhang=DB::table('tbl_hoadonban')
+        ->where('NgayTao',$ngay)
+        ->where('TrangThai','!=',5)
+        ->where('TrangThai','!=',6)
+        ->get();
+        $sodonhang=count($donhang);
+        if($sodonhang<1){
+            $sodonhang=0;
+        }
+        $doanhthu=0;
+        if($sodonhang>0){
+            foreach($donhang as $key){
+                $doanhthu+=$key->TongTien;
+            }
+        }
+        $data=[];
+        $data[0]=$soview;
+        $data[1]=$sodonhang;
+        $data[2]=$doanhthu;
+        $data[3]=$ngay;
+        return $data;
+    }
+    public function chitietviewngay($NgayTK){
+        $this->AuthLogin();
+        $ngaytk=$NgayTK;
+        $views=DB::table('tbl_view')
+        ->where('NgayDangNhap',$ngaytk)
+        ->paginate(5);
+        return view('admin.chitietviewngay',compact('views','ngaytk'));  
     }
 }
