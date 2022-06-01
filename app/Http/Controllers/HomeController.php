@@ -260,6 +260,7 @@ class HomeController extends Controller
         ->select('MaSP','TenSP','DonGiaBan','tbl_sanpham.Anh as AnhSP','MoTa','TenNSX','TenLoai','TenChatLieu','KhuyenMai')->first();
         $anhbotro=DB::table('tbl_anhbotro')->where('MaSP',$MaSP)->get();
         $kichthuoc=DB::table('tbl_kichthuoc')->where('MaSP',$MaSP)->get();
+        $kichthuoc=$kichthuoc->reverse();
         $maxsize=0;
         $averagestar=DB::table('tbl_danhgia')->where('MaSP',$MaSP)->get();
         $rating=0;
