@@ -264,13 +264,16 @@ class HomeController extends Controller
         $maxsize=0;
         $averagestar=DB::table('tbl_danhgia')->where('MaSP',$MaSP)->get();
         $rating=0;
+        $norating=0;
         if(count($averagestar)==0){
-            $rating=5;
+            $rating=0;
+            $norating=5-$rating;
         }else{
             for($i=0;$i<count($averagestar);$i++){
                 $rating+=$averagestar[$i]->Sao;
             }
             $rating=round($rating/count($averagestar));
+            $norating=5-$rating;
         }
         if(count($kichthuoc)==1){
 
@@ -296,7 +299,13 @@ class HomeController extends Controller
         ->where('tbl_danhgia.MaSP',$MaSP)
         ->where('tbl_binhluan.MaSP',$MaSP)
         ->select('TenNguoiDung','Sao','NgayBinhLuan','BinhLuan')->paginate(5);
-        return view('pages.product.show_details',compact('loaisp','nsx','slider','data','anhbotro','kichthuoc','sptt','maxsize','valfisrtsize','danhgia','rating'));
+        $sodanhgia=0;
+        if(count($danhgia)<1){
+            $sodanhgia=0;
+        }else
+        $sodanhgia=count($danhgia);
+
+        return view('pages.product.show_details',compact('loaisp','nsx','slider','data','anhbotro','kichthuoc','sptt','maxsize','valfisrtsize','danhgia','rating','norating','sodanhgia'));
 
     } 
     public function getCountSize(Request $request){

@@ -51,6 +51,10 @@
         @for($i=0;$i<$rating;$i++)
         <a class="ion-android-star" style="color: rgb(241, 196, 15);font-size:25px;"></a>  
         @endfor
+        @for($i=0;$i<$norating;$i++)
+        <a class="ion-android-star" style="color: #808080;font-size:25px;"></a>  
+        @endfor
+        ({{$sodanhgia}} lượt đánh giá)
         <br>
         <label class="control-label"><span>Thương hiệu: {{$data->TenNSX}} </span></label><br>
         <label class="control-label"><span>Chất liệu: {{$data->TenChatLieu}}</span></label><br>

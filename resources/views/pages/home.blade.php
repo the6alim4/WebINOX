@@ -21,7 +21,7 @@
 										<input type="hidden" id="wishlist_productchatlieu{{$key->MaSP}}" value="{{$key->TenChatLieu}}">
 										<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{$key->DonGiaBan}}">
 										<input type="hidden" id="wishlist_productkm{{$key->MaSP}}" value="{{$key->KhuyenMai}}">											
-										<img id="wishlist_productimg{{$key->MaSP}}" src="{{$key->AnhSP}}" style="width: 350px;height: 250px;" alt="">
+										<a href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}"><img id="wishlist_productimg{{$key->MaSP}}" src="{{$key->AnhSP}}" style="width: 350px;height: 250px;" alt=""></a>
 										<div class="caption cntr" style="padding:0;">
 											<p>{{$key->TenSP}}</p>
 											@if($key->KhuyenMai>0)
@@ -77,7 +77,7 @@
 										<input type="hidden" id="wishlist_productchatlieu{{$key->MaSP}}" value="{{$key->TenChatLieu}}">
 										<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{$key->DonGiaBan}}">
 										<input type="hidden" id="wishlist_productkm{{$key->MaSP}}" value="{{$key->KhuyenMai}}">											
-										<img id="wishlist_productimg{{$key->MaSP}}" src="{{$key->AnhSP}}" style="width: 350px;height: 250px;" alt="">
+										<a href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}"><img id="wishlist_productimg{{$key->MaSP}}" src="{{$key->AnhSP}}" style="width: 350px;height: 250px;" alt=""></a>
 										<div class="caption cntr" style="padding:0;">
 											<p>{{$key->TenSP}}</p>
 											@if($key->KhuyenMai>0)
@@ -118,7 +118,7 @@
 										<input type="hidden" id="wishlist_productchatlieu{{$key->MaSP}}" value="{{$key->TenChatLieu}}">
 										<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{$key->DonGiaBan}}">										
 										<input type="hidden" id="wishlist_productkm{{$key->MaSP}}" value="{{$key->KhuyenMai}}">										
-										<img id="wishlist_productimg{{$key->MaSP}}" src="{{$key->AnhSP}}" style="width: 350px;height: 250px;" alt="">
+										<a href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}"><img id="wishlist_productimg{{$key->MaSP}}" src="{{$key->AnhSP}}" style="width: 350px;height: 250px;" alt=""></a>
 										<div class="caption cntr" style="padding:0;">
 											<p>{{$key->TenSP}}</p>
 											<p  style="color: red;font-size: larger;"><strong>Sale:{{($key->KhuyenMai)*100}}%</strong></p>

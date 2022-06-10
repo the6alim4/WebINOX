@@ -22,7 +22,7 @@
                                         <input type="hidden" id="wishlist_productnsx{{$key->MaSP}}" value="{{$key->TenNSX}}">
 										<input type="hidden" id="wishlist_productchatlieu{{$key->MaSP}}" value="{{$key->TenChatLieu}}">
 										<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{number_format($key->DonGiaBan)}}">                               
-                                    <img id="wishlist_productimg{{$key->MaSP}}" src="{{asset($key->AnhSP)}}" style="max-width:100%;height: 250px;" alt="">
+                                        <a href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}"><img id="wishlist_productimg{{$key->MaSP}}" src="{{asset($key->AnhSP)}}" style="max-width:100%;height: 250px;" alt=""></a>
                                     <div class="caption cntr" style="width: 100%;">
                                         <p>{{$key->TenSP}}</p>
                                         <p><strong>Giá bán: {{number_format($key->DonGiaBan)}} VND</strong></p>
