@@ -20,12 +20,15 @@
 										<input type="hidden" id="wishlist_productname{{$key->MaSP}}" value="{{$key->TenSP}}">
                                         <input type="hidden" id="wishlist_productnsx{{$key->MaSP}}" value="{{$key->TenNSX}}">
 										<input type="hidden" id="wishlist_productchatlieu{{$key->MaSP}}" value="{{$key->TenChatLieu}}">
-										<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{number_format($key->DonGiaBan)}}">
+										<input type="hidden" id="wishlist_productprice{{$key->MaSP}}" value="{{$key->DonGiaBan}}">
                                         <input type="hidden" id="wishlist_productkm{{$key->MaSP}}" value="{{$key->KhuyenMai}}">	
                                         <a href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}"><img id="wishlist_productimg{{$key->MaSP}}" src="{{asset($key->AnhSP)}}" style="max-width:100%;height: 250px;" alt=""></a>
                                     <div class="caption cntr" style="width: 100%;">
                                         <p>{{$key->TenSP}}</p>
-                                        <p><strong>Giá bán: {{number_format($key->DonGiaBan)}} VND</strong></p>
+                                        @if($key->KhuyenMai>0)
+											<p  style="color: red;font-size: larger;"><strong>Sale:{{($key->KhuyenMai)*100}}%</strong></p>
+											@endif
+                                        <p><strong>Giá bán: {{number_format(round((int)($key->DonGiaBan)*(1-$key->KhuyenMai)),0))}} VND</strong></p>
                                         <h4><a class="shopBtn" id="wishlist_producturl{{$key->MaSP}}" href="{{URL::to('/chi-tiet-san-pham/'.$key->MaSP)}}" title="add to cart"> Thêm vào giỏ hàng </a></h4>
                                     </form>
                                         <div class="actionList">
