@@ -217,7 +217,7 @@ class HomeController extends Controller
         ->join('tbl_chatlieu','tbl_chatlieu.MaChatLieu','=','tbl_sanpham.MaChatLieu')
         ->join('tbl_nsx','tbl_nsx.MaNSX','=','tbl_sanpham.MaNSX')
         ->where('tbl_sanpham.MaLoai',$MaLoai)->orderby('MaSP','asc')
-        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu','TenLoai')
+        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu','TenLoai','KhuyenMai')
         ->paginate(6);
         $tenloai=DB::table('tbl_loaisp')->where('MaLoai',$MaLoai)->first();
         return view('pages.category.show_category',compact('loaisp','nsx','slider','category_by_id','tenloai'));
@@ -230,7 +230,7 @@ class HomeController extends Controller
         ->join('tbl_chatlieu','tbl_chatlieu.MaChatLieu','=','tbl_sanpham.MaChatLieu')
         ->join('tbl_nsx','tbl_nsx.MaNSX','=','tbl_sanpham.MaNSX')
         ->where('tbl_sanpham.MaNSX',$MaNSX)->orderby('MaSP','asc')
-        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu')
+        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu','KhuyenMai')
         ->paginate(6);
         $tennsx=DB::table('tbl_nsx')->where('MaNSX',$MaNSX)->first();
         return view('pages.category.show_brand',compact('loaisp','nsx','slider','category_by_id','tennsx'));
@@ -244,7 +244,7 @@ class HomeController extends Controller
         ->join('tbl_chatlieu','tbl_chatlieu.MaChatLieu','=','tbl_sanpham.MaChatLieu')
         ->join('tbl_nsx','tbl_nsx.MaNSX','=','tbl_sanpham.MaNSX')
         ->where('tbl_sanpham.TenSP','like','%'.$ten.'%')->orderby('MaSP','asc')
-        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu')
+        ->select('MaSP','TenSP','tbl_sanpham.Anh as AnhSP','TenNSX','DonGiaBan','TenChatLieu','KhuyenMai')
         ->paginate(6);
         return view('pages.category.search',compact('loaisp','nsx','slider','category_by_id'));
     }
